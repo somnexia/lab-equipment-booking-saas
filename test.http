@@ -1,0 +1,25 @@
+# POST http://localhost:3000/api/auth/register
+# Content-Type: application/json
+
+# {
+#   "organization_id": 4,
+#   "name": "admin",
+#   "email": "admin@mail.com",
+#   "password": "123456",
+#   "role": "admin"
+# }
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTc3MzIzMzc4NywiZXhwIjoxNzczMjM3Mzg3fQ.sQgZG3oyS6DzQSMofxJ520dIK2B6tBhNFCy4TOjeCyI
+@baseUrl = http://localhost:3000/api
+# POST http://localhost:3000/api/auth/login
+# Content-Type: application/json
+
+# {
+#  "email":"admin@mail.com",
+#  "password":"123456"
+# }
+
+
+  
+GET {{baseUrl}}/bookings
+Authorization: Bearer {{token}}
