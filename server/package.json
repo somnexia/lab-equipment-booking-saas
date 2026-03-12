@@ -9,7 +9,8 @@
     "start": "node ./bin/www",
     "prod": "cross-env NODE_ENV=production node ./bin/www",
     "lint": "eslint . --fix",
-    "check-env": "node ./config/validateEnv.js"
+    "check-env": "node ./config/validateEnv.js",
+    "pb": "node ./server/pbServer.js"   
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -22,7 +23,8 @@
     "jsonwebtoken": "^9.0.3",
     "morgan": "~1.9.1",
     "mysql2": "^3.19.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "pocketbase": "^0.26.8"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",
