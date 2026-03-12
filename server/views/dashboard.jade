@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  h1 Dashboard
+
+  p Добро пожаловать в систему управления лабораторным оборудованием.
+
+  button#logout Выйти
+
+  h2 Список оборудования
+
+  table(border="1")
+    thead
+      tr
+        th ID
+        th Название
+        th Категория
+        th Статус
+    tbody#equipmentTable
+
+  script.
+    const token = localStorage.getItem("token");
+
+    if(!token){
+      window.location.href = "/auth/login";
+    }
+
+    document.getElementById("logout").addEventListener("click", ()=>{
+      localStorage.removeItem("token");
+      window.location.href = "/auth/login";
+    });
+
+    async function loadEquipment(){
+      try{
+
+        const response = await fetch("/api/equipment",{
+          headers:{
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        const table = document.getElementById("equipmentTable");
+
+        table.innerHTML = "";
+
+        data.forEach(item => {
+
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.category_id}</td>
+            <td>${item.status}</td>
+            <td><button onclick="bookEquipment(${item.id})">Забронировать</button></td>
+          `;
+
+          table.appendChild(row);
+
+        });
+
+      }catch(err){
+        console.error("Ошибка загрузки оборудования", err);
+      }
+    }
+
+    loadEquipment();

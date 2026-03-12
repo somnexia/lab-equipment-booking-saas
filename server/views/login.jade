@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  h1 Вход
+
+  form(id="loginForm")
+    div
+      label Email
+      input(type="email" name="email" required)
+
+    div
+      label Пароль
+      input(type="password" name="password" required)
+
+    button(type="submit") Войти
+
+  p#message
+
+  script.
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        email: form.email.value,
+        password: form.password.value
+      };
+
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      if(result.token){
+      localStorage.setItem("token", result.token);
+
+      message.innerText = "Вход выполнен";
+
+      setTimeout(()=>{
+        window.location.href = "/dashboard";
+      },1000);
+
+    } else {
+      message.innerText = result.message || "Ошибка входа";
+    }
+    });

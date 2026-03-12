@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "server": "nodemon ./bin/www",
-    "client": "cd .. && cd client && set PORT=3001 && npx webpack serve",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "npm run check-env && npm run server",
+    "build": "echo \"Server build placeholder\"",
+    "start": "node ./bin/www",
+    "prod": "cross-env NODE_ENV=production node ./bin/www",
+    "lint": "eslint . --fix",
+    "check-env": "node ./config/validateEnv.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -19,5 +23,10 @@
     "morgan": "~1.9.1",
     "mysql2": "^3.19.1",
     "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^8.45.0"
   }
 }

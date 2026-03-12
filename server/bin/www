@@ -3,9 +3,14 @@
 /**
  * Module dependencies.
  */
+// проверяем переменные окружения перед загрузкой приложения
+require('../config/validateEnv'); 
 
+// загружаем приложение после проверки переменных окружения
 var app = require('../app');
-var debug = require('debug')('server:server');
+// 
+var debug = require('debug')('server:server');// для отладки, можно удалить если не нужно
+// http модуль для создания сервера
 var http = require('http');
 
 /**
