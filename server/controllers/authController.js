@@ -1,3 +1,5 @@
+
+// server\controllers\authController.js
 const AuthService = require('../services/authService');
 const jwt = require('jsonwebtoken');
 
@@ -31,10 +33,10 @@ exports.login = async (req, res) => {
     const user = await AuthService.login(email, password);
 
     const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET || "secret",
-      { expiresIn: "1h" }
-    );
+  { id: user.id, email: user.email, role: user.role }, // <-- добавили роль
+  process.env.JWT_SECRET,
+  { expiresIn: "1h" }
+);
 
     res.json({
       token,

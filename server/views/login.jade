@@ -40,12 +40,12 @@ block content
 
       if(result.token){
       localStorage.setItem("token", result.token);
+  localStorage.setItem("role", result.user.role || "student");
 
-      message.innerText = "Вход выполнен";
+  message.innerText = "Вход выполнен";
 
-      setTimeout(()=>{
-        window.location.href = "/dashboard";
-      },1000);
+  setTimeout(()=>{
+    window.location.href = "/dashboard";
 
     } else {
       message.innerText = result.message || "Ошибка входа";

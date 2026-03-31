@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 Dashboard
+  p Добро пожаловать в систему управления лабораторным оборудованием.
+
+  if error
+    p(style="color:red")= error
+
+  if classes.length
+    table(border="1")
+      tr
+        th Student
+        th Subject
+        th Grade
+        th Status
+      each cls in classes
+        tr
+          td= cls.student
+          td= cls.subject
+          td= cls.grade
+          td= cls.status
+  else
+    p Нет данных для отображения.
