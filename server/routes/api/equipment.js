@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const EquipmentController = require('../controllers/equipmentController');
-const { authenticate, authorize } = require('../middlewares/authMiddleware');
+const EquipmentController = require('../../controllers/equipmentController');
+const { authenticate, authorize } = require('../../middlewares/authMiddleware');
 
 
 // Использование в маршрутах middleware для аутентификации и авторизации: 

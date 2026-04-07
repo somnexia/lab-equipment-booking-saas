@@ -4,10 +4,19 @@ block content
   h1 Dashboard
   p Добро пожаловать в систему управления лабораторным оборудованием.
 
+  p#userInfo
+    | Пользователь: 
+    b= user?.name || 'Неизвестно'
+    |  (роль: 
+    b= user?.role || 'user')
+    | )
+
+  button(id="logoutBtn") Выйти
+
   if error
     p(style="color:red")= error
 
-  if classes.length
+  if classes?.length
     table(border="1")
       tr
         th Student
@@ -22,3 +31,26 @@ block content
           td= cls.status
   else
     p Нет данных для отображения.
+
+script.
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  logoutBtn.addEventListener('click', async () => {
+    console.log('Logout clicked');
+
+    try {
+      const res = await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      if (res.ok) {
+        console.log('Logout successful, redirecting to login');
+        window.location.href = '/auth/login';
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (err) {
+      console.error('Logout fetch error:', err);
+    }
+  });

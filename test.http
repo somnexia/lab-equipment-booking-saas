@@ -1,26 +1,50 @@
-@baseUrl = http://localhost:3000/api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTc3MzMwNDUwMSwiZXhwIjoxNzczMzA4MTAxfQ.uioFjNIjEzWopicorAxJX8n86x88jIYoScWIvBJggBE
+@baseUrl = http://localhost:3000
+@api = {{baseUrl}}/api
 
-  # POST {{baseUrl}}/auth/register
-  # Content-Type: application/json
+###############################################
+### 1. Регистрация пользователя
+###############################################
+POST {{api}}/auth/register
+Content-Type: application/json
 
-  # {
-  #   "organization_id": 4,
-  #   "name": "admin",
-  #   "email": "admin@mail.com",
-  #   "password": "123456",
-  #   "role": "admin"
-  # }
+{
+  "organization_id": 1,
+  "name": "testuser",
+  "email": "testuser3@mail.com",
+  "password": "123456"
+}
 
-# POST http://localhost:3000/api/auth/login
-# Content-Type: application/json
+###############################################
+### 2. Логин пользователя
+###############################################
+POST {{api}}/auth/login
+Content-Type: application/json
 
-# {
-#  "email":"admin@mail.com",
-#  "password":"123456"
-# }
+{
+  "email": "testuser@mail.com",
+  "password": "123456"
+}
 
+###############################################
+### 3. Логин (неверный пароль)
+###############################################
+POST {{api}}/auth/login
+Content-Type: application/json
 
-  
-GET {{baseUrl}}/bookings/
+{
+  "email": "testuser@mail.com",
+  "password": "wrongpassword"
+}
+
+###############################################
+### 4. Пример защищённого запроса (если добавишь JWT middleware)
+###############################################
+@token = ВСТАВЬ_СЮДА_ТОКЕН
+
+GET {{api}}/bookings
 Authorization: Bearer {{token}}
+
+###############################################
+### 5. Проверка dashboard (через браузер)
+###############################################
+GET {{baseUrl}}/dashboard

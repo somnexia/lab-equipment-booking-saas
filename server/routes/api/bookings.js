@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const BookingsController = require('../controllers/bookingsController');
-const { authenticate, authorize } = require('../middlewares/authMiddleware');
+const BookingsController = require('../../controllers/bookingsController');
+const { authenticate, authorize } = require('../../middlewares/authMiddleware');
 
 // Все маршруты бронирований защищены авторизацией
 router.get('/', authenticate, BookingsController.getAll);

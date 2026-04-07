@@ -1,25 +1,24 @@
+// server/services/mysqlAuthService.js
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 
-const AuthService = {
+const mysqlAuthService = {
 
-  async register(userData) {
-
-    const { name, email, password, organization_id } = userData;
+  async register({ name, email, password, organization_id, role = 'user' }) {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
     const [result] = await db.query(
       `INSERT INTO users (organization_id, name, email, password_hash, role)
-       VALUES (?, ?, ?, ?, 'user')`,
-      [organization_id, name, email, passwordHash]
+       VALUES (?, ?, ?, ?, ?)`,
+      [organization_id, name, email, passwordHash, role]
     );
 
     return {
       id: result.insertId,
       name,
       email,
-      
+      role
     };
   },
 
@@ -31,20 +30,14 @@ const AuthService = {
     );
 
     const user = rows[0];
+    if (!user) throw new Error('User not found');
 
-    if (!user) {
-      throw new Error('User not found');
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.password_hash);
-
-    if (!passwordMatch) {
-      throw new Error('Invalid password');
-    }
+    const match = await bcrypt.compare(password, user.password_hash);
+    if (!match) throw new Error('Invalid password');
 
     return user;
   }
 
 };
 
-module.exports = AuthService;
+module.exports = mysqlAuthService;

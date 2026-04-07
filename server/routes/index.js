@@ -1,27 +1,27 @@
 // server/routes/index.js
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-const authRoutes = require('./auth');
-const equipmentRoutes = require('./equipment');
-const bookingsRoutes = require('./bookings');
-const authPagesRoutes = require('./authPages');
-const pocketbaseRoutes = require('./pocketbase');
+// API
+const authRoutes = require('./api/auth');
+const equipmentRoutes = require('./api/equipment');
+const bookingsRoutes = require('./api/bookings');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// Pages
+const authPagesRoutes = require('./pages/authPages');
+const dashboardRoutes = require('./pages/dashboard');
+
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Home' });
 });
 
-// API маршруты
+// API
 router.use('/api/auth', authRoutes);
 router.use('/api/equipment', equipmentRoutes);
 router.use('/api/bookings', bookingsRoutes);
 
-// Страницы
+// Pages
 router.use('/auth', authPagesRoutes);
-
-// Dashboard через PocketBase
-router.use('/', pocketbaseRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 module.exports = router;

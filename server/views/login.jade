@@ -5,49 +5,48 @@ block content
 
   form(id="loginForm")
     div
-      label Email
-      input(type="email" name="email" required)
-
+      label(for="email") Email
+      input(type="email" name="email" id="email" required autocomplete="email")
     div
-      label Пароль
-      input(type="password" name="password" required)
-
+      label(for="password") Пароль
+      input(type="password" name="password" id="password" required autocomplete="current-password")
     button(type="submit") Войти
 
   p#message
 
+block scripts
   script.
     const form = document.getElementById('loginForm');
     const message = document.getElementById('message');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      console.log('Submit clicked'); // <-- лог в консоли
 
       const data = {
         email: form.email.value,
         password: form.password.value
       };
 
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          credentials: 'include'
+        });
 
-      const result = await res.json();
+        const result = await res.json();
+        console.log('Login response', result);
 
-      if(result.token){
-      localStorage.setItem("token", result.token);
-  localStorage.setItem("role", result.user.role || "student");
-
-  message.innerText = "Вход выполнен";
-
-  setTimeout(()=>{
-    window.location.href = "/dashboard";
-
-    } else {
-      message.innerText = result.message || "Ошибка входа";
-    }
+        if (res.ok) {
+          console.log('Login successful, redirecting...');
+          window.location.href = '/dashboard';
+        } else {
+          message.innerText = result.error || 'Ошибка входа';
+        }
+      } catch (err) {
+        message.innerText = 'Ошибка соединения с сервером';
+        console.error(err);
+      }
     });

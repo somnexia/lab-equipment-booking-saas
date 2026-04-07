@@ -5,56 +5,58 @@ block content
 
   form(id="registerForm")
     div
-      label Имя
-      input(type="text" name="name" required)
-
+      label(for="name") Имя
+      input(type="text" name="name" id="name" required)
     div
-      label Email
-      input(type="email" name="email" required)
-
+      label(for="email") Email
+      input(type="email" name="email" id="email" required)
     div
-      label Пароль
-      input(type="password" name="password" required)
-
+      label(for="password") Пароль
+      input(type="password" name="password" id="password" required)
     div
-      label Organization ID
-      input(type="number" name="organization_id" required)
-
+      label(for="organization_id") Organization ID
+      input(type="number" name="organization_id" id="organization_id" required)
     button(type="submit") Зарегистрироваться
 
   p#message
 
+block scripts
   script.
     const form = document.getElementById('registerForm');
     const message = document.getElementById('message');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      console.log('Register clicked');
 
       const data = {
         name: form.name.value,
         email: form.email.value,
         password: form.password.value,
         organization_id: parseInt(form.organization_id.value),
-        role: "user"
+        role: 'user'
       };
 
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-      const result = await res.json();
+        const result = await res.json();
+        console.log('Register response', result);
 
-      if(res.ok){
-      message.innerText = "Регистрация успешна! Перенаправление на логин...";
-      setTimeout(()=>{
-        window.location.href = "/auth/login";
-      },1500);
-    } else {
-      message.innerText = result.message || "Ошибка регистрации";
-    }
+        if (res.ok) {
+          message.innerText = 'Регистрация успешна! Перенаправление...';
+          setTimeout(() => {
+            window.location.href = '/auth/login';
+          }, 1500);
+        } else {
+          message.innerText = result.error || 'Ошибка регистрации';
+        }
+      } catch (err) {
+        message.innerText = 'Ошибка соединения с сервером';
+        console.error(err);
+      }
     });
