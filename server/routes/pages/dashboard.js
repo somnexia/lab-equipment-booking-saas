@@ -1,18 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const requireAuth = require('../../middlewares/pageAuthMiddleware');
-const pbService = require('../../services/pbAuthService');
+const { authenticate } = require('../../middlewares/authMiddleware');
+const simplePassword = require('../../middlewares/simplePassword');
 
-router.get('/', requireAuth, async (req, res) => {
-  console.log('Accessing dashboard for user:', req.user.email);
-  try {
-    const classes = await pbService.getClasses();
-    console.log('Classes loaded:', classes);
-    res.render('dashboard', { title: 'Dashboard', classes, user: req.user });
-  } catch (err) {
-    console.error('Dashboard load error:', err);
-    res.render('dashboard', { title: 'Dashboard', classes: [], error: 'Ошибка загрузки данных', user: req.user });
-  }
+
+router.get('/', authenticate, simplePassword, (req, res) => {
+  console.log('📦 Dashboard (equipment) for:', req.user.email);
+
+  res.render('dashboard', {
+    title: 'Dashboard',
+    user: req.user
+  });
 });
 
 module.exports = router;

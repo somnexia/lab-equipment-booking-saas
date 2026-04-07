@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1 Classes (PB)
+
+  p Пользователь: #{user && user.email} (#{user && user.role})
+
+  button#logoutBtn Выйти
+
+  br
+  a(href="/dashboard") ← Назад к оборудованию
+
+  if error
+    p(style="color:red")= error
+
+  if classes && classes.length
+    table(border="1")
+      tr
+        th Student
+        th Subject
+        th Grade
+        th Status
+      each cls in classes
+        tr
+          td= cls.student
+          td= cls.subject
+          td= cls.grade
+          td= cls.status
+  else
+    p Нет данных
+
+  script.
+    console.log('Classes loaded');
+    
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      console.log('🚪 Logout PB');
+
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      window.location.href = '/auth/login';
+    });

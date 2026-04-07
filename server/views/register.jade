@@ -3,60 +3,66 @@ extends layout
 block content
   h1 Регистрация
 
-  form(id="registerForm")
+  form#registerForm
     div
-      label(for="name") Имя
-      input(type="text" name="name" id="name" required)
+      label Имя
+      input(type="text", name="name", required)
+
     div
-      label(for="email") Email
-      input(type="email" name="email" id="email" required)
+      label Email
+      input(type="email", name="email", required)
+
     div
-      label(for="password") Пароль
-      input(type="password" name="password" id="password" required)
+      label Пароль
+      input(type="password", name="password", required)
+
     div
-      label(for="organization_id") Organization ID
-      input(type="number" name="organization_id" id="organization_id" required)
+      label Organization ID
+      input(type="number", name="organization_id", required)
+
     button(type="submit") Зарегистрироваться
 
   p#message
 
-block scripts
   script.
     const form = document.getElementById('registerForm');
     const message = document.getElementById('message');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      console.log('Register clicked');
+
+      console.log('🔥 Register submit');
 
       const data = {
         name: form.name.value,
         email: form.email.value,
         password: form.password.value,
         organization_id: parseInt(form.organization_id.value),
-        role: 'user'
+        role: "user"
       };
 
       try {
         const res = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify(data),
+          credentials: 'include'
         });
 
         const result = await res.json();
-        console.log('Register response', result);
+        console.log('Register result:', result);
 
         if (res.ok) {
-          message.innerText = 'Регистрация успешна! Перенаправление...';
+          message.innerText = "Регистрация успешна!";
           setTimeout(() => {
-            window.location.href = '/auth/login';
-          }, 1500);
+            window.location.href = "/auth/login";
+          }, 1000);
         } else {
-          message.innerText = result.error || 'Ошибка регистрации';
+          message.innerText = result.error || "Ошибка регистрации";
         }
+
       } catch (err) {
-        message.innerText = 'Ошибка соединения с сервером';
         console.error(err);
+        message.innerText = "Ошибка соединения";
       }
     });

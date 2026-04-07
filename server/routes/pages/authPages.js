@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const requireAuth = require('../../middlewares/pageAuthMiddleware');
+const { authenticate } = require('../../middlewares/authMiddleware');
 
 // регистрация и логин остаются доступными
 // страница регистрации
@@ -16,7 +16,7 @@ router.get('/login', (req, res) => {
 });
 
 // защищённая страница dashboard
-router.get('/dashboard', requireAuth, (req, res) => {
+router.get('/dashboard', authenticate, (req, res) => {
   console.log('Render dashboard page, user:', req.user);
   res.render('dashboard', { title: 'Dashboard', user: req.user });
 });

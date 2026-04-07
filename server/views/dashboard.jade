@@ -1,11 +1,16 @@
 extends layout
 
 block content
-  h1 Dashboard
+  h1 Dashboard (Equipment)
 
-  p Добро пожаловать в систему управления лабораторным оборудованием.
+  p Пользователь: #{user && user.email} (#{user && user.role})
+
 
   button#logout Выйти
+
+  br
+  a(href="/classes") Перейти к классам
+
 
   h2 Список оборудования
 
@@ -19,34 +24,40 @@ block content
     tbody#equipmentTable
 
   script.
-    const token = localStorage.getItem("token");
+    console.log('Dashboard loaded');
 
-    if(!token){
-      window.location.href = "/auth/login";
-    }
+    document.getElementById("logout").addEventListener("click", async () => {
+      console.log('🚪 Logout mysql');
 
-    document.getElementById("logout").addEventListener("click", ()=>{
-      localStorage.removeItem("token");
-      window.location.href = "/auth/login";
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      window.location.href = '/auth/login';
     });
 
-    async function loadEquipment(){
-      try{
+    async function loadEquipment() {
+      try {
+        console.log('📡 Loading equipment');
 
-        const response = await fetch("/api/equipment",{
-          headers:{
-            "Authorization": "Bearer " + token
-          }
+        const response = await fetch("/api/equipment", {
+          credentials: 'include'
         });
 
+        if (response.status === 401) {
+          console.log('❌ Unauthorized → redirect');
+          window.location.href = '/auth/login';
+          return;
+        }
+
         const data = await response.json();
+        console.log('Equipment:', data);
 
         const table = document.getElementById("equipmentTable");
-
         table.innerHTML = "";
 
         data.forEach(item => {
-
           const row = document.createElement("tr");
 
           row.innerHTML = `
@@ -54,15 +65,13 @@ block content
             <td>${item.name}</td>
             <td>${item.category_id}</td>
             <td>${item.status}</td>
-            <td><button onclick="bookEquipment(${item.id})">Забронировать</button></td>
           `;
 
           table.appendChild(row);
-
         });
 
-      }catch(err){
-        console.error("Ошибка загрузки оборудования", err);
+      } catch (err) {
+        console.error("Ошибка загрузки", err);
       }
     }
 

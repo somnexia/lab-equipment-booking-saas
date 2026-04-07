@@ -10,6 +10,7 @@ const bookingsRoutes = require('./api/bookings');
 // Pages
 const authPagesRoutes = require('./pages/authPages');
 const dashboardRoutes = require('./pages/dashboard');
+const classesRoutes = require('./pages/classes');
 
 router.get('/', (req, res) => {
   res.render('index', { title: 'Home' });
@@ -23,5 +24,6 @@ router.use('/api/bookings', bookingsRoutes);
 // Pages
 router.use('/auth', authPagesRoutes);
 router.use('/dashboard', dashboardRoutes);
+router.use('/classes', classesRoutes);
 
 module.exports = router;
