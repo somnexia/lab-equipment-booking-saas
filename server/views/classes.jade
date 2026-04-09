@@ -29,14 +29,25 @@ block content
   else
     p Нет данных
 
+  h2 Добавить запись
+
+  form#addForm
+    input(type="text" name="student" placeholder="Student")
+    input(type="text" name="subject" placeholder="Subject")
+    input(type="number" name="grade" placeholder="Grade")
+    input(type="text" name="status" placeholder="Status")
+    button(type="submit") Добавить
+
+    
+  script(src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js")
+
   script.
     const PB_URL = "#{process.env.PB_URL}";
     const pb = new PocketBase(PB_URL);
-    console.log('Classes loaded');
-    
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-      console.log('🚪 Logout PB');
 
+    console.log('Classes loaded');
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
       await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
@@ -44,13 +55,35 @@ block content
 
       window.location.href = '/auth/login';
     });
-    console.log('📡 Subscribing to PB real-time...');
 
-    const pb = new PocketBase("http://127.0.0.1:8090"); // или из env через window
-
+    // REALTIME
     pb.collection('classes').subscribe('*', function (e) {
       console.log('🔥 REALTIME UPDATE:', e);
-
-      // просто перезагружаем страницу (самый простой вариант)
       location.reload();
+    });
+
+    const form = document.getElementById('addForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        student: form.student.value,
+        subject: form.subject.value,
+        grade: Number(form.grade.value),
+        status: form.status.value
+      };
+
+      const res = await fetch('/api/classes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        console.log('✅ Created');
+        form.reset();
+      } else {
+        console.error('❌ Failed');
+      }
     });

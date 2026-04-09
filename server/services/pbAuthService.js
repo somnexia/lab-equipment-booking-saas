@@ -25,6 +25,14 @@ async function getClasses() {
     status: r.status || '—'
   }));
 }
+async function createClass(data) {
+  await authAdmin();
+
+  const record = await pb.collection('classes').create(data);
+
+  return record;
+}
+
 
 const pbAuthService = {
 
@@ -56,8 +64,14 @@ const pbAuthService = {
       throw err; // чтобы контроллер мог обработать
     }
   },
-  getClasses
+
+
 
 };
 
-module.exports = pbAuthService;
+module.exports = {
+
+  register: pbAuthService.register,
+  getClasses,
+  createClass,
+};
