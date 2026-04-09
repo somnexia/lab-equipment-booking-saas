@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 
 
 var app = express();
-
+const visitLogger = require('./middlewares/loggerMiddleware');
 
 
 // view engine setup
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   res.set('Cache-Control', 'no-store');
   next();
 });
-
+app.use(visitLogger);
 
 
 

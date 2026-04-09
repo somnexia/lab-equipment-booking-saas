@@ -30,6 +30,8 @@ block content
     p Нет данных
 
   script.
+    const PB_URL = "#{process.env.PB_URL}";
+    const pb = new PocketBase(PB_URL);
     console.log('Classes loaded');
     
     document.getElementById('logoutBtn').addEventListener('click', async () => {
@@ -41,4 +43,14 @@ block content
       });
 
       window.location.href = '/auth/login';
+    });
+    console.log('📡 Subscribing to PB real-time...');
+
+    const pb = new PocketBase("http://127.0.0.1:8090"); // или из env через window
+
+    pb.collection('classes').subscribe('*', function (e) {
+      console.log('🔥 REALTIME UPDATE:', e);
+
+      // просто перезагружаем страницу (самый простой вариант)
+      location.reload();
     });

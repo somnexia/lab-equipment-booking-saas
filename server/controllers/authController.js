@@ -11,17 +11,17 @@ exports.register = async (req, res) => {
 
     // Генерация JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, role:  user.role || 'user' },
+      { id: user.id, email: user.email, role: user.role || 'user', },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
     // Ставим HttpOnly cookie
     res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // false на dev
-  maxAge: 1000 * 60 * 60 * 24 // 1 день
-});
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // false на dev
+      maxAge: 1000 * 60 * 60 * 24 // 1 день
+    });
 
     res.status(201).json({
       message: 'User created',
@@ -44,17 +44,22 @@ exports.login = async (req, res) => {
     console.log('User found in MySQL:', user);
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role || 'user' },
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role || 'user',
+        simpleAuth: false // ← ДОБАВИЛИ
+      },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
     // Ставим HttpOnly cookie
     res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // false на dev
-  maxAge: 1000 * 60 * 60 * 24 // 1 день
-});
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // false на dev
+      maxAge: 1000 * 60 * 60 * 24 // 1 день
+    });
 
     res.status(200).json({
       message: 'Login successful',
@@ -75,4 +80,40 @@ exports.login = async (req, res) => {
 exports.logout = (req, res) => {
   res.clearCookie('token');
   res.status(200).json({ message: 'Logged out' });
+};
+
+exports.simplePassword = (req, res) => {
+  const { password } = req.body;
+
+  console.log('🔐 Simple password POST:', req.body);
+
+  if (password !== process.env.SIMPLE_PASSWORD) {
+    console.log('❌ Wrong simple password');
+    return res.status(401).json({ error: 'Неверный пароль' });
+  }
+
+  const oldToken = req.cookies.token;
+
+  const decoded = jwt.verify(oldToken, process.env.JWT_SECRET);
+
+  const newToken = jwt.sign(
+    {
+      id: decoded.id,
+      email: decoded.email,
+      role: decoded.role,
+      simpleAuth: true // ← ВОТ ЭТО ГЛАВНОЕ
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' }
+  );
+
+  // 🔥 ВАЖНО: ПЕРЕЗАПИСЫВАЕМ COOKIE
+  res.cookie('token', newToken, {
+    httpOnly: true,
+    secure: false, // dev режим
+  });
+
+  console.log('✅ NEW TOKEN ISSUED');
+
+  return res.json({ success: true }); // ❗ НЕ redirect
 };

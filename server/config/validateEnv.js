@@ -8,7 +8,9 @@ const requiredVars = [
   'DB_NAME',
   'JWT_SECRET',
   'PORT',
-  'PB_URL' // 👈 добавили PocketBase
+  'PB_URL',
+  'SIMPLE_PASSWORD' // 👈 добавили PocketBase
+
 ];
 
 // Проверяем отсутствие переменных
@@ -30,6 +32,12 @@ if (isNaN(process.env.PORT)) {
 // JWT_SECRET должен быть не слишком коротким
 if (process.env.JWT_SECRET.length < 10) {
   console.error('❌ JWT_SECRET is too short (min 10 chars)');
+  process.exit(1);
+}
+
+// SIMPLE_PASSWORD должен быть не слишком коротким
+if (process.env.SIMPLE_PASSWORD.length < 6) {
+  console.error('❌ SIMPLE_PASSWORD is too short (min 6 chars)');
   process.exit(1);
 }
 

@@ -1,13 +1,21 @@
-// middlewares/simplePassword.js
+// server/middlewares/simplePassword.js
 module.exports = (req, res, next) => {
-  // Можно брать пароль из query, body или header — пример через query
-  const password = req.query.simplePassword || req.headers['x-simple-password'];
+  console.log('--- SIMPLE PASSWORD MIDDLEWARE ---');
 
-  if (!password || password !== process.env.SIMPLE_PASSWORD) {
-    console.log('❌ Simple password check failed');
-    return res.status(401).send('Доступ запрещен: неверный простой пароль');
+  // req.user уже должен быть после authenticate
+  if (!req.user) {
+    console.log('❌ No user in request');
+    return res.redirect('/auth/login');
   }
 
-  console.log('✅ Simple password passed');
-  next();
+  // если пользователь уже прошёл simpleAuth → пускаем
+  if (req.user.simpleAuth) {
+    console.log('✅ Simple password already passed');
+    return next();
+  }
+
+  console.log('🔐 Simple password required');
+
+  // показываем страницу ввода пароля
+  return res.render('simplePassword');
 };
