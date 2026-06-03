@@ -8,9 +8,11 @@
 4. [CRUD-матрица](04-crud-matrix.md) — текст; **таблица в draw.io:** [diagrams/crud-matrix.drawio](diagrams/crud-matrix.drawio)  
 5. [Use Case](05-use-case.md) — варианты использования; диаграмма: [diagrams/use-case.drawio](diagrams/use-case.drawio)  
 6. [Диаграммы состояний](06-state-diagram.md) — `diagrams/booking-states.drawio`  
-7. [Каталог draw.io](diagrams/README.md) — ERD, CRUD, Use Case, состояния
+7. [Диаграмма последовательности](07-sequence-diagram.md) — `diagrams/booking-sequence.drawio`  
+8. [Диаграмма действий](08-activity-diagram.md) — `diagrams/booking-activity.drawio`  
+9. [Каталог draw.io](diagrams/README.md) — все схемы
 
 ## Планируется
 
-- `diagrams/` — действия, последовательность  
+- `database/grants.sql`, `views.sql`, `procedures.sql`  
 - `team-jira.md` — распределение работы в Jira  

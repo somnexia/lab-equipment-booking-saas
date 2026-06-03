@@ -12,6 +12,8 @@
 | [docs/04-crud-matrix.md](docs/04-crud-matrix.md) | CRUD-матрица (6 ролей × 5 таблиц) |
 | [docs/05-use-case.md](docs/05-use-case.md) | Use Case; диаграмма: [docs/diagrams/use-case.drawio](docs/diagrams/use-case.drawio) |
 | [docs/06-state-diagram.md](docs/06-state-diagram.md) | Состояния; [docs/diagrams/booking-states.drawio](docs/diagrams/booking-states.drawio) |
+| [docs/07-sequence-diagram.md](docs/07-sequence-diagram.md) | Последовательность; [docs/diagrams/booking-sequence.drawio](docs/diagrams/booking-sequence.drawio) |
+| [docs/08-activity-diagram.md](docs/08-activity-diagram.md) | Действия; [docs/diagrams/booking-activity.drawio](docs/diagrams/booking-activity.drawio) |
 
 ## База данных
 
