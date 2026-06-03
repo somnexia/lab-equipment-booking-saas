@@ -1,6 +1,7 @@
 // server/controllers/authController.js
 const AuthService = require('../services/mysqlAuthService');
 const jwt = require('jsonwebtoken');
+const { DEFAULT_REGISTER_ROLE } = require('../config/roles');
 
 exports.register = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ exports.register = async (req, res) => {
 
     // Генерация JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role || 'user', },
+      { id: user.id, email: user.email, role: user.role || DEFAULT_REGISTER_ROLE, },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -47,7 +48,7 @@ exports.login = async (req, res) => {
       {
         id: user.id,
         email: user.email,
-        role: user.role || 'user',
+        role: user.role || DEFAULT_REGISTER_ROLE,
         simpleAuth: false // ← ДОБАВИЛИ
       },
       process.env.JWT_SECRET,
@@ -67,7 +68,7 @@ exports.login = async (req, res) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        role: user.role || 'user'
+        role: user.role || DEFAULT_REGISTER_ROLE
       }
     });
 
