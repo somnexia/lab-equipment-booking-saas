@@ -22,10 +22,11 @@ ALTER TABLE `users`
   ) NOT NULL DEFAULT 'student';
 
 UPDATE `users` SET `role` = 'system_admin' WHERE `role` = 'admin';
+UPDATE `users` SET `role` = 'student' WHERE `role` = 'guest';
 UPDATE `users` SET `role` = 'equipment_manager' WHERE `role` = 'manager';
 UPDATE `users` SET `role` = 'student' WHERE `role` = 'user';
 
--- Шаг 2: только новые значения
+-- Шаг 2: только новые значения (без guest)
 ALTER TABLE `users`
   MODIFY `role` ENUM(
     'system_admin',
@@ -33,6 +34,5 @@ ALTER TABLE `users`
     'equipment_manager',
     'researcher',
     'student',
-    'technician',
-    'guest'
+    'technician'
   ) NOT NULL DEFAULT 'student';

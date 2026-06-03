@@ -7,7 +7,7 @@
 | Документ | Содержание |
 |----------|------------|
 | [docs/01-introduction.md](docs/01-introduction.md) | Введение, цели, задачи |
-| [docs/02-users-and-roles.md](docs/02-users-and-roles.md) | 7 ролей пользователей |
+| [docs/02-users-and-roles.md](docs/02-users-and-roles.md) | 6 ролей пользователей |
 | [docs/03-tables.md](docs/03-tables.md) | Описание таблиц БД |
 
 ## База данных

@@ -9,7 +9,6 @@ const ROLES = {
   RESEARCHER: 'researcher',
   STUDENT: 'student',
   TECHNICIAN: 'technician',
-  GUEST: 'guest',
 };
 
 const ROLE_LABELS = {
@@ -19,7 +18,6 @@ const ROLE_LABELS = {
   [ROLES.RESEARCHER]: 'Исследователь',
   [ROLES.STUDENT]: 'Студент',
   [ROLES.TECHNICIAN]: 'Техник',
-  [ROLES.GUEST]: 'Гость (посетитель)',
 };
 
 /** Просмотр каталога оборудования */

@@ -1,5 +1,6 @@
 -- Тестовые данные Lab Equipment Booking SaaS
 -- Пароль для всех демо-пользователей: Password123!
+-- 5 учётных записей покрывают 6 ролей; техника можно назначить через UPDATE (см. README).
 
 USE `lab_equipment_booking`;
 
@@ -12,17 +13,14 @@ INSERT INTO `equipment_categories` (`id`, `organization_id`, `name`, `descriptio
 (2, 1, 'Измерительные приборы', 'Весы, pH-метры'),
 (3, 2, 'Электроника', 'Осциллографы, мультиметры');
 
--- bcrypt hash для пароля Password123!
 SET @pwd = '$2b$10$m/FWZv0eTvUl.2FfUf5HL.zbPBL3mjB4CDmmjBT/RYluQTWIJ1jIi';
 
 INSERT INTO `users` (`id`, `organization_id`, `name`, `email`, `password_hash`, `role`) VALUES
-(1, 1, 'Сергей Системов', 'system.admin@lab.local', @pwd, 'system_admin'),
+(1, 1, 'Сергей Системов', 'admin@lab.local', @pwd, 'system_admin'),
 (2, 1, 'Мария Лаборантова', 'lab.admin@chem.lab.local', @pwd, 'lab_admin'),
-(3, 1, 'Иван Менеджеров', 'equipment.manager@chem.lab.local', @pwd, 'equipment_manager'),
+(3, 1, 'Иван Менеджеров', 'manager@chem.lab.local', @pwd, 'equipment_manager'),
 (4, 1, 'Алексей Исследов', 'researcher@chem.lab.local', @pwd, 'researcher'),
-(5, 1, 'Пётр Студентов', 'student@chem.lab.local', @pwd, 'student'),
-(6, 2, 'Николай Техников', 'technician@physics.lab.local', @pwd, 'technician'),
-(7, 2, 'Гость Посетителев', 'guest@example.com', @pwd, 'guest');
+(5, 1, 'Пётр Студентов', 'student@chem.lab.local', @pwd, 'student');
 
 INSERT INTO `equipment` (`id`, `organization_id`, `category_id`, `name`, `description`, `status`) VALUES
 (1, 1, 1, 'Колба Эрленмейера 250 мл', 'Стеклянная колба для химических опытов', 'available'),

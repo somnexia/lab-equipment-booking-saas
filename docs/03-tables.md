@@ -40,7 +40,7 @@ users 1 ── * bookings
 | `created_at` | TIMESTAMP | Дата регистрации |
 
 **Роли (`role`):**  
-`system_admin`, `lab_admin`, `equipment_manager`, `researcher`, `student`, `technician`, `guest`.
+`system_admin`, `lab_admin`, `equipment_manager`, `researcher`, `student`, `technician`.
 
 ## Таблица `equipment_categories`
 

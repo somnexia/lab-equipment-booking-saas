@@ -15,16 +15,21 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 ```
 
-## Демо-пользователи
+## Демо-пользователи (5 аккаунтов)
 
 Пароль для всех: `Password123!`
 
 | Email | Роль |
 |-------|------|
-| system.admin@lab.local | system_admin |
+| admin@lab.local | system_admin |
 | lab.admin@chem.lab.local | lab_admin |
-| equipment.manager@chem.lab.local | equipment_manager |
+| manager@chem.lab.local | equipment_manager |
 | researcher@chem.lab.local | researcher |
 | student@chem.lab.local | student |
-| technician@physics.lab.local | technician |
-| guest@example.com | guest |
+
+Роль **technician** в схеме есть, отдельный демо-логин не обязателен. Для проверки ТО:
+
+```sql
+UPDATE users SET role = 'technician' WHERE email = 'manager@chem.lab.local';
+-- после теста верните: equipment_manager
+```

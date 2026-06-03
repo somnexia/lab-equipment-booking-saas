@@ -37,8 +37,7 @@ CREATE TABLE `users` (
     'equipment_manager',
     'researcher',
     'student',
-    'technician',
-    'guest'
+    'technician'
   ) NOT NULL DEFAULT 'student',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
