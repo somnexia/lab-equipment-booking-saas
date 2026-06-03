@@ -36,7 +36,7 @@ async function createClass(data) {
 
 const pbAuthService = {
 
-  async register({ name, email, password, role = 'user' }) {
+  async register({ name, email, password, role = 'student' }) {
     // Сначала авторизуемся
     await authAdmin();
 

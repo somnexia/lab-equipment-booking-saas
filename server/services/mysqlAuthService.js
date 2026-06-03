@@ -1,10 +1,11 @@
 // server/services/mysqlAuthService.js
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
+const { DEFAULT_REGISTER_ROLE } = require('../config/roles');
 
 const mysqlAuthService = {
 
-  async register({ name, email, password, organization_id, role = 'user' }) {
+  async register({ name, email, password, organization_id, role = DEFAULT_REGISTER_ROLE }) {
 
     const passwordHash = await bcrypt.hash(password, 10);
 

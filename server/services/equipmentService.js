@@ -16,22 +16,33 @@ const EquipmentService = {
 
   // Создать новое оборудование
   create: async (equipment) => {
-    const { name, category_id, description } = equipment;
+    const {
+      name,
+      category_id,
+      description,
+      organization_id,
+      status = 'available',
+    } = equipment;
     const [result] = await db.query(
-      'INSERT INTO equipment (name, category_id, description) VALUES (?, ?, ?)',
-      [name, category_id, description]
+      `INSERT INTO equipment (organization_id, name, category_id, description, status)
+       VALUES (?, ?, ?, ?, ?)`,
+      [organization_id, name, category_id, description, status]
     );
     return { id: result.insertId, ...equipment };
   },
 
-  // Обновить оборудование
   update: async (id, equipment) => {
-    const { name, category_id, description } = equipment;
+    const { name, category_id, description, status } = equipment;
     await db.query(
-      'UPDATE equipment SET name = ?, category_id = ?, description = ? WHERE id = ?',
-      [name, category_id, description, id]
+      `UPDATE equipment
+       SET name = COALESCE(?, name),
+           category_id = COALESCE(?, category_id),
+           description = COALESCE(?, description),
+           status = COALESCE(?, status)
+       WHERE id = ?`,
+      [name, category_id, description, status, id]
     );
-    return { id, ...equipment };
+    return { id: Number(id), ...equipment };
   },
 
   // Удалить оборудование
