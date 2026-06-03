@@ -3,6 +3,21 @@
 База данных: **`lab_equipment_booking`**.  
 Скрипт создания: [`database/schema.sql`](../database/schema.sql).
 
+## ERD-диаграмма
+
+Файл: [`diagrams/lab-equipment-booking-erd.drawio`](diagrams/lab-equipment-booking-erd.drawio) (draw.io).  
+Инструкция: [`diagrams/README.md`](diagrams/README.md).
+
+## Чем это отличается от `schema.sql`?
+
+| `schema.sql` | `03-tables.md` |
+|--------------|----------------|
+| Машиночитаемый DDL для СУБД | Текст для отчёта и преподавателя |
+| `CREATE TABLE`, индексы, FK | Назначение полей **простым языком** |
+| Без пояснения ролей и правил | ENUM-статусы, бизнес-правила, связь с ролями |
+
+SQL и описание таблиц **согласованы**, но не дублируют друг друга дословно: в SQL — синтаксис, в документе — смысл и огранич предметной области.
+
 ## ER-связи (кратко)
 
 ```
@@ -88,8 +103,30 @@ users 1 ── * bookings
 2. Оборудование со статусом `broken` или `maintenance` не должно принимать новые брони `active` (планируется в процедуре бронирования).
 3. Пользователь видит данные в рамках своей `organization_id` (планируется в VIEW и API).
 
+## Словари значений ENUM
+
+### `users.role`
+
+`system_admin`, `lab_admin`, `equipment_manager`, `researcher`, `student`, `technician` — см. [02-users-and-roles.md](02-users-and-roles.md).
+
+### `equipment.status`
+
+| Значение | Смысл |
+|----------|--------|
+| `available` | Можно бронировать |
+| `maintenance` | Техобслуживание, бронь запрещена |
+| `broken` | Неисправно, бронь запрещена |
+
+### `bookings.status`
+
+| Значение | Смысл |
+|----------|--------|
+| `active` | Актуальная бронь |
+| `completed` | Слот завершён |
+| `cancelled` | Отменена пользователем или админом |
+
 ## Следующие артефакты
 
-- ERD-диаграмма: `docs/diagrams/erd.mmd` (этап 3)
-- CRUD-матрица: `docs/04-crud-matrix.md`
+- CRUD-матрица: [04-crud-matrix.md](04-crud-matrix.md)
+- Use Case, диаграммы состояний: `docs/diagrams/`
 - Представления и процедуры: `database/views.sql`, `database/procedures.sql`

@@ -64,16 +64,14 @@
 ## Матрица доступа (кратко)
 
 | Сущность | system_admin | lab_admin | equipment_manager | researcher | student | technician |
-|----------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|----------|:---:|:---:|:---:|:---:|:---:|:---:|
 | Организации | CRUD | R (своя) | R | — | — | — |
 | Пользователи | CRUD | CRUD (своя орг.) | R | — | — | — |
 | Категории | CRUD | CRUD | CRUD | R | R | R |
 | Оборудование | CRUD | CRUD | CRUD | R | R | RU (статус) |
 | Бронирования | CRUD | CRUD | R | CRUD | CRU | R |
 
-*В seed — 5 демо-аккаунтов; роль `technician` проверяется через `UPDATE` (см. database/README.md).*
-
-Полная CRUD-матрица будет в отдельном файле `docs/04-crud-matrix.md` (следующий этап).
+Полная версия с пояснениями и API: **[04-crud-matrix.md](04-crud-matrix.md)**.
 
 ## Миграция со старой модели
 

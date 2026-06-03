@@ -33,3 +33,13 @@ mysql -u root -p < database/seed.sql
 UPDATE users SET role = 'technician' WHERE email = 'manager@chem.lab.local';
 -- после теста верните: equipment_manager
 ```
+
+## Команды для создания User в  phpMyAdmin
+
+CREATE DATABASE IF NOT EXISTS lab_equipment_booking;
+CREATE USER IF NOT EXISTS 'labuser'@'localhost' IDENTIFIED BY 'ваш_пароль';
+GRANT ALL PRIVILEGES ON lab_equipment_booking.* TO 'labuser'@'localhost';
+FLUSH PRIVILEGES;
+
+## Проверка через PowerShell (не через браузер)
+Invoke-RestMethod -Uri "http://localhost:3000/api/auth/login" -Method POST -ContentType "application/json" -Body

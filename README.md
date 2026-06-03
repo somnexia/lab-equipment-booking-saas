@@ -9,6 +9,9 @@
 | [docs/01-introduction.md](docs/01-introduction.md) | Введение, цели, задачи |
 | [docs/02-users-and-roles.md](docs/02-users-and-roles.md) | 6 ролей пользователей |
 | [docs/03-tables.md](docs/03-tables.md) | Описание таблиц БД |
+| [docs/04-crud-matrix.md](docs/04-crud-matrix.md) | CRUD-матрица (6 ролей × 5 таблиц) |
+| [docs/05-use-case.md](docs/05-use-case.md) | Use Case; диаграмма: [docs/diagrams/use-case.drawio](docs/diagrams/use-case.drawio) |
+| [docs/06-state-diagram.md](docs/06-state-diagram.md) | Состояния; [docs/diagrams/booking-states.drawio](docs/diagrams/booking-states.drawio) |
 
 ## База данных
 
