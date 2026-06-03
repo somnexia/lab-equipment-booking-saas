@@ -2,17 +2,21 @@ const express = require('express');
 const router = express.Router();
 const EquipmentController = require('../../controllers/equipmentController');
 const { authenticate, authorize } = require('../../middlewares/authMiddleware');
+const {
+  CAN_VIEW_EQUIPMENT,
+  CAN_MANAGE_EQUIPMENT,
+  CAN_UPDATE_EQUIPMENT_STATUS,
+} = require('../../config/roles');
 
+const CAN_EDIT_EQUIPMENT = [
+  ...new Set([...CAN_MANAGE_EQUIPMENT, ...CAN_UPDATE_EQUIPMENT_STATUS]),
+];
 
-// Использование в маршрутах middleware для аутентификации и авторизации: 
+router.get('/', authenticate, authorize(CAN_VIEW_EQUIPMENT), EquipmentController.getAll);
+router.get('/:id', authenticate, authorize(CAN_VIEW_EQUIPMENT), EquipmentController.getById);
 
-// 🔹 Любой авторизованный пользователь может просматривать оборудование
-router.get('/', authenticate, EquipmentController.getAll);
-router.get('/:id', authenticate, EquipmentController.getById);
-
-// 🔹 Только админ и менеджер могут создавать, обновлять и удалять оборудование
-router.post('/', authenticate, authorize(['admin', 'manager']), EquipmentController.create);
-router.put('/:id', authenticate, authorize(['admin', 'manager']), EquipmentController.update);
-router.delete('/:id', authenticate, authorize(['admin', 'manager']), EquipmentController.delete);
+router.post('/', authenticate, authorize(CAN_MANAGE_EQUIPMENT), EquipmentController.create);
+router.put('/:id', authenticate, authorize(CAN_EDIT_EQUIPMENT), EquipmentController.update);
+router.delete('/:id', authenticate, authorize(CAN_MANAGE_EQUIPMENT), EquipmentController.delete);
 
 module.exports = router;
