@@ -6,7 +6,11 @@ const router = express.Router();
 const authController = require('../../controllers/authController');
 const { authenticate } = require('../../middlewares/authMiddleware');
 
-// 🔹 login / register
+// В браузере открывают GET — API принимает только POST; перенаправляем на форму
+router.get('/login', (req, res) => {
+  res.redirect('/auth/login');
+});
+
 router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.post('/logout', authController.logout);
