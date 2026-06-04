@@ -7,13 +7,17 @@
 | `schema.sql` | Создание БД и таблиц |
 | `seed.sql` | Тестовые организации, пользователи, оборудование, брони |
 | `migrate_from_legacy_roles.sql` | Обновление существующей БД со старых ролей |
+| `procedures.sql` | Функции и хранимые процедуры (брони, статус оборудования) |
 
 ## Установка с нуля
 
 ```bash
 mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
+mysql -u root -p lab_equipment_booking < database/procedures.sql
 ```
+
+Документация процедур: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md).
 
 ## Демо-пользователи (5 аккаунтов)
 

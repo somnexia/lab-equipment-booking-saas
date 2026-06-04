@@ -86,6 +86,6 @@
 | Login + JWT | Реализовано |
 | GET equipment | Реализовано |
 | POST bookings + authorize | Реализовано |
-| Проверка `available` | Не реализовано |
-| Проверка пересечения слотов | Не реализовано |
+| Проверка `available` | Реализовано в `sp_create_booking` |
+| Проверка пересечения слотов | Реализовано в `fn_booking_has_conflict` |
 | Фильтр по `organization_id` | Не реализовано |

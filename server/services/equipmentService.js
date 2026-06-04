@@ -31,18 +31,41 @@ const EquipmentService = {
     return { id: result.insertId, ...equipment };
   },
 
-  update: async (id, equipment) => {
+  update: async (id, equipment, actor = null) => {
     const { name, category_id, description, status } = equipment;
-    await db.query(
-      `UPDATE equipment
-       SET name = COALESCE(?, name),
-           category_id = COALESCE(?, category_id),
-           description = COALESCE(?, description),
-           status = COALESCE(?, status)
-       WHERE id = ?`,
-      [name, category_id, description, status, id]
-    );
-    return { id: Number(id), ...equipment };
+
+    if (status && actor) {
+      await db.query('CALL sp_update_equipment_status(?, ?, ?, ?)', [
+        id,
+        status,
+        actor.id,
+        actor.role,
+      ]);
+    }
+
+    if (name !== undefined || category_id !== undefined || description !== undefined) {
+      await db.query(
+        `UPDATE equipment
+         SET name = COALESCE(?, name),
+             category_id = COALESCE(?, category_id),
+             description = COALESCE(?, description)
+         WHERE id = ?`,
+        [name, category_id, description, id]
+      );
+    } else if (!status || !actor) {
+      await db.query(
+        `UPDATE equipment
+         SET name = COALESCE(?, name),
+             category_id = COALESCE(?, category_id),
+             description = COALESCE(?, description),
+             status = COALESCE(?, status)
+         WHERE id = ?`,
+        [name, category_id, description, status, id]
+      );
+    }
+
+    const updated = await EquipmentService.getById(id);
+    return updated || { id: Number(id), ...equipment };
   },
 
   // Удалить оборудование

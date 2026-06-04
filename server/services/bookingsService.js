@@ -1,42 +1,85 @@
 const db = require('../config/db');
 
+function firstResultSet(rows) {
+  if (Array.isArray(rows) && Array.isArray(rows[0])) {
+    return rows[0][0];
+  }
+  return rows[0];
+}
+
 const BookingsService = {
-  // Получить все бронирования
   getAll: async () => {
     const [rows] = await db.query('SELECT * FROM bookings');
     return rows;
   },
 
-  // Получить бронирование по ID
   getById: async (id) => {
     const [rows] = await db.query('SELECT * FROM bookings WHERE id = ?', [id]);
     return rows[0];
   },
 
-  // Создать новое бронирование
-  create: async (booking) => {
-    const { equipment_id, user_id, start_time, end_time, status } = booking;
-    const [result] = await db.query(
-      'INSERT INTO bookings (equipment_id, user_id, start_time, end_time, status, created_at) VALUES (?, ?, ?, ?, ?, NOW())',
-      [equipment_id, user_id, start_time, end_time, status || 'active']
+  create: async (booking, actor) => {
+    const { equipment_id, user_id, start_time, end_time } = booking;
+    const targetUserId = user_id || actor.id;
+
+    const [rows] = await db.query(
+      'CALL sp_create_booking(?, ?, ?, ?, ?, ?)',
+      [equipment_id, targetUserId, start_time, end_time, actor.id, actor.role]
     );
-    return { id: result.insertId, ...booking };
+
+    const result = firstResultSet(rows);
+    return {
+      id: result.booking_id,
+      equipment_id,
+      user_id: targetUserId,
+      start_time,
+      end_time,
+      status: result.status,
+    };
   },
 
-  // Обновить бронирование
-  update: async (id, booking) => {
+  update: async (id, booking, actor) => {
     const { start_time, end_time, status } = booking;
-    await db.query(
-      'UPDATE bookings SET start_time = ?, end_time = ?, status = ? WHERE id = ?',
-      [start_time, end_time, status, id]
-    );S
-    return { id, ...booking };
+
+    if (status === 'cancelled') {
+      const [rows] = await db.query(
+        'CALL sp_cancel_booking(?, ?, ?)',
+        [id, actor.id, actor.role]
+      );
+      return { id: Number(id), ...firstResultSet(rows) };
+    }
+
+    if (status === 'completed') {
+      const [rows] = await db.query(
+        'CALL sp_complete_booking(?, ?, ?)',
+        [id, actor.id, actor.role]
+      );
+      return { id: Number(id), ...firstResultSet(rows) };
+    }
+
+    if (start_time && end_time) {
+      const [rows] = await db.query(
+        'CALL sp_update_booking(?, ?, ?, ?, ?)',
+        [id, start_time, end_time, actor.id, actor.role]
+      );
+      return { id: Number(id), start_time, end_time, ...firstResultSet(rows) };
+    }
+
+    const existing = await BookingsService.getById(id);
+    return { id: Number(id), ...existing, ...booking };
   },
 
-  // Удалить бронирование
-  delete: async (id) => {
-    await db.query('DELETE FROM bookings WHERE id = ?', [id]);
-    return { message: `Booking with id ${id} deleted` };
+  delete: async (id, actor) => {
+    const [rows] = await db.query(
+      'CALL sp_cancel_booking(?, ?, ?)',
+      [id, actor.id, actor.role]
+    );
+    const result = firstResultSet(rows);
+    return {
+      message: `Booking ${id} cancelled`,
+      booking_id: result.booking_id,
+      status: result.status,
+    };
   },
 };
 

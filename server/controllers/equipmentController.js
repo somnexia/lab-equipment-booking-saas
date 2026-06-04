@@ -35,11 +35,17 @@ const EquipmentController = {
 
   update: async (req, res) => {
     try {
-      const updatedEquipment = await EquipmentService.update(req.params.id, req.body);
+      const updatedEquipment = await EquipmentService.update(
+        req.params.id,
+        req.body,
+        req.user
+      );
       res.json(updatedEquipment);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      const msg = err.sqlMessage || err.message;
+      const status = msg.includes('not found') ? 404 : msg.includes('cannot') ? 403 : 500;
+      res.status(status).json({ error: msg });
     }
   },
 

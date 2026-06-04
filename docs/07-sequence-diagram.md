@@ -66,14 +66,9 @@
 
 ---
 
-## Планируемые изменения (на диаграмме — note)
+## Реализация в БД
 
-Вместо прямого `INSERT` в Service:
-
-1. Вызов **`sp_create_booking`** в MySQL.
-2. Проверка `equipment.status = available`.
-3. Проверка пересечения активных броней.
-4. Проверка `organization_id` пользователя и оборудования.
+`BookingsService` вызывает **`CALL sp_create_booking(...)`** — см. [09-stored-procedures.md](09-stored-procedures.md).
 
 ---
 
@@ -84,6 +79,6 @@
 | POST /api/bookings | `server/routes/api/bookings.js` |
 | JWT | `server/middlewares/authMiddleware.js` |
 | create | `server/controllers/bookingsController.js` |
-| INSERT | `server/services/bookingsService.js` |
+| CALL sp_* | `server/services/bookingsService.js`, `database/procedures.sql` |
 | GET equipment | `server/routes/api/equipment.js`, `equipmentService.js` |
 | login | `server/controllers/authController.js` |
