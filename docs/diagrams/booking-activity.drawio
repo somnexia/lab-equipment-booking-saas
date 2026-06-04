@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net" agent="lab-equipment-booking-saas" version="22.1.0" type="device">
+  <diagram id="booking-activity" name="Activity - Create Booking">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Диаграмма действий: создание бронирования (UC-30)&#xa;Lab Equipment Booking SaaS" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="250" y="15" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_user" value="Пользователь" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="340" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_sys" value="Система (Express API)" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="70" width="400" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_db" value="База данных (MySQL)" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="70" width="360" height="920" as="geometry" />
+        </mxCell>
+        <mxCell id="start" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="lane_user">
+          <mxGeometry x="155" y="50" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_open" value="Открыть веб-приложение&#xa;(/auth/login или /dashboard)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="100" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d_auth" value="Авторизован?" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_user">
+          <mxGeometry x="115" y="175" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a_login" value="Ввести email и пароль,&#xa;нажать «Войти»" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="270" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_catalog" value="Просмотреть каталог&#xa;оборудования" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="360" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_select" value="Выбрать оборудование,&#xa;дату и время (слот)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="440" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_confirm" value="Подтвердить&#xa;бронирование" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="520" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="a_success" value="Получить подтверждение&#xa;(бронь active)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="720" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_err_show" value="Просмотреть сообщение&#xa;об ошибке" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane_user">
+          <mxGeometry x="100" y="820" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="end_ok" value="" style="ellipse;fillColor=#ffffff;strokeColor=#82b366;strokeWidth=3;" vertex="1" parent="lane_user">
+          <mxGeometry x="155" y="790" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="end_ok_in" value="" style="ellipse;fillColor=#82b366;strokeColor=#82b366;" vertex="1" parent="lane_user">
+          <mxGeometry x="161" y="796" width="18" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="end_err" value="" style="ellipse;fillColor=#ffffff;strokeColor=#b85450;strokeWidth=3;" vertex="1" parent="lane_user">
+          <mxGeometry x="155" y="880" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="end_err_in" value="" style="ellipse;fillColor=#b85450;strokeColor=#b85450;" vertex="1" parent="lane_user">
+          <mxGeometry x="161" y="886" width="18" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="s_login" value="POST /api/auth/login&#xa;проверка bcrypt, выдача JWT" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_sys">
+          <mxGeometry x="90" y="265" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_jwt" value="Проверить JWT&#xa;(authenticate)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_sys">
+          <mxGeometry x="100" y="355" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_get_eq" value="GET /api/equipment&#xa;вернуть каталог JSON" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_sys">
+          <mxGeometry x="90" y="415" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d_role" value="Роль разрешена&#xa;для POST bookings?" style="rhombus;whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane_sys">
+          <mxGeometry x="95" y="510" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="s_post" value="POST /api/bookings&#xa;(authorize + create)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_sys">
+          <mxGeometry x="95" y="610" width="150" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d_avail" value="equipment.status&#xa;= available?" style="rhombus;whiteSpace=wrap;html=1;fontSize=9;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane_sys">
+          <mxGeometry x="100" y="680" width="140" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="s_201" value="Ответ 201 Created&#xa;+ данные брони" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane_sys">
+          <mxGeometry x="100" y="780" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_err" value="Ответ 401 / 403 / 500&#xa;+ текст ошибки" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane_sys">
+          <mxGeometry x="260" y="600" width="120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d_conflict" value="Нет пересечения&#xa;с active бронями?" style="rhombus;whiteSpace=wrap;html=1;fontSize=9;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="lane_sys">
+          <mxGeometry x="95" y="770" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="note_sp" value="* Планируется в sp_create_booking" style="text;html=1;strokeColor=none;fillColor=none;fontSize=9;fontStyle=2;fontColor=#9673a6;" vertex="1" parent="lane_sys">
+          <mxGeometry x="255" y="795" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="db_sel_user" value="SELECT users" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_db">
+          <mxGeometry x="100" y="265" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="db_sel_eq" value="SELECT equipment&#xa;(+ categories)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="lane_db">
+          <mxGeometry x="90" y="410" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="db_ins" value="INSERT INTO bookings&#xa;status = 'active'" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane_db">
+          <mxGeometry x="85" y="680" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="start" target="a_open"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_open" target="d_auth"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" value="нет" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_user" source="d_auth" target="a_login"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" value="да" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_user" source="d_auth" target="a_catalog"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="270" y="210" /><mxPoint x="270" y="385" /></Array></mxGeometry></mxCell>
+        <mxCell id="e5" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_login" target="a_catalog"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_catalog" target="a_select"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_select" target="a_confirm"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_confirm" target="a_success"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="170" y="680" /></Array></mxGeometry></mxCell>
+        <mxCell id="e9" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_success" target="end_ok"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e10" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_user" source="a_err_show" target="end_err"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="a_login" target="s_login"><mxGeometry relative="1" as="geometry"><mxPoint x="310" y="330" as="sourcePoint" /><mxPoint x="470" y="330" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="e12" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="s_login" target="db_sel_user"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e13" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="a_catalog" target="s_jwt"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e14" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_sys" source="s_jwt" target="s_get_eq"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e15" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="s_get_eq" target="db_sel_eq"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e16" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="a_confirm" target="d_role"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e17" value="да" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_role" target="s_post"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e18" value="нет" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_role" target="s_err"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e19" style="endArrow=block;html=1;rounded=0;" edge="1" parent="lane_sys" source="s_post" target="d_avail"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e20" value="да" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_avail" target="d_conflict"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e21" value="нет" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_avail" target="s_err"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="320" y="718" /></Array></mxGeometry></mxCell>
+        <mxCell id="e22" value="да" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_conflict" target="s_201"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e23" value="нет *" style="endArrow=block;html=1;rounded=0;fontSize=9;" edge="1" parent="lane_sys" source="d_conflict" target="s_err"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e24" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="s_post" target="db_ins"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e25" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="s_201" target="a_success"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e26" style="endArrow=block;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="s_err" target="a_err_show"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="210" y="870" /></Array></mxGeometry></mxCell>
+        <mxCell id="legend" value="&lt;b&gt;Дорожки (swimlanes):&lt;/b&gt; пользователь | приложение | СУБД.&lt;br&gt;Ромбы — условия. * проверка конфликта слотов — в планах (sp_create_booking).&lt;br&gt;Связь: UC-30, booking-sequence.drawio, 06-state-diagram.md" style="text;html=1;strokeColor=#999999;fillColor=#fafafa;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1000" width="1100" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
