@@ -7,10 +7,7 @@ const simplePassword = require('../../middlewares/simplePassword');
 router.get('/', authenticate, simplePassword, (req, res) => {
   console.log('📦 Dashboard (equipment) for:', req.user.email);
 
-  res.render('dashboard', {
-    title: 'Dashboard',
-    user: req.user
-  });
+  res.render('dashboard', { title: 'Каталог оборудования' });
 });
 
 module.exports = router;

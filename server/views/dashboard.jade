@@ -15,45 +15,45 @@ block content
       tr
         td(colspan="4") Загрузка…
 
-  block scripts
-    script.
-      async function loadEquipment() {
-        const table = document.getElementById('equipmentTable');
+block scripts
+  script.
+    async function loadEquipment() {
+      const table = document.getElementById('equipmentTable');
 
-        try {
-          const response = await fetch('/api/equipment', { credentials: 'include' });
+      try {
+        const response = await fetch('/api/equipment', { credentials: 'include' });
 
-          if (response.status === 401) {
-            window.location.href = '/auth/login';
-            return;
-          }
-
-          const data = await response.json();
-          table.innerHTML = '';
-
-          if (!data.length) {
-            table.innerHTML = '<tr><td colspan="4">Нет оборудования</td></tr>';
-            return;
-          }
-
-          data.forEach(function (item) {
-            const row = document.createElement('tr');
-            const id = item.equipment_id ?? item.id;
-            const name = item.equipment_name ?? item.name;
-            const category = item.category_name ?? item.category_id ?? '—';
-            const status = item.status_label ?? item.status;
-
-            row.innerHTML =
-              '<td>' + id + '</td>' +
-              '<td>' + name + '</td>' +
-              '<td>' + category + '</td>' +
-              '<td>' + status + '</td>';
-            table.appendChild(row);
-          });
-        } catch (err) {
-          console.error(err);
-          table.innerHTML = '<tr><td colspan="4">Ошибка загрузки</td></tr>';
+        if (response.status === 401) {
+          window.location.href = '/auth/login';
+          return;
         }
-      }
 
-      loadEquipment();
+        const data = await response.json();
+        table.innerHTML = '';
+
+        if (!data.length) {
+          table.innerHTML = '<tr><td colspan="4">Нет оборудования</td></tr>';
+          return;
+        }
+
+        data.forEach(function (item) {
+          const row = document.createElement('tr');
+          const id = item.equipment_id ?? item.id;
+          const name = item.equipment_name ?? item.name;
+          const category = item.category_name ?? item.category_id ?? '—';
+          const status = item.status_label ?? item.status;
+
+          row.innerHTML =
+            '<td>' + id + '</td>' +
+            '<td>' + name + '</td>' +
+            '<td>' + category + '</td>' +
+            '<td>' + status + '</td>';
+          table.appendChild(row);
+        });
+      } catch (err) {
+        console.error(err);
+        table.innerHTML = '<tr><td colspan="4">Ошибка загрузки</td></tr>';
+      }
+    }
+
+    loadEquipment();

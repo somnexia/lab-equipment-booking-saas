@@ -6,7 +6,7 @@ const { authenticate } = require('../../middlewares/authMiddleware');
 // страница регистрации
 router.get('/register', (req, res) => {
   console.log('Render register page');
-  res.render('register', { title: 'Register' });
+  res.render('register', { title: 'Регистрация' });
 });
 
 // страница логина
@@ -18,7 +18,7 @@ router.get('/login', (req, res) => {
 // защищённая страница dashboard
 router.get('/dashboard', authenticate, (req, res) => {
   console.log('Render dashboard page, user:', req.user);
-  res.render('dashboard', { title: 'Dashboard', user: req.user });
+  res.render('dashboard', { title: 'Каталог оборудования' });
 });
 
 module.exports = router;

@@ -1,44 +1,46 @@
 extends layout
 
 block content
-  h1 Регистрация
+  .card.auth-card
+    h1 Регистрация
 
-  form#registerForm
-    div
-      label Имя
-      input(type="text", name="name", required)
+    form#registerForm
+      .form-row
+        label Имя
+        input(type="text", name="name", required)
 
-    div
-      label Email
-      input(type="email", name="email", required)
+      .form-row
+        label Email
+        input(type="email", name="email", required)
 
-    div
-      label Пароль
-      input(type="password", name="password", required)
+      .form-row
+        label Пароль
+        input(type="password", name="password", required)
 
-    div
-      label Organization ID
-      input(type="number", name="organization_id", required)
+      .form-row
+        label Organization ID
+        input(type="number", name="organization_id", value="1", required)
+        small(style="color:#5c6b7a") Демо: 1 — химия, 2 — физика
 
-    button(type="submit") Зарегистрироваться
+      button.btn.btn-primary(type="submit") Зарегистрироваться
 
-  p#message
+    p#message.form-message
 
+block scripts
   script.
     const form = document.getElementById('registerForm');
     const message = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-
-      console.log('🔥 Register submit');
+      message.innerText = '';
 
       const data = {
         name: form.name.value,
         email: form.email.value,
         password: form.password.value,
-        organization_id: parseInt(form.organization_id.value),
-        role: "student"
+        organization_id: parseInt(form.organization_id.value, 10),
+        role: 'student'
       };
 
       try {
@@ -50,19 +52,17 @@ block content
         });
 
         const result = await res.json();
-        console.log('Register result:', result);
 
         if (res.ok) {
-          message.innerText = "Регистрация успешна!";
-          setTimeout(() => {
-            window.location.href = "/auth/login";
+          message.style.color = '#15803d';
+          message.innerText = 'Регистрация успешна! Перенаправление…';
+          setTimeout(function () {
+            window.location.href = '/auth/login';
           }, 1000);
         } else {
-          message.innerText = result.error || "Ошибка регистрации";
+          message.innerText = result.error || 'Ошибка регистрации';
         }
-
       } catch (err) {
-        console.error(err);
-        message.innerText = "Ошибка соединения";
+        message.innerText = 'Ошибка соединения';
       }
     });

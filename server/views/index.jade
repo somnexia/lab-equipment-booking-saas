@@ -1,12 +1,13 @@
 extends layout
 
 block content
-  h1 Lab Equipment Booking
-  p SaaS для бронирования лабораторного оборудования
-  ul
-    li
-      a(href="/auth/login") Вход
-    li
-      a(href="/auth/register") Регистрация
-    li
-      a(href="/dashboard") Личный кабинет (после входа)
+  .hero
+    h1 Lab Equipment Booking
+    p SaaS для бронирования лабораторного оборудования: каталог приборов, слоты, роли пользователей.
+
+    .hero-actions
+      if user
+        a.btn.btn-primary(href="/dashboard") Каталог оборудования
+      else
+        a.btn.btn-primary(href="/auth/login") Войти
+        a.btn(href="/auth/register") Регистрация

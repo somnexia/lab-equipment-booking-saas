@@ -1,54 +1,52 @@
 extends layout
 
 block content
-  h1 Вход
+  .card.auth-card
+    h1 Вход
 
-  form#loginForm
-    div
-      label(for="email") Email
-      input#email(type="email", name="email", required)
+    form#loginForm
+      .form-row
+        label(for="email") Email
+        input#email(type="email", name="email", required, autocomplete="username")
 
-    div
-      label(for="password") Пароль
-      input#password(type="password", name="password", required)
+      .form-row
+        label(for="password") Пароль
+        input#password(type="password", name="password", required, autocomplete="current-password")
 
-    button(type="submit") Войти
+      button.btn.btn-primary(type="submit") Войти
 
-  p#message
+    p#message.form-message
 
-  script.
-    const form = document.getElementById('loginForm');
-    const message = document.getElementById('message');
+  block scripts
+    script.
+      const form = document.getElementById('loginForm');
+      const message = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      console.log('🔥 Submit clicked');
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        message.innerText = '';
 
-      const data = {
-        email: form.email.value,
-        password: form.password.value
-      };
+        const data = {
+          email: form.email.value,
+          password: form.password.value
+        };
 
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          credentials: 'include'
-        });
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            credentials: 'include'
+          });
 
-        const result = await res.json();
-        console.log('Login result:', result);
+          const result = await res.json();
 
-        if (res.ok) {
-          console.log('➡️ Redirect to dashboard');
-          window.location.href = '/dashboard';
-        } else {
-          message.innerText = result.error || 'Ошибка входа';
+          if (res.ok) {
+            window.location.href = '/dashboard';
+          } else {
+            message.innerText = result.error || 'Ошибка входа';
+          }
+        } catch (err) {
+          message.innerText = 'Ошибка соединения';
         }
-
-      } catch (err) {
-        console.error(err);
-        message.innerText = 'Ошибка соединения';
-      }
-    });
+      });
