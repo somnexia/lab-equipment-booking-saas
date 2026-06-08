@@ -97,6 +97,16 @@ const CAN_UPDATE_USERS = Object.values(ROLES);
 /** Удаление пользователей */
 const CAN_DELETE_USERS = [ROLES.SYSTEM_ADMIN, ROLES.LAB_ADMIN];
 
+/** Просмотр категорий оборудования (все роли — своя org; system_admin — все) */
+const CAN_VIEW_EQUIPMENT_CATEGORIES = Object.values(ROLES);
+
+/** Создание / изменение / удаление категорий (ограничения по org в сервисе) */
+const CAN_MANAGE_EQUIPMENT_CATEGORIES = [
+  ROLES.SYSTEM_ADMIN,
+  ROLES.LAB_ADMIN,
+  ROLES.EQUIPMENT_MANAGER,
+];
+
 /** Роль по умолчанию при регистрации через UI */
 const DEFAULT_REGISTER_ROLE = ROLES.STUDENT;
 
@@ -117,5 +127,7 @@ module.exports = {
   CAN_CREATE_USERS,
   CAN_UPDATE_USERS,
   CAN_DELETE_USERS,
+  CAN_VIEW_EQUIPMENT_CATEGORIES,
+  CAN_MANAGE_EQUIPMENT_CATEGORIES,
   DEFAULT_REGISTER_ROLE,
 };
