@@ -42,12 +42,73 @@ function assertCanRead(equipment, actor) {
   throw forbidden();
 }
 
+function parseListFilters(query = {}) {
+  const filters = {};
+
+  if (query.bookable === 'true' || query.bookable === '1') {
+    filters.status = 'available';
+  }
+
+  if (query.status) {
+    if (!VALID_STATUSES.includes(query.status)) {
+      badRequest('invalid status filter');
+    }
+    filters.status = query.status;
+  }
+
+  if (query.category_id !== undefined && query.category_id !== '') {
+    const categoryId = Number(query.category_id);
+    if (Number.isNaN(categoryId)) badRequest('invalid category_id');
+    filters.category_id = categoryId;
+  }
+
+  if (query.q?.trim()) {
+    filters.q = query.q.trim();
+  }
+
+  return filters;
+}
+
 async function fetchById(id) {
   const [rows] = await db.query(
     'SELECT * FROM v_equipment_catalog WHERE equipment_id = ?',
     [id]
   );
   return rows[0];
+}
+
+async function queryCatalog(actor, filters = {}) {
+  const conditions = [];
+  const params = [];
+
+  if (actor.role !== ROLES.SYSTEM_ADMIN) {
+    assertOrgInToken(actor);
+    conditions.push('organization_id = ?');
+    params.push(actor.organization_id);
+  }
+
+  if (filters.status) {
+    conditions.push('status = ?');
+    params.push(filters.status);
+  }
+
+  if (filters.category_id) {
+    conditions.push('category_id = ?');
+    params.push(filters.category_id);
+  }
+
+  if (filters.q) {
+    conditions.push('(equipment_name LIKE ? OR description LIKE ?)');
+    const like = `%${filters.q}%`;
+    params.push(like, like);
+  }
+
+  const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+  const [rows] = await db.query(
+    `SELECT * FROM v_equipment_catalog ${where} ORDER BY equipment_id`,
+    params
+  );
+  return rows;
 }
 
 async function validateCategory(categoryId, organizationId) {
@@ -71,21 +132,51 @@ async function validateCategory(categoryId, organizationId) {
   }
 }
 
-const EquipmentService = {
-  getAll: async (actor) => {
-    if (actor.role === ROLES.SYSTEM_ADMIN) {
-      const [rows] = await db.query(
-        'SELECT * FROM v_equipment_catalog ORDER BY equipment_id'
-      );
-      return rows;
-    }
+async function applyStatusChange(id, status, actor) {
+  if (!VALID_STATUSES.includes(status)) badRequest('invalid status');
+  await db.query('CALL sp_update_equipment_status(?, ?, ?, ?)', [
+    id,
+    status,
+    actor.id,
+    actor.role,
+  ]);
+}
 
-    assertOrgInToken(actor);
-    const [rows] = await db.query(
-      'SELECT * FROM v_equipment_catalog WHERE organization_id = ? ORDER BY equipment_id',
-      [actor.organization_id]
-    );
-    return rows;
+async function assertCanDeleteEquipment(equipmentId) {
+  const [rows] = await db.query(
+    `SELECT
+       SUM(status = 'active') AS active_cnt,
+       COUNT(*) AS total_cnt
+     FROM bookings
+     WHERE equipment_id = ?`,
+    [equipmentId]
+  );
+
+  const activeCnt = Number(rows[0]?.active_cnt || 0);
+  const totalCnt = Number(rows[0]?.total_cnt || 0);
+
+  if (activeCnt > 0) {
+    const err = new Error('Cannot delete equipment: active bookings exist');
+    err.status = 409;
+    throw err;
+  }
+
+  if (totalCnt > 0) {
+    const err = new Error('Cannot delete equipment: booking history exists');
+    err.status = 409;
+    throw err;
+  }
+}
+
+const EquipmentService = {
+  getAll: async (actor, query = {}) => {
+    const filters = parseListFilters(query);
+    return queryCatalog(actor, filters);
+  },
+
+  getAvailable: async (actor, query = {}) => {
+    const filters = parseListFilters({ ...query, bookable: 'true' });
+    return queryCatalog(actor, filters);
   },
 
   getById: async (id, actor) => {
@@ -123,6 +214,16 @@ const EquipmentService = {
     return EquipmentService.getById(result.insertId, actor);
   },
 
+  updateStatus: async (id, status, actor) => {
+    const existing = await fetchById(id);
+    if (!existing) throw notFound();
+    assertCanRead(existing, actor);
+
+    if (!status) badRequest('status is required');
+    await applyStatusChange(id, status, actor);
+    return EquipmentService.getById(id, actor);
+  },
+
   update: async (id, data, actor) => {
     const existing = await fetchById(id);
     if (!existing) throw notFound();
@@ -142,14 +243,7 @@ const EquipmentService = {
       if (status === undefined) {
         return existing;
       }
-      if (!VALID_STATUSES.includes(status)) badRequest('invalid status');
-
-      await db.query('CALL sp_update_equipment_status(?, ?, ?, ?)', [
-        id,
-        status,
-        actor.id,
-        actor.role,
-      ]);
+      await applyStatusChange(id, status, actor);
       return EquipmentService.getById(id, actor);
     }
 
@@ -177,13 +271,7 @@ const EquipmentService = {
     }
 
     if (status !== undefined) {
-      if (!VALID_STATUSES.includes(status)) badRequest('invalid status');
-      await db.query('CALL sp_update_equipment_status(?, ?, ?, ?)', [
-        id,
-        status,
-        actor.id,
-        actor.role,
-      ]);
+      await applyStatusChange(id, status, actor);
     }
 
     return EquipmentService.getById(id, actor);
@@ -201,17 +289,9 @@ const EquipmentService = {
       assertCanRead(existing, actor);
     }
 
-    try {
-      await db.query('DELETE FROM equipment WHERE id = ?', [id]);
-    } catch (err) {
-      if (err.code === 'ER_ROW_IS_REFERENCED_2') {
-        const e = new Error('Cannot delete equipment: related bookings exist');
-        e.status = 409;
-        throw e;
-      }
-      throw err;
-    }
+    await assertCanDeleteEquipment(id);
 
+    await db.query('DELETE FROM equipment WHERE id = ?', [id]);
     return { message: `Equipment with id ${id} deleted` };
   },
 };

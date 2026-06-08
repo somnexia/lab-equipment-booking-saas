@@ -16,14 +16,29 @@ function httpStatus(err) {
     return 403;
   }
   if (msg.includes('required') || msg.includes('invalid')) return 400;
-  if (msg.includes('related bookings')) return 409;
+  if (
+    msg.includes('related bookings') ||
+    msg.includes('active bookings') ||
+    msg.includes('booking history')
+  ) {
+    return 409;
+  }
   return 500;
 }
 
 const EquipmentController = {
   getAll: async (req, res) => {
     try {
-      const equipments = await EquipmentService.getAll(req.user);
+      const equipments = await EquipmentService.getAll(req.user, req.query);
+      res.json(equipments);
+    } catch (err) {
+      res.status(httpStatus(err)).json({ error: err.message });
+    }
+  },
+
+  getAvailable: async (req, res) => {
+    try {
+      const equipments = await EquipmentService.getAvailable(req.user, req.query);
       res.json(equipments);
     } catch (err) {
       res.status(httpStatus(err)).json({ error: err.message });
@@ -53,6 +68,19 @@ const EquipmentController = {
       const updatedEquipment = await EquipmentService.update(
         req.params.id,
         req.body,
+        req.user
+      );
+      res.json(updatedEquipment);
+    } catch (err) {
+      res.status(httpStatus(err)).json({ error: err.sqlMessage || err.message });
+    }
+  },
+
+  updateStatus: async (req, res) => {
+    try {
+      const updatedEquipment = await EquipmentService.updateStatus(
+        req.params.id,
+        req.body.status,
         req.user
       );
       res.json(updatedEquipment);
