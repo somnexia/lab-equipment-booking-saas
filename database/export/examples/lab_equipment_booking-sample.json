@@ -1,0 +1,59 @@
+{
+  "exported_at": "2026-06-03T12:00:00.000Z",
+  "database": "lab_equipment_booking",
+  "format": "json",
+  "tables": {
+    "organizations": [
+      {
+        "id": 1,
+        "name": "Chemistry Lab",
+        "slug": "chem-lab",
+        "created_at": "2026-01-15T10:00:00.000Z"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "organization_id": 1,
+        "email": "student@chem.lab.local",
+        "full_name": "Demo Student",
+        "role": "student",
+        "password_hash": "[REDACTED]",
+        "is_active": 1,
+        "created_at": "2026-01-15T10:00:00.000Z"
+      }
+    ],
+    "equipment_categories": [
+      {
+        "id": 1,
+        "organization_id": 1,
+        "name": "Spectroscopy",
+        "description": "UV-Vis, IR, NMR"
+      }
+    ],
+    "equipment": [
+      {
+        "id": 1,
+        "organization_id": 1,
+        "category_id": 1,
+        "name": "UV-Vis Spectrometer X200",
+        "model": "X200",
+        "location": "Room 101",
+        "status": "available",
+        "hourly_rate": "25.00"
+      }
+    ],
+    "bookings": [
+      {
+        "id": 1,
+        "equipment_id": 1,
+        "user_id": 1,
+        "start_time": "2026-06-10T09:00:00.000Z",
+        "end_time": "2026-06-10T11:00:00.000Z",
+        "status": "confirmed",
+        "notes": "Sample analysis",
+        "created_at": "2026-06-01T08:00:00.000Z"
+      }
+    ]
+  }
+}

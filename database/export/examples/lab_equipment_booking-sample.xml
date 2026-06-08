@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseExport name="lab_equipment_booking" format="xml" exportedAt="2026-06-03T12:00:00.000Z">
+  <table name="organizations">
+  <row>
+    <id>1</id>
+    <name>Chemistry Lab</name>
+    <slug>chem-lab</slug>
+    <created_at>2026-01-15T10:00:00.000Z</created_at>
+  </row>
+  </table>
+  <table name="users">
+  <row>
+    <id>1</id>
+    <organization_id>1</organization_id>
+    <email>student@chem.lab.local</email>
+    <full_name>Demo Student</full_name>
+    <role>student</role>
+    <password_hash>[REDACTED]</password_hash>
+    <is_active>1</is_active>
+    <created_at>2026-01-15T10:00:00.000Z</created_at>
+  </row>
+  </table>
+  <table name="equipment">
+  <row>
+    <id>1</id>
+    <organization_id>1</organization_id>
+    <category_id>1</category_id>
+    <name>UV-Vis Spectrometer X200</name>
+    <model>X200</model>
+    <location>Room 101</location>
+    <status>available</status>
+    <hourly_rate>25.00</hourly_rate>
+  </row>
+  </table>
+  <table name="bookings">
+  <row>
+    <id>1</id>
+    <equipment_id>1</equipment_id>
+    <user_id>1</user_id>
+    <start_time>2026-06-10T09:00:00.000Z</start_time>
+    <end_time>2026-06-10T11:00:00.000Z</end_time>
+    <status>confirmed</status>
+    <notes>Sample analysis</notes>
+    <created_at>2026-06-01T08:00:00.000Z</created_at>
+  </row>
+  </table>
+</databaseExport>

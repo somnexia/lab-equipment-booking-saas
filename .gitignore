@@ -40,12 +40,14 @@ build/
 database/export/output/*
 !database/export/output/.gitkeep
 
-database/export/examples/
+
 
 docs/team-jira.md
 
 database/export/*
 !database/export/README.md
+!database/export/examples/
+
 
 
 test.http
