@@ -60,6 +60,8 @@ node database/export/export-xml.mjs
 
 
 # Ошибка PowerShell PSSecurityException / UnauthorizedAccess
+```powershell
+
 На Windows по умолчанию часто стоит политика Restricted: интерактивные команды в PowerShell работают, а файлы .ps1 запускать нельзя.
 npm вызывает export-sql.ps1 как скрипт — система его блокирует.
 
@@ -74,4 +76,4 @@ C:\xampp\mysql\bin\mysqldump.exe -u root --databases lab_equipment_booking --rou
 Вариант 3 — разрешить скрипты только для вашего пользователя (один раз):
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 После этого снова: npm run export:db.
-
+```

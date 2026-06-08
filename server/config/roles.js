@@ -81,6 +81,22 @@ const CAN_UPDATE_ORGANIZATIONS = [
 /** Удаление организаций */
 const CAN_DELETE_ORGANIZATIONS = [ROLES.SYSTEM_ADMIN];
 
+/** Список пользователей (system_admin — все, lab_admin/equipment_manager — своя орг.) */
+const CAN_LIST_USERS = [
+  ROLES.SYSTEM_ADMIN,
+  ROLES.LAB_ADMIN,
+  ROLES.EQUIPMENT_MANAGER,
+];
+
+/** Создание пользователей (ограничения в сервисе) */
+const CAN_CREATE_USERS = [ROLES.SYSTEM_ADMIN, ROLES.LAB_ADMIN];
+
+/** Изменение пользователей (детальные правила в usersService) */
+const CAN_UPDATE_USERS = Object.values(ROLES);
+
+/** Удаление пользователей */
+const CAN_DELETE_USERS = [ROLES.SYSTEM_ADMIN, ROLES.LAB_ADMIN];
+
 /** Роль по умолчанию при регистрации через UI */
 const DEFAULT_REGISTER_ROLE = ROLES.STUDENT;
 
@@ -97,5 +113,9 @@ module.exports = {
   CAN_CREATE_ORGANIZATIONS,
   CAN_UPDATE_ORGANIZATIONS,
   CAN_DELETE_ORGANIZATIONS,
+  CAN_LIST_USERS,
+  CAN_CREATE_USERS,
+  CAN_UPDATE_USERS,
+  CAN_DELETE_USERS,
   DEFAULT_REGISTER_ROLE,
 };

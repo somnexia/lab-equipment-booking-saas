@@ -49,6 +49,6 @@ database/export/*
 !database/export/examples/
 
 
-
+server/rest-client/*
 test.http
 
