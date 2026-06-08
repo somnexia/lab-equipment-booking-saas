@@ -1,13 +1,51 @@
 doctype html
-html
+html(lang="ru")
   head
     meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    - var docTitle = pageTitle || title
+    title= docTitle ? docTitle + ' — Lab Booking' : 'Lab Equipment Booking'
     link(rel="stylesheet", href="/stylesheets/style.css")
   body
-    block content
+    header.site-header
+      .header-inner
+        a.brand(href="/")
+          span.brand-title Lab Booking
+          span.brand-sub SaaS · лабораторное оборудование
 
-    //- сюда будут вставляться скрипты со страниц
+        if user
+          nav.site-nav(aria-label="Основное меню")
+            a.nav-link(href="/dashboard", class=currentPath.startsWith('/dashboard') ? 'is-active' : undefined) Каталог
+            span.nav-link.is-disabled(title="Скоро") Мои брони
+            span.nav-link.is-disabled(title="Скоро") Новая бронь
+
+          .header-user
+            span.user-email= user.email
+            if roleLabel
+              span.user-role= roleLabel
+            button#navLogout.btn.btn-ghost(type="button") Выйти
+        else
+          nav.site-nav(aria-label="Вход")
+            a.nav-link(href="/auth/login", class=currentPath === '/auth/login' ? 'is-active' : undefined) Вход
+            a.nav-link(href="/auth/register", class=currentPath === '/auth/register' ? 'is-active' : undefined) Регистрация
+
+    main.site-main
+      .container
+        block content
+
+    footer.site-footer
+      .container
+        p Lab Equipment Booking · учебный SaaS-проект
+
     block scripts
-      script(src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js")
+
+    if user
+      script.
+        (function () {
+          const btn = document.getElementById('navLogout');
+          if (!btn) return;
+          btn.addEventListener('click', async function () {
+            await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+            window.location.href = '/auth/login';
+          });
+        })();

@@ -1,82 +1,59 @@
 extends layout
 
 block content
-  h1 Dashboard (Equipment)
+  h1.page-title Каталог оборудования
+  p.page-lead Оборудование вашей лаборатории. Доступные приборы можно будет забронировать на следующем шаге UI.
 
-  p Пользователь: #{user && user.email} (#{user && user.role})
-
-
-  button#logout Выйти
-
-  br
-  a(href="/classes") Перейти к классам
-
-
-  h2 Список оборудования
-
-  table(border="1")
+  table.data-table
     thead
       tr
         th ID
         th Название
         th Категория
-        th Статус / доступность
+        th Статус
     tbody#equipmentTable
+      tr
+        td(colspan="4") Загрузка…
 
-  script.
-    console.log('Dashboard loaded');
+  block scripts
+    script.
+      async function loadEquipment() {
+        const table = document.getElementById('equipmentTable');
 
-    document.getElementById("logout").addEventListener("click", async () => {
-      console.log('🚪 Logout mysql');
+        try {
+          const response = await fetch('/api/equipment', { credentials: 'include' });
 
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
+          if (response.status === 401) {
+            window.location.href = '/auth/login';
+            return;
+          }
 
-      window.location.href = '/auth/login';
-    });
+          const data = await response.json();
+          table.innerHTML = '';
 
-    async function loadEquipment() {
-      try {
-        console.log('📡 Loading equipment');
+          if (!data.length) {
+            table.innerHTML = '<tr><td colspan="4">Нет оборудования</td></tr>';
+            return;
+          }
 
-        const response = await fetch("/api/equipment", {
-          credentials: 'include'
-        });
+          data.forEach(function (item) {
+            const row = document.createElement('tr');
+            const id = item.equipment_id ?? item.id;
+            const name = item.equipment_name ?? item.name;
+            const category = item.category_name ?? item.category_id ?? '—';
+            const status = item.status_label ?? item.status;
 
-        if (response.status === 401) {
-          console.log('❌ Unauthorized → redirect');
-          window.location.href = '/auth/login';
-          return;
+            row.innerHTML =
+              '<td>' + id + '</td>' +
+              '<td>' + name + '</td>' +
+              '<td>' + category + '</td>' +
+              '<td>' + status + '</td>';
+            table.appendChild(row);
+          });
+        } catch (err) {
+          console.error(err);
+          table.innerHTML = '<tr><td colspan="4">Ошибка загрузки</td></tr>';
         }
-
-        const data = await response.json();
-        console.log('Equipment:', data);
-
-        const table = document.getElementById("equipmentTable");
-        table.innerHTML = "";
-
-        data.forEach(item => {
-          const row = document.createElement("tr");
-          const id = item.equipment_id ?? item.id;
-          const name = item.equipment_name ?? item.name;
-          const category = item.category_name ?? item.category_id ?? '—';
-          const status = item.status_label ?? item.status;
-
-          row.innerHTML = `
-            <td>${id}</td>
-            <td>${name}</td>
-            <td>${category}</td>
-            <td>${status}</td>
-          `;
-
-          table.appendChild(row);
-        });
-
-      } catch (err) {
-        console.error("Ошибка загрузки", err);
       }
-    }
 
-    loadEquipment();
+      loadEquipment();

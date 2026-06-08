@@ -9,6 +9,7 @@ const usersRoutes = require('./api/users');
 const equipmentCategoriesRoutes = require('./api/equipment-categories');
 const equipmentRoutes = require('./api/equipment');
 const bookingsRoutes = require('./api/bookings');
+// PocketBase (не в навигации UI; маршруты оставлены для доработки)
 const classesApi = require('./api/classes');
 // Pages
 const authPagesRoutes = require('./pages/authPages');
@@ -16,7 +17,7 @@ const dashboardRoutes = require('./pages/dashboard');
 const classesRoutes = require('./pages/classes');
 
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
+  res.render('index', { title: 'Главная' });
 });
 
 // API
