@@ -1,0 +1,93 @@
+extends layout
+
+block content
+  h1.page-title Новая бронь
+  p.page-lead
+    a(href="/dashboard") ← Каталог
+    |  ·
+    a(href="/bookings") Мои бронирования
+
+  .card(style="max-width:480px")
+    form#bookingForm
+      .form-row
+        label(for="equipment_id") Оборудование (доступное)
+        select#equipment_id(name="equipment_id", required)
+          option(value="") Загрузка…
+
+      .form-row
+        label(for="start_time") Начало
+        input#start_time(type="datetime-local", name="start_time", required)
+
+      .form-row
+        label(for="end_time") Конец
+        input#end_time(type="datetime-local", name="end_time", required)
+
+      button.btn.btn-primary(type="submit") Создать бронь
+
+    p#message.form-message
+
+block scripts
+  script.
+    const preselectedId = '#{equipmentId}';
+
+    function toLocalInputValue(date) {
+      const pad = function (n) { return String(n).padStart(2, '0'); };
+      return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) +
+        'T' + pad(date.getHours()) + ':' + pad(date.getMinutes());
+    }
+
+    async function loadEquipment() {
+      const select = document.getElementById('equipment_id');
+      const res = await fetch('/api/equipment/available', { credentials: 'include' });
+      if (!res.ok) {
+        select.innerHTML = '<option value="">Ошибка загрузки</option>';
+        return;
+      }
+      const items = await res.json();
+      select.innerHTML = '<option value="">— выберите прибор —</option>';
+      items.forEach(function (item) {
+        const id = item.equipment_id ?? item.id;
+        const name = item.equipment_name ?? item.name;
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = '#' + id + ' — ' + name;
+        if (String(preselectedId) === String(id)) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    const startDefault = new Date();
+    startDefault.setMinutes(0, 0, 0);
+    startDefault.setHours(startDefault.getHours() + 1);
+    const endDefault = new Date(startDefault.getTime() + 2 * 60 * 60 * 1000);
+    document.getElementById('start_time').value = toLocalInputValue(startDefault);
+    document.getElementById('end_time').value = toLocalInputValue(endDefault);
+
+    loadEquipment();
+
+    document.getElementById('bookingForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const message = document.getElementById('message');
+      message.innerText = '';
+
+      const start = document.getElementById('start_time').value.replace('T', ' ') + ':00';
+      const end = document.getElementById('end_time').value.replace('T', ' ') + ':00';
+
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          equipment_id: Number(document.getElementById('equipment_id').value),
+          start_time: start,
+          end_time: end,
+        }),
+      });
+
+      const data = await res.json().catch(function () { return {}; });
+      if (res.ok) {
+        window.location.href = '/bookings';
+      } else {
+        message.innerText = data.error || 'Не удалось создать бронь';
+      }
+    });

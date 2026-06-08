@@ -2,7 +2,12 @@ extends layout
 
 block content
   h1.page-title Каталог оборудования
-  p.page-lead Оборудование вашей лаборатории. Доступные приборы можно будет забронировать на следующем шаге UI.
+  p.page-lead
+    | Список приборов вашей организации.
+    if uiPerms.canBook
+      |  Доступные позиции можно забронировать.
+    if uiPerms.canManageEquipment
+      |  Управление инвентарём — смена статуса в таблице (полное редактирование — позже).
 
   table.data-table
     thead
@@ -11,12 +16,77 @@ block content
         th Название
         th Категория
         th Статус
+        th Действия
     tbody#equipmentTable
       tr
-        td(colspan="4") Загрузка…
+        td(colspan="5") Загрузка…
 
 block scripts
   script.
+    window.UI_PERMS = !{JSON.stringify(uiPerms)};
+
+    const STATUS_LABELS = {
+      available: 'Доступно',
+      maintenance: 'Техобслуживание',
+      broken: 'Неисправно',
+    };
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text == null ? '' : String(text);
+      return div.innerHTML;
+    }
+
+    function statusBadge(status) {
+      const label = STATUS_LABELS[status] || status || '—';
+      return '<span class="status-badge status-' + escapeHtml(status) + '">' + escapeHtml(label) + '</span>';
+    }
+
+    function buildActions(item) {
+      const id = item.equipment_id ?? item.id;
+      const status = item.status;
+      const parts = [];
+      const perms = window.UI_PERMS || {};
+
+      if (perms.canBook && status === 'available') {
+        parts.push('<a class="btn btn-sm btn-primary" href="/bookings/new?equipment_id=' + id + '">Забронировать</a>');
+      }
+
+      if (perms.canUpdateStatus) {
+        parts.push(
+          '<div class="status-edit">' +
+            '<select class="status-select" data-id="' + id + '">' +
+              '<option value="available"' + (status === 'available' ? ' selected' : '') + '>Доступно</option>' +
+              '<option value="maintenance"' + (status === 'maintenance' ? ' selected' : '') + '>Техобслуживание</option>' +
+              '<option value="broken"' + (status === 'broken' ? ' selected' : '') + '>Неисправно</option>' +
+            '</select>' +
+            '<button type="button" class="btn btn-sm btn-save-status" data-id="' + id + '">OK</button>' +
+          '</div>'
+        );
+      }
+
+      if (!parts.length) {
+        return '<span class="muted">—</span>';
+      }
+
+      return '<div class="row-actions">' + parts.join('') + '</div>';
+    }
+
+    async function saveStatus(equipmentId, status) {
+      const res = await fetch('/api/equipment/' + equipmentId + '/status', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ status }),
+      });
+      const data = await res.json().catch(function () { return {}; });
+      if (!res.ok) {
+        alert(data.error || 'Не удалось обновить статус');
+        return false;
+      }
+      return true;
+    }
+
     async function loadEquipment() {
       const table = document.getElementById('equipmentTable');
 
@@ -32,7 +102,7 @@ block scripts
         table.innerHTML = '';
 
         if (!data.length) {
-          table.innerHTML = '<tr><td colspan="4">Нет оборудования</td></tr>';
+          table.innerHTML = '<tr><td colspan="5">Нет оборудования</td></tr>';
           return;
         }
 
@@ -41,18 +111,28 @@ block scripts
           const id = item.equipment_id ?? item.id;
           const name = item.equipment_name ?? item.name;
           const category = item.category_name ?? item.category_id ?? '—';
-          const status = item.status_label ?? item.status;
 
           row.innerHTML =
-            '<td>' + id + '</td>' +
-            '<td>' + name + '</td>' +
-            '<td>' + category + '</td>' +
-            '<td>' + status + '</td>';
+            '<td>' + escapeHtml(id) + '</td>' +
+            '<td>' + escapeHtml(name) + '</td>' +
+            '<td>' + escapeHtml(category) + '</td>' +
+            '<td>' + statusBadge(item.status) + '</td>' +
+            '<td>' + buildActions(item) + '</td>';
           table.appendChild(row);
+        });
+
+        table.querySelectorAll('.btn-save-status').forEach(function (btn) {
+          btn.addEventListener('click', async function () {
+            const id = btn.getAttribute('data-id');
+            const select = table.querySelector('.status-select[data-id="' + id + '"]');
+            if (!select) return;
+            const ok = await saveStatus(id, select.value);
+            if (ok) loadEquipment();
+          });
         });
       } catch (err) {
         console.error(err);
-        table.innerHTML = '<tr><td colspan="4">Ошибка загрузки</td></tr>';
+        table.innerHTML = '<tr><td colspan="5">Ошибка загрузки</td></tr>';
       }
     }
 

@@ -16,8 +16,8 @@ html(lang="ru")
         if user
           nav.site-nav(aria-label="Основное меню")
             a.nav-link(href="/dashboard", class=currentPath.startsWith('/dashboard') ? 'is-active' : undefined) Каталог
-            span.nav-link.is-disabled(title="Скоро") Мои брони
-            span.nav-link.is-disabled(title="Скоро") Новая бронь
+            a.nav-link(href="/bookings", class=currentPath === '/bookings' ? 'is-active' : undefined) Мои брони
+            a.nav-link(href="/bookings/new", class=currentPath === '/bookings/new' ? 'is-active' : undefined) Новая бронь
 
           .header-user
             span.user-email= user.email

@@ -1,0 +1,95 @@
+extends layout
+
+block content
+  h1.page-title Мои бронирования
+  p.page-lead
+    a(href="/bookings/new") + Новая бронь
+    |  ·
+    a(href="/dashboard") Каталог оборудования
+
+  table.data-table
+    thead
+      tr
+        th ID
+        th Оборудование
+        th Начало
+        th Конец
+        th Статус
+        th Действия
+    tbody#bookingsTable
+      tr
+        td(colspan="6") Загрузка…
+
+block scripts
+  script.
+    const BOOKING_STATUS = {
+      active: 'Активная',
+      completed: 'Завершена',
+      cancelled: 'Отменена',
+    };
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text == null ? '' : String(text);
+      return div.innerHTML;
+    }
+
+    async function cancelBooking(id) {
+      if (!confirm('Отменить бронь #' + id + '?')) return;
+      const res = await fetch('/api/bookings/' + id + '/cancel', {
+        method: 'PATCH',
+        credentials: 'include',
+      });
+      const data = await res.json().catch(function () { return {}; });
+      if (!res.ok) {
+        alert(data.error || 'Ошибка отмены');
+        return;
+      }
+      loadBookings();
+    }
+
+    async function loadBookings() {
+      const table = document.getElementById('bookingsTable');
+      try {
+        const res = await fetch('/api/bookings/me', { credentials: 'include' });
+        if (res.status === 401) {
+          window.location.href = '/auth/login';
+          return;
+        }
+        const data = await res.json();
+        table.innerHTML = '';
+
+        if (!data.length) {
+          table.innerHTML = '<tr><td colspan="6">Нет бронирований</td></tr>';
+          return;
+        }
+
+        data.forEach(function (b) {
+          const id = b.booking_id ?? b.id;
+          const status = b.booking_status ?? b.status;
+          const actions = status === 'active'
+            ? '<button type="button" class="btn btn-sm btn-danger btn-cancel" data-id="' + id + '">Отменить</button>'
+            : '<span class="muted">—</span>';
+
+          const row = document.createElement('tr');
+          row.innerHTML =
+            '<td>' + escapeHtml(id) + '</td>' +
+            '<td>' + escapeHtml(b.equipment_name || b.equipment_id) + '</td>' +
+            '<td>' + escapeHtml(b.start_time) + '</td>' +
+            '<td>' + escapeHtml(b.end_time) + '</td>' +
+            '<td>' + escapeHtml(BOOKING_STATUS[status] || status) + '</td>' +
+            '<td>' + actions + '</td>';
+          table.appendChild(row);
+        });
+
+        table.querySelectorAll('.btn-cancel').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            cancelBooking(btn.getAttribute('data-id'));
+          });
+        });
+      } catch (err) {
+        table.innerHTML = '<tr><td colspan="6">Ошибка загрузки</td></tr>';
+      }
+    }
+
+    loadBookings();
