@@ -35,3 +35,18 @@ Thumbs.db
 # Optional: build outputs (если будут)
 dist/
 build/
+
+# Database export dumps (генерируются локально)
+database/export/output/*
+!database/export/output/.gitkeep
+
+database/export/examples/
+
+docs/team-jira.md
+
+database/export/*
+!database/export/README.md
+
+
+test.http
+

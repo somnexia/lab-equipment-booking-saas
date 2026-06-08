@@ -13,9 +13,6 @@
 9. [Хранимые процедуры](09-stored-procedures.md) — `database/procedures.sql`  
 10. [Представления VIEW](10-views.md) — `database/views.sql`  
 11. [Права MySQL GRANT](11-grants.md) — `database/grants.sql`  
-12. [Каталог draw.io](diagrams/README.md) — все схемы
-
-## Планируется
-
-- `team-jira.md` — распределение работы в Jira  
-- Экспорт БД SQL / XML / JSON  
+12. [Экспорт БД](12-database-export.md) — SQL / JSON / XML, скрипты в `database/export/`  
+13. [Команда и Jira](team-jira.md) — шаблон распределения работы в группе  
+14. [Каталог draw.io](diagrams/README.md) — все схемы
