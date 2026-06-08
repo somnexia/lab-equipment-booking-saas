@@ -1,35 +1,50 @@
-// controllers/equipmentController.js
 const EquipmentService = require('../services/equipmentService');
+
+function httpStatus(err) {
+  if (err.status) return err.status;
+  const msg = err.sqlMessage || err.message || '';
+  if (msg.includes('not found') || msg.includes('Equipment not found')) return 404;
+  if (
+    msg.includes('denied') ||
+    msg.includes('cannot') ||
+    msg.includes('Cannot') ||
+    msg.includes('Only') ||
+    msg.includes('Role') ||
+    msg.includes('Technician') ||
+    msg.includes('another organization')
+  ) {
+    return 403;
+  }
+  if (msg.includes('required') || msg.includes('invalid')) return 400;
+  if (msg.includes('related bookings')) return 409;
+  return 500;
+}
 
 const EquipmentController = {
   getAll: async (req, res) => {
     try {
-      const equipments = await EquipmentService.getAll();
+      const equipments = await EquipmentService.getAll(req.user);
       res.json(equipments);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(httpStatus(err)).json({ error: err.message });
     }
   },
 
   getById: async (req, res) => {
     try {
-      const equipment = await EquipmentService.getById(req.params.id);
-      if (!equipment) return res.status(404).json({ error: 'Equipment not found' });
+      const equipment = await EquipmentService.getById(req.params.id, req.user);
       res.json(equipment);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(httpStatus(err)).json({ error: err.message });
     }
   },
 
   create: async (req, res) => {
     try {
-      const newEquipment = await EquipmentService.create(req.body);
+      const newEquipment = await EquipmentService.create(req.body, req.user);
       res.status(201).json(newEquipment);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(httpStatus(err)).json({ error: err.message });
     }
   },
 
@@ -42,22 +57,18 @@ const EquipmentController = {
       );
       res.json(updatedEquipment);
     } catch (err) {
-      console.error(err);
-      const msg = err.sqlMessage || err.message;
-      const status = msg.includes('not found') ? 404 : msg.includes('cannot') ? 403 : 500;
-      res.status(status).json({ error: msg });
+      res.status(httpStatus(err)).json({ error: err.sqlMessage || err.message });
     }
   },
 
   delete: async (req, res) => {
     try {
-      const result = await EquipmentService.delete(req.params.id);
+      const result = await EquipmentService.delete(req.params.id, req.user);
       res.json(result);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(httpStatus(err)).json({ error: err.message });
     }
-  }
+  },
 };
 
 module.exports = EquipmentController;
