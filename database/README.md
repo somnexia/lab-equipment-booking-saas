@@ -8,6 +8,7 @@
 | `seed.sql` | Тестовые организации, пользователи, оборудование, брони |
 | `migrate_from_legacy_roles.sql` | Обновление существующей БД со старых ролей |
 | `procedures.sql` | Функции и хранимые процедуры (брони, статус оборудования) |
+| `views.sql` | Представления для каталога, броней, пользователей |
 
 ## Установка с нуля
 
@@ -15,9 +16,11 @@
 mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 mysql -u root -p lab_equipment_booking < database/procedures.sql
+mysql -u root -p lab_equipment_booking < database/views.sql
 ```
 
-Документация процедур: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md).
+- Процедуры: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md)  
+- Представления: [docs/10-views.md](../docs/10-views.md)
 
 ## Демо-пользователи (5 аккаунтов)
 

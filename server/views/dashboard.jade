@@ -20,7 +20,7 @@ block content
         th ID
         th Название
         th Категория
-        th Статус
+        th Статус / доступность
     tbody#equipmentTable
 
   script.
@@ -59,12 +59,16 @@ block content
 
         data.forEach(item => {
           const row = document.createElement("tr");
+          const id = item.equipment_id ?? item.id;
+          const name = item.equipment_name ?? item.name;
+          const category = item.category_name ?? item.category_id ?? '—';
+          const status = item.status_label ?? item.status;
 
           row.innerHTML = `
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.category_id}</td>
-            <td>${item.status}</td>
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${category}</td>
+            <td>${status}</td>
           `;
 
           table.appendChild(row);

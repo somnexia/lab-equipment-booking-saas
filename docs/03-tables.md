@@ -129,4 +129,5 @@ users 1 ── * bookings
 
 - CRUD-матрица: [04-crud-matrix.md](04-crud-matrix.md)
 - Use Case, диаграммы состояний: `docs/diagrams/`
-- Представления и процедуры: `database/views.sql`, `database/procedures.sql`
+- Представления: [10-views.md](10-views.md) (`database/views.sql`)
+- Процедуры: [09-stored-procedures.md](09-stored-procedures.md) (`database/procedures.sql`)

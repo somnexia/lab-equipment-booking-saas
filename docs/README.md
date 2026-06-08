@@ -11,9 +11,10 @@
 7. [Диаграмма последовательности](07-sequence-diagram.md) — `diagrams/booking-sequence.drawio`  
 8. [Диаграмма действий](08-activity-diagram.md) — `diagrams/booking-activity.drawio`  
 9. [Хранимые процедуры](09-stored-procedures.md) — `database/procedures.sql`  
-10. [Каталог draw.io](diagrams/README.md) — все схемы
+10. [Представления VIEW](10-views.md) — `database/views.sql`  
+11. [Каталог draw.io](diagrams/README.md) — все схемы
 
 ## Планируется
 
-- `database/views.sql`, `grants.sql`  
+- `database/grants.sql`  
 - `team-jira.md` — распределение работы в Jira  

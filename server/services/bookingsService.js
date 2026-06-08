@@ -9,12 +9,17 @@ function firstResultSet(rows) {
 
 const BookingsService = {
   getAll: async () => {
-    const [rows] = await db.query('SELECT * FROM bookings');
+    const [rows] = await db.query(
+      'SELECT * FROM v_bookings_detail ORDER BY start_time DESC'
+    );
     return rows;
   },
 
   getById: async (id) => {
-    const [rows] = await db.query('SELECT * FROM bookings WHERE id = ?', [id]);
+    const [rows] = await db.query(
+      'SELECT * FROM v_bookings_detail WHERE booking_id = ?',
+      [id]
+    );
     return rows[0];
   },
 

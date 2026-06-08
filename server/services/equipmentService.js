@@ -4,13 +4,15 @@ const db = require('../config/db'); // твой файл подключения 
 const EquipmentService = {
   // Получить все оборудование
   getAll: async () => {
-    const [rows] = await db.query('SELECT * FROM equipment');
+    const [rows] = await db.query('SELECT * FROM v_equipment_catalog ORDER BY equipment_id');
     return rows;
   },
 
-  // Получить оборудование по ID
   getById: async (id) => {
-    const [rows] = await db.query('SELECT * FROM equipment WHERE id = ?', [id]);
+    const [rows] = await db.query(
+      'SELECT * FROM v_equipment_catalog WHERE equipment_id = ?',
+      [id]
+    );
     return rows[0];
   },
 
