@@ -10,7 +10,9 @@
     "prod": "cross-env NODE_ENV=production node ./bin/www",
     "lint": "eslint . --fix",
     "check-env": "node ./config/validateEnv.js",
-    "pb": "node ./server/pbServer.js"
+    "pb": "node ./server/pbServer.js",
+    "export:db": "node ./scripts/export-db.js && powershell ../database/export/export-sql.ps1"
+    
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
