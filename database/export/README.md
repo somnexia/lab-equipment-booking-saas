@@ -65,9 +65,13 @@ npm вызывает export-sql.ps1 как скрипт — система ег�
 
 Как получить SQL-дамп сейчас (без смены политики)
 Вариант 1 — обход для одного запуска:
-
 cd c:\PROJECTS\lab-equipment-booking-saas\server
 powershell -ExecutionPolicy Bypass -File ..\database\export\export-sql.ps1
 
 Вариант 2 — mysqldump напрямую (если XAMPP):
 C:\xampp\mysql\bin\mysqldump.exe -u root --databases lab_equipment_booking --routines --triggers -r ..\database\export\output\dump.sql
+
+Вариант 3 — разрешить скрипты только для вашего пользователя (один раз):
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+После этого снова: npm run export:db.
+
