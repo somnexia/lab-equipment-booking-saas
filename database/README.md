@@ -9,6 +9,7 @@
 | `migrate_from_legacy_roles.sql` | Обновление существующей БД со старых ролей |
 | `procedures.sql` | Функции и хранимые процедуры (брони, статус оборудования) |
 | `views.sql` | Представления для каталога, броней, пользователей |
+| `grants.sql` | Пользователи MySQL и назначение прав (GRANT) |
 
 ## Установка с нуля
 
@@ -17,10 +18,12 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 mysql -u root -p lab_equipment_booking < database/procedures.sql
 mysql -u root -p lab_equipment_booking < database/views.sql
+mysql -u root -p < database/grants.sql
 ```
 
 - Процедуры: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md)  
-- Представления: [docs/10-views.md](../docs/10-views.md)
+- Представления: [docs/10-views.md](../docs/10-views.md)  
+- Права: [docs/11-grants.md](../docs/11-grants.md)
 
 ## Демо-пользователи (5 аккаунтов)
 
@@ -41,12 +44,17 @@ UPDATE users SET role = 'technician' WHERE email = 'manager@chem.lab.local';
 -- после теста верните: equipment_manager
 ```
 
-## Команды для создания User в  phpMyAdmin
+## Пользователь приложения (`labuser`)
 
-CREATE DATABASE IF NOT EXISTS lab_equipment_booking;
-CREATE USER IF NOT EXISTS 'labuser'@'localhost' IDENTIFIED BY 'ваш_пароль';
-GRANT ALL PRIVILEGES ON lab_equipment_booking.* TO 'labuser'@'localhost';
-FLUSH PRIVILEGES;
+Создаётся в `grants.sql`. Пароль в `.env` (`DB_PASSWORD`) должен совпадать с паролем в SQL  
+(по умолчанию в скрипте: `ChangeMe_LabUser` — **замените** на свой).
+
+Проверка прав:
+
+```sql
+SHOW GRANTS FOR 'labuser'@'localhost';
+SHOW GRANTS FOR 'app_student'@'localhost';
+```
 
 ## Проверка через PowerShell (не через браузер)
 Invoke-RestMethod -Uri "http://localhost:3000/api/auth/login" -Method POST -ContentType "application/json" -Body

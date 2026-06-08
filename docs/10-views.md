@@ -115,3 +115,31 @@ SELECT * FROM v_users_by_organization WHERE organization_id = 1;
 - [09-stored-procedures.md](09-stored-procedures.md)
 - [03-tables.md](03-tables.md)
 - [07-sequence-diagram.md](07-sequence-diagram.md) — шаг GET equipment
+
+
+# команды для запуска в терминале(CMD)
+
+найти файл расположения Mysql терминала + запуск программа-клиент, которая подключается к серверу базы данных:
+
+1. C:\xampp\mysql\bin\mysql.exe -u root -p
+-u = user (пользователь)
+root = имя пользователя базы данных
+-p = password
+2.  USE lab_equipment_booking;
+Выбери базу данных
+
+3. SOURCE C:/PROJECTS/lab-equipment-booking-saas/database/view.sql;
+выполняет SQL-файл целиком внутри текущей базы данных
+
+4. SHOW TABLES; 
+
+5. SHOW FULL TABLES WHERE TABLE_TYPE = 'VIEW';
+показывает все объекты в текущей базе
+фильтрует только VIEW
+
+6. SHOW CREATE VIEW v_active_bookings;
+показывает SQL-код, который создаёт это VIEW
+позволяет понять:
+какие таблицы используются
+какие JOIN / SELECT внутри
+логика представления

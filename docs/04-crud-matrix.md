@@ -194,20 +194,20 @@
 
 ---
 
-## Планируемое соответствие правам MySQL (`GRANT`)
+## Соответствие правам MySQL (`GRANT`)
 
-На следующем этапе (шаг 5) — отдельные пользователи БД, например:
+Реализовано в [`database/grants.sql`](../database/grants.sql) — см. [11-grants.md](11-grants.md).
 
 | Пользователь БД | Роль приложения | Типичный доступ |
 |-----------------|-----------------|----------------|
-| `app_system_admin` | system_admin | ALL на все таблицы |
-| `app_lab_admin` | lab_admin | CRUD на таблицы лаборатории (через VIEW/процедуры) |
-| `app_equipment_mgr` | equipment_manager | CRUD equipment, equipment_categories |
-| `app_booking_user` | researcher, student | SELECT equipment; INSERT/UPDATE bookings |
-| `app_technician` | technician | SELECT equipment; UPDATE status |
-| `app_readonly` | отчёты | SELECT |
-
-Детали — в `database/grants.sql` (будет добавлен).
+| `labuser` | Подключение Node.js | ALL (режим разработки) |
+| `app_system_admin` | system_admin | ALL на схему |
+| `app_lab_admin` | lab_admin | CRUD таблиц + VIEW + процедуры |
+| `app_equipment_mgr` | equipment_manager | CRUD equipment, categories |
+| `app_researcher` | researcher | SELECT + процедуры бронирования |
+| `app_student` | student | SELECT VIEW + EXECUTE бронирования |
+| `app_technician` | technician | SELECT + `sp_update_equipment_status` |
+| `app_readonly` | отчёты | SELECT на VIEW |
 
 ---
 

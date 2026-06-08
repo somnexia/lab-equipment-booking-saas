@@ -67,3 +67,92 @@ CALL sp_update_equipment_status(3, 'maintenance', 6, 'technician');
 
 При нарушении правила MySQL возвращает `SQLSTATE 45000` и `MESSAGE_TEXT`.  
 Node.js передаёт текст в ответ API (`err.sqlMessage`).
+
+# команды для запуска в терминале(CMD)
+```sql
+
+1. C:\xampp\mysql\bin\mysql.exe -u root -p
+-u = user (пользователь)
+root = имя пользователя базы данных
+-p = password
+2.  USE lab_equipment_booking;
+Выбери базу данных
+
+3. SOURCE C:/PROJECTS/lab-equipment-booking-saas/database/procedures.sql;
+выполняет SQL-файл целиком внутри текущей базы данных
+
+```
+
+# другие важные  команды MySQL для процедур(CMD)
+
+```sql
+1. Создание процедуры
+DELIMITER //
+
+CREATE PROCEDURE procedure_name()
+BEGIN
+    SELECT 'Hello';
+END //
+
+DELIMITER ;
+Объяснение:
+DELIMITER // → меняет символ конца команды (нужно для процедур)
+CREATE PROCEDURE → создание процедуры
+BEGIN ... END → тело процедуры
+2. Вызов процедуры
+CALL procedure_name();
+3. Удаление процедуры
+DROP PROCEDURE procedure_name;
+4. Просмотр списка процедур
+SHOW PROCEDURE STATUS WHERE Db = 'database_name';
+5. Просмотр структуры процедуры
+SHOW CREATE PROCEDURE procedure_name;
+6. Процедура с параметрами (очень важно)
+IN (входной параметр)
+DELIMITER //
+
+CREATE PROCEDURE get_user(IN user_id INT)
+BEGIN
+    SELECT * FROM users WHERE id = user_id;
+END //
+
+DELIMITER ;
+
+Вызов:
+
+CALL get_user(1);
+OUT (выходной параметр)
+DELIMITER //
+
+CREATE PROCEDURE count_users(OUT total INT)
+BEGIN
+    SELECT COUNT(*) INTO total FROM users;
+END //
+
+DELIMITER ;
+
+Вызов:
+
+CALL count_users(@total);
+SELECT @total;
+INOUT (вход + выход)
+DELIMITER //
+
+CREATE PROCEDURE increase_value(INOUT x INT)
+BEGIN
+    SET x = x + 1;
+END //
+
+DELIMITER ;
+7. Важное правило (частая ошибка)
+
+❌ нельзя писать процедуры без DELIMITER
+
+✔ всегда:
+
+DELIMITER //
+...
+END //
+DELIMITER ;
+
+```
