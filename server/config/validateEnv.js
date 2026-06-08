@@ -1,6 +1,9 @@
 // config/validateEnv.js
 require('dotenv').config();
 
+const simplePasswordMode = (process.env.SIMPLE_PASSWORD_MODE || 'on').toLowerCase();
+const simplePasswordRequired = simplePasswordMode !== 'off';
+
 const requiredVars = [
   'DB_HOST',
   'DB_USER',
@@ -9,9 +12,11 @@ const requiredVars = [
   'JWT_SECRET',
   'PORT',
   'PB_URL',
-  'SIMPLE_PASSWORD' // 👈 добавили PocketBase
-
 ];
+
+if (simplePasswordRequired) {
+  requiredVars.push('SIMPLE_PASSWORD');
+}
 
 // Проверяем отсутствие переменных
 const missingVars = requiredVars.filter(v => !process.env[v]);
@@ -35,10 +40,12 @@ if (process.env.JWT_SECRET.length < 10) {
   process.exit(1);
 }
 
-// SIMPLE_PASSWORD должен быть не слишком коротким
-if (process.env.SIMPLE_PASSWORD.length < 6) {
-  console.error('❌ SIMPLE_PASSWORD is too short (min 6 chars)');
-  process.exit(1);
+// SIMPLE_PASSWORD (если режим не off)
+if (simplePasswordRequired) {
+  if (process.env.SIMPLE_PASSWORD.length < 6) {
+    console.error('❌ SIMPLE_PASSWORD is too short (min 6 chars)');
+    process.exit(1);
+  }
 }
 
 // PB_URL должен начинаться с http
