@@ -63,6 +63,24 @@ const CAN_DELETE_BOOKINGS = [
   ROLES.RESEARCHER,
 ];
 
+/** Просмотр организаций (system_admin — все, lab_admin — своя) */
+const CAN_VIEW_ORGANIZATIONS = [
+  ROLES.SYSTEM_ADMIN,
+  ROLES.LAB_ADMIN,
+];
+
+/** Создание организаций */
+const CAN_CREATE_ORGANIZATIONS = [ROLES.SYSTEM_ADMIN];
+
+/** Изменение организаций (ограничения в сервисе для lab_admin) */
+const CAN_UPDATE_ORGANIZATIONS = [
+  ROLES.SYSTEM_ADMIN,
+  ROLES.LAB_ADMIN,
+];
+
+/** Удаление организаций */
+const CAN_DELETE_ORGANIZATIONS = [ROLES.SYSTEM_ADMIN];
+
 /** Роль по умолчанию при регистрации через UI */
 const DEFAULT_REGISTER_ROLE = ROLES.STUDENT;
 
@@ -75,5 +93,9 @@ module.exports = {
   CAN_VIEW_BOOKINGS,
   CAN_MANAGE_BOOKINGS,
   CAN_DELETE_BOOKINGS,
+  CAN_VIEW_ORGANIZATIONS,
+  CAN_CREATE_ORGANIZATIONS,
+  CAN_UPDATE_ORGANIZATIONS,
+  CAN_DELETE_ORGANIZATIONS,
   DEFAULT_REGISTER_ROLE,
 };

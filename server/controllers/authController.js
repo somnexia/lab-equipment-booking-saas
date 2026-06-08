@@ -12,7 +12,12 @@ exports.register = async (req, res) => {
 
     // Генерация JWT
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role || DEFAULT_REGISTER_ROLE, },
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role || DEFAULT_REGISTER_ROLE,
+        organization_id: user.organization_id,
+      },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
@@ -49,7 +54,8 @@ exports.login = async (req, res) => {
         id: user.id,
         email: user.email,
         role: user.role || DEFAULT_REGISTER_ROLE,
-        simpleAuth: false // ← ДОБАВИЛИ
+        organization_id: user.organization_id,
+        simpleAuth: false,
       },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
@@ -102,7 +108,8 @@ exports.simplePassword = (req, res) => {
       id: decoded.id,
       email: decoded.email,
       role: decoded.role,
-      simpleAuth: true // ← ВОТ ЭТО ГЛАВНОЕ
+      organization_id: decoded.organization_id,
+      simpleAuth: true,
     },
     process.env.JWT_SECRET,
     { expiresIn: '1h' }

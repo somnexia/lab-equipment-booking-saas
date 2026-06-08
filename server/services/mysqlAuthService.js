@@ -17,9 +17,10 @@ const mysqlAuthService = {
 
     return {
       id: result.insertId,
+      organization_id,
       name,
       email,
-      role
+      role,
     };
   },
 

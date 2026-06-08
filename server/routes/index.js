@@ -4,6 +4,7 @@ const router = express.Router();
 
 // API
 const authRoutes = require('./api/auth');
+const organizationsRoutes = require('./api/organizations');
 const equipmentRoutes = require('./api/equipment');
 const bookingsRoutes = require('./api/bookings');
 const classesApi = require('./api/classes');
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
 
 // API
 router.use('/api/auth', authRoutes);
+router.use('/api/organizations', organizationsRoutes);
 router.use('/api/equipment', equipmentRoutes);
 router.use('/api/bookings', bookingsRoutes);
 router.use('/api/classes', classesApi);
