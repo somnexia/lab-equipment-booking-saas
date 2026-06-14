@@ -6,8 +6,43 @@ block content
     | Список приборов вашей организации.
     if uiPerms.canBook
       |  Доступные позиции можно забронировать.
-    if uiPerms.canManageEquipment
-      |  Управление инвентарём — смена статуса в таблице (полное редактирование — позже).
+    if uiPerms.canUpdateStatus && !uiPerms.canManageEquipment
+      |  Смена статуса — в колонке «Действия».
+
+  if uiPerms.canCreateEquipment
+    .dashboard-toolbar
+      button#btnToggleAdd.btn.btn-primary(type="button") + Добавить оборудование
+
+    .card#addEquipmentPanel.add-equipment-panel(hidden)
+      h2.panel-title Новое оборудование
+      form#addEquipmentForm
+        if uiPerms.isSystemAdmin
+          .form-row
+            label(for="eq_organization_id") Организация
+            select#eq_organization_id(name="organization_id", required)
+              option(value="") Загрузка…
+        .form-row
+          label(for="eq_name") Название
+          input#eq_name(type="text", name="name", required, maxlength="255", placeholder="Например: Спектрофотометр UV-2600")
+        .form-row
+          label(for="eq_category_id") Категория
+          select#eq_category_id(name="category_id")
+            option(value="") — без категории —
+        .form-row
+          label(for="eq_description") Описание
+          textarea#eq_description(name="description", rows="2", placeholder="Необязательно")
+        .form-row
+          label(for="eq_status") Статус
+          select#eq_status(name="status")
+            option(value="available", selected) Доступно
+            option(value="maintenance") Техобслуживание
+            option(value="broken") Неисправно
+        .form-actions
+          button.btn.btn-primary(type="submit") Сохранить
+          button#btnCancelAdd.btn(type="button") Отмена
+      p#addEquipmentMessage.form-message(role="alert", aria-live="polite", hidden)
+
+  p#dashboardMessage.form-message(role="alert", aria-live="polite", hidden)
 
   table.data-table
     thead
@@ -31,10 +66,30 @@ block scripts
       broken: 'Неисправно',
     };
 
+    const API_ERRORS = {
+      'name is required': 'Укажите название оборудования.',
+      'organization_id is required': 'Выберите организацию.',
+      'Cannot delete equipment: active bookings exist': 'Нельзя удалить: есть активные брони.',
+      'Cannot delete equipment: booking history exists': 'Нельзя удалить: есть история бронирований.',
+    };
+
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text == null ? '' : String(text);
       return div.innerHTML;
+    }
+
+    function showInlineMessage(id, text) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = text || '';
+      el.hidden = !text;
+    }
+
+    function formatApiError(raw) {
+      if (!raw) return 'Ошибка запроса';
+      const msg = String(raw).trim();
+      return API_ERRORS[msg] || msg;
     }
 
     function statusBadge(status) {
@@ -65,6 +120,10 @@ block scripts
         );
       }
 
+      if (perms.canDeleteEquipment) {
+        parts.push('<button type="button" class="btn btn-sm btn-danger btn-delete-equipment" data-id="' + id + '">Удалить</button>');
+      }
+
       if (!parts.length) {
         return '<span class="muted">—</span>';
       }
@@ -81,10 +140,28 @@ block scripts
       });
       const data = await res.json().catch(function () { return {}; });
       if (!res.ok) {
-        alert(data.error || 'Не удалось обновить статус');
+        showInlineMessage('dashboardMessage', formatApiError(data.error));
         return false;
       }
+      showInlineMessage('dashboardMessage', '');
       return true;
+    }
+
+    async function deleteEquipment(id, name) {
+      const label = name ? '«' + name + '» (#' + id + ')' : '#' + id;
+      if (!confirm('Удалить оборудование ' + label + '?')) return;
+
+      const res = await fetch('/api/equipment/' + id, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      const data = await res.json().catch(function () { return {}; });
+      if (!res.ok) {
+        showInlineMessage('dashboardMessage', formatApiError(data.error));
+        return;
+      }
+      showInlineMessage('dashboardMessage', '');
+      loadEquipment();
     }
 
     async function loadEquipment() {
@@ -130,10 +207,124 @@ block scripts
             if (ok) loadEquipment();
           });
         });
+
+        table.querySelectorAll('.btn-delete-equipment').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const row = btn.closest('tr');
+            const name = row && row.children[1] ? row.children[1].textContent : '';
+            deleteEquipment(btn.getAttribute('data-id'), name);
+          });
+        });
       } catch (err) {
         console.error(err);
         table.innerHTML = '<tr><td colspan="5">Ошибка загрузки</td></tr>';
       }
     }
 
+    async function loadCategories(select) {
+      const res = await fetch('/api/equipment-categories', { credentials: 'include' });
+      if (!res.ok) return;
+      const items = await res.json();
+      items.forEach(function (cat) {
+        const id = cat.category_id ?? cat.id;
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = cat.category_name ?? cat.name ?? ('Категория #' + id);
+        select.appendChild(opt);
+      });
+    }
+
+    async function loadOrganizations(select) {
+      const res = await fetch('/api/organizations', { credentials: 'include' });
+      if (!res.ok) {
+        select.innerHTML = '<option value="">Ошибка загрузки</option>';
+        return;
+      }
+      const items = await res.json();
+      select.innerHTML = '<option value="">— выберите организацию —</option>';
+      items.forEach(function (org) {
+        const id = org.organization_id ?? org.id;
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = org.organization_name ?? org.name ?? ('Орг. #' + id);
+        select.appendChild(opt);
+      });
+    }
+
+    function initAddEquipment() {
+      const perms = window.UI_PERMS || {};
+      if (!perms.canCreateEquipment) return;
+
+      const panel = document.getElementById('addEquipmentPanel');
+      const toggleBtn = document.getElementById('btnToggleAdd');
+      const cancelBtn = document.getElementById('btnCancelAdd');
+      const form = document.getElementById('addEquipmentForm');
+      const categorySelect = document.getElementById('eq_category_id');
+
+      loadCategories(categorySelect);
+      if (perms.isSystemAdmin) {
+        loadOrganizations(document.getElementById('eq_organization_id'));
+      }
+
+      toggleBtn.addEventListener('click', function () {
+        panel.hidden = !panel.hidden;
+        if (!panel.hidden) {
+          document.getElementById('eq_name').focus();
+        }
+      });
+
+      cancelBtn.addEventListener('click', function () {
+        panel.hidden = true;
+        form.reset();
+        showInlineMessage('addEquipmentMessage', '');
+      });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        showInlineMessage('addEquipmentMessage', '');
+
+        const payload = {
+          name: document.getElementById('eq_name').value.trim(),
+          status: document.getElementById('eq_status').value,
+        };
+
+        const categoryId = document.getElementById('eq_category_id').value;
+        if (categoryId) payload.category_id = Number(categoryId);
+
+        const description = document.getElementById('eq_description').value.trim();
+        if (description) payload.description = description;
+
+        if (perms.isSystemAdmin) {
+          payload.organization_id = Number(document.getElementById('eq_organization_id').value);
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+
+        try {
+          const res = await fetch('/api/equipment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(function () { return {}; });
+
+          if (!res.ok) {
+            showInlineMessage('addEquipmentMessage', formatApiError(data.error));
+            return;
+          }
+
+          form.reset();
+          panel.hidden = true;
+          loadEquipment();
+        } catch (err) {
+          showInlineMessage('addEquipmentMessage', 'Ошибка сети. Попробуйте ещё раз.');
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
     loadEquipment();
+    initAddEquipment();

@@ -26,14 +26,16 @@ block content
         th ID
         th Оборудование
         if uiPerms.useOrgList
+          th ID&nbsp;польз.
           th Пользователь
+          th Организация
         th Начало
         th Конец
         th Статус
         th Действия
     tbody#bookingsTable
       tr
-        td(colspan=uiPerms.useOrgList ? 7 : 6) Загрузка…
+        td(colspan=uiPerms.useOrgList ? 9 : 6) Загрузка…
 
 block scripts
   script.
@@ -110,7 +112,7 @@ block scripts
     async function loadBookings() {
       const table = document.getElementById('bookingsTable');
       const perms = window.UI_PERMS || {};
-      const colSpan = perms.useOrgList ? 7 : 6;
+      const colSpan = perms.useOrgList ? 9 : 6;
 
       try {
         const res = await fetch(bookingsUrl(), { credentials: 'include' });
@@ -142,7 +144,10 @@ block scripts
             '<td>' + escapeHtml(b.equipment_name || b.equipment_id) + '</td>';
 
           if (perms.useOrgList) {
-            html += '<td>' + escapeHtml(b.user_name || b.user_email || b.user_id) + '</td>';
+            html +=
+              '<td>' + escapeHtml(b.user_id) + '</td>' +
+              '<td>' + escapeHtml(b.user_name || b.user_email || '—') + '</td>' +
+              '<td>' + escapeHtml(b.organization_name || '—') + '</td>';
           }
 
           html +=
