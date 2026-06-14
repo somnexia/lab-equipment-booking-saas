@@ -266,9 +266,35 @@ a:hover {
   background: #f8fafc;
 }
 
+.page-hint {
+  margin: -0.5rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .muted {
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.bookings-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.bookings-toolbar label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.bookings-toolbar select {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
 }
 
 /* Status badges */
