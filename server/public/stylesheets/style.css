@@ -200,6 +200,10 @@ a:hover {
   font-size: 0.9rem;
 }
 
+.form-message[hidden] {
+  display: none;
+}
+
 /* Buttons */
 .btn {
   display: inline-block;

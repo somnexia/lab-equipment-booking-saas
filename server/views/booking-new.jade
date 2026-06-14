@@ -10,7 +10,7 @@ block content
   .card(style="max-width:480px")
     form#bookingForm
       .form-row
-        label(for="equipment_id") Оборудование (доступное)
+        label(for="equipment_id") Оборудование
         select#equipment_id(name="equipment_id", required)
           option(value="") Загрузка…
 
@@ -24,11 +24,37 @@ block content
 
       button.btn.btn-primary(type="submit") Создать бронь
 
-    p#message.form-message
+    p#message.form-message(role="alert", aria-live="polite", hidden)
 
 block scripts
   script.
     const preselectedId = '#{equipmentId}';
+
+    const EQUIPMENT_STATUS = {
+      available: 'доступно',
+      maintenance: 'техобслуживание',
+      broken: 'неисправно',
+    };
+
+    const API_ERRORS = {
+      'end_time must be after start_time': 'Конец должен быть позже начала.',
+      'Equipment is not available for booking': 'Прибор недоступен для бронирования (статус не «Доступно»).',
+      'Time slot conflicts with an active booking': 'Интервал пересекается с другой активной бронью.',
+      'Equipment not found': 'Прибор не найден.',
+      'Role cannot create bookings': 'Ваша роль не может создавать брони.',
+    };
+
+    function showMessage(text) {
+      const el = document.getElementById('message');
+      el.textContent = text || '';
+      el.hidden = !text;
+    }
+
+    function formatApiError(raw) {
+      if (!raw) return 'Не удалось создать бронь';
+      const msg = String(raw).trim();
+      return API_ERRORS[msg] || msg;
+    }
 
     function toLocalInputValue(date) {
       const pad = function (n) { return String(n).padStart(2, '0'); };
@@ -36,24 +62,89 @@ block scripts
         'T' + pad(date.getHours()) + ':' + pad(date.getMinutes());
     }
 
+    function parseLocalInput(value) {
+      if (!value) return null;
+      return new Date(value);
+    }
+
+    function validateTimes() {
+      const startVal = document.getElementById('start_time').value;
+      const endVal = document.getElementById('end_time').value;
+      if (!startVal || !endVal) return true;
+
+      const start = parseLocalInput(startVal);
+      const end = parseLocalInput(endVal);
+      if (end <= start) {
+        showMessage('Конец должен быть позже начала.');
+        return false;
+      }
+      return true;
+    }
+
+    function optionLabel(id, name, status) {
+      const title = name ? name : 'Прибор #' + id;
+      if (status && status !== 'available') {
+        const hint = EQUIPMENT_STATUS[status] || status;
+        return '#' + id + ' — ' + title + ' (' + hint + ')';
+      }
+      return '#' + id + ' — ' + title;
+    }
+
+    function addEquipmentOption(select, item, selected) {
+      const id = item.equipment_id ?? item.id;
+      const name = item.equipment_name ?? item.name;
+      const status = item.status;
+      const opt = document.createElement('option');
+      opt.value = id;
+      opt.textContent = optionLabel(id, name, status);
+      if (status && status !== 'available') {
+        opt.dataset.unavailable = '1';
+      }
+      if (selected) opt.selected = true;
+      select.appendChild(opt);
+      return id;
+    }
+
+    async function fetchEquipmentById(id) {
+      const res = await fetch('/api/equipment/' + encodeURIComponent(id), { credentials: 'include' });
+      if (!res.ok) return null;
+      return res.json();
+    }
+
     async function loadEquipment() {
       const select = document.getElementById('equipment_id');
       const res = await fetch('/api/equipment/available', { credentials: 'include' });
       if (!res.ok) {
         select.innerHTML = '<option value="">Ошибка загрузки</option>';
+        showMessage('Не удалось загрузить список доступного оборудования.');
         return;
       }
+
       const items = await res.json();
+      const seen = new Set();
       select.innerHTML = '<option value="">— выберите прибор —</option>';
+
       items.forEach(function (item) {
-        const id = item.equipment_id ?? item.id;
-        const name = item.equipment_name ?? item.name;
-        const opt = document.createElement('option');
-        opt.value = id;
-        opt.textContent = '#' + id + ' — ' + name;
-        if (String(preselectedId) === String(id)) opt.selected = true;
-        select.appendChild(opt);
+        const id = addEquipmentOption(select, item, String(preselectedId) === String(item.equipment_id ?? item.id));
+        seen.add(String(id));
       });
+
+      if (preselectedId && !seen.has(String(preselectedId))) {
+        const extra = await fetchEquipmentById(preselectedId);
+        if (extra) {
+          addEquipmentOption(select, extra, true);
+          if (extra.status && extra.status !== 'available') {
+            showMessage('Выбранный прибор сейчас недоступен для бронирования.');
+          }
+        } else {
+          const opt = document.createElement('option');
+          opt.value = preselectedId;
+          opt.textContent = 'Прибор #' + preselectedId + ' (не найден или нет доступа)';
+          opt.selected = true;
+          select.appendChild(opt);
+          showMessage('Не удалось загрузить данные выбранного прибора.');
+        }
+      }
     }
 
     const startDefault = new Date();
@@ -63,31 +154,54 @@ block scripts
     document.getElementById('start_time').value = toLocalInputValue(startDefault);
     document.getElementById('end_time').value = toLocalInputValue(endDefault);
 
+    ['start_time', 'end_time'].forEach(function (id) {
+      document.getElementById(id).addEventListener('change', function () {
+        if (validateTimes()) showMessage('');
+      });
+    });
+
     loadEquipment();
 
     document.getElementById('bookingForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const message = document.getElementById('message');
-      message.innerText = '';
+      showMessage('');
+
+      if (!validateTimes()) return;
+
+      const equipmentSelect = document.getElementById('equipment_id');
+      const selectedOpt = equipmentSelect.options[equipmentSelect.selectedIndex];
+      if (selectedOpt && selectedOpt.dataset.unavailable === '1') {
+        showMessage('Прибор недоступен для бронирования (статус не «Доступно»).');
+        return;
+      }
 
       const start = document.getElementById('start_time').value.replace('T', ' ') + ':00';
       const end = document.getElementById('end_time').value.replace('T', ' ') + ':00';
 
-      const res = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          equipment_id: Number(document.getElementById('equipment_id').value),
-          start_time: start,
-          end_time: end,
-        }),
-      });
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
 
-      const data = await res.json().catch(function () { return {}; });
-      if (res.ok) {
-        window.location.href = '/bookings';
-      } else {
-        message.innerText = data.error || 'Не удалось создать бронь';
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            equipment_id: Number(equipmentSelect.value),
+            start_time: start,
+            end_time: end,
+          }),
+        });
+
+        const data = await res.json().catch(function () { return {}; });
+        if (res.ok) {
+          window.location.href = '/bookings';
+          return;
+        }
+        showMessage(formatApiError(data.error));
+      } catch (err) {
+        showMessage('Ошибка сети. Попробуйте ещё раз.');
+      } finally {
+        submitBtn.disabled = false;
       }
     });
