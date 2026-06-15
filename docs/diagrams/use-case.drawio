@@ -1,137 +1,226 @@
-<mxfile host="app.diagrams.net" agent="lab-equipment-booking-saas" version="22.1.0" type="device">
+<mxfile host="Electron" agent="lab-equipment-booking-saas">
   <diagram id="use-case-diagram" name="Use Case">
-    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1103" dy="1703" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" value="Диаграмма вариантов использования (Use Case)&#xa;Lab Equipment Booking SaaS" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="350" y="10" width="500" height="40" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=15;fontFamily=Helvetica" value="Use Case Diagram" vertex="1">
+          <mxGeometry height="40" width="500" x="210" as="geometry" />
         </mxCell>
-        <mxCell id="boundary" value="Система: Lab Equipment Booking SaaS" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontStyle=1;fontSize=12;fillColor=none;strokeColor=#333333;strokeWidth=2;dashed=1;dashPattern=6 6;" vertex="1" parent="1">
-          <mxGeometry x="200" y="50" width="1050" height="720" as="geometry" />
+        <mxCell id="boundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=8;fontStyle=1;fontSize=12;fillColor=none;strokeColor=#333333;strokeWidth=2;dashed=1;dashPattern=8 6" value="System: Lab Equipment Booking" vertex="1">
+          <mxGeometry height="720" width="1050" x="200" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="pkg_auth" value="Аутентификация" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="230" y="90" width="320" height="130" as="geometry" />
+        <mxCell id="pkg_auth" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1" value="Authentication" vertex="1">
+          <mxGeometry height="130" width="320" x="230" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="pkg_admin" value="Администрирование" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="580" y="90" width="340" height="130" as="geometry" />
+        <mxCell id="pkg_admin" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1" value="Administration" vertex="1">
+          <mxGeometry height="130" width="340" x="580" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="pkg_equip" value="Оборудование" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="230" y="240" width="690" height="200" as="geometry" />
+        <mxCell id="pkg_equip" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;dashed=1" value="Equipment" vertex="1">
+          <mxGeometry height="200" width="690" x="230" y="240" as="geometry" />
         </mxCell>
-        <mxCell id="pkg_book" value="Бронирование" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="230" y="460" width="500" height="180" as="geometry" />
+        <mxCell id="pkg_book" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1" value="Bookings" vertex="1">
+          <mxGeometry height="180" width="500" x="230" y="460" as="geometry" />
         </mxCell>
-        <mxCell id="pkg_api" value="Интеграция" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="760" y="460" width="260" height="120" as="geometry" />
+        <mxCell id="pkg_api" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fontStyle=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;dashed=1" value="Integration" vertex="1">
+          <mxGeometry height="120" width="260" x="760" y="460" as="geometry" />
         </mxCell>
-        <mxCell id="uc_login" value="Войти в систему" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="260" y="125" width="120" height="50" as="geometry" />
+        <mxCell id="uc_login" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Log in" vertex="1">
+          <mxGeometry height="50" width="120" x="240" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="uc_register" value="Зарегистрироваться" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="400" y="125" width="130" height="50" as="geometry" />
+        <mxCell id="uc_logout" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Log out" vertex="1">
+          <mxGeometry height="45" width="90" x="445" y="155" as="geometry" />
         </mxCell>
-        <mxCell id="uc_logout" value="Выйти" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="330" y="165" width="90" height="45" as="geometry" />
+        <mxCell id="uc_users_all" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffffff;strokeColor=#333333" value="Manage users&#xa;(all orgs)" vertex="1">
+          <mxGeometry height="55" width="130" x="780" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="uc_org_manage" value="Управлять&#xa;организациями" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="600" y="120" width="120" height="55" as="geometry" />
+        <mxCell id="uc_users_lab" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffffff;strokeColor=#333333" value="Manage lab&#xa;users" vertex="1">
+          <mxGeometry height="50" width="120" x="600" y="165" as="geometry" />
         </mxCell>
-        <mxCell id="uc_users_all" value="Управлять&#xa;пользователями (все)" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="740" y="115" width="130" height="55" as="geometry" />
+        <mxCell id="uc_profile" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffffff;strokeColor=#333333" value="Edit own&#xa;profile" vertex="1">
+          <mxGeometry height="50" width="110" x="750" y="160" as="geometry" />
         </mxCell>
-        <mxCell id="uc_users_lab" value="Управлять&#xa;пользователями лаб." style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="600" y="175" width="120" height="50" as="geometry" />
+        <mxCell id="uc_cat" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Manage&#xa;categories" vertex="1">
+          <mxGeometry height="55" width="110" x="300" y="340" as="geometry" />
         </mxCell>
-        <mxCell id="uc_profile" value="Редактировать&#xa;свой профиль" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="750" y="175" width="110" height="50" as="geometry" />
+        <mxCell id="uc_equip_manage" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Manage&#xa;equipment" vertex="1">
+          <mxGeometry height="55" width="120" x="460" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="uc_cat" value="Управлять&#xa;категориями" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="260" y="290" width="110" height="55" as="geometry" />
+        <mxCell id="uc_equip_view" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffffff;strokeColor=#333333" value="View equipment&#xa;catalog" vertex="1">
+          <mxGeometry height="60" width="140" x="760" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="uc_equip_manage" value="Управлять&#xa;оборудованием" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="400" y="290" width="120" height="55" as="geometry" />
+        <mxCell id="uc_equip_status" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffffff;strokeColor=#333333" value="Change status&#xa;(maint. / broken)" vertex="1">
+          <mxGeometry height="60" width="150" x="690" y="370" as="geometry" />
         </mxCell>
-        <mxCell id="uc_equip_view" value="Просмотреть&#xa;каталог оборудования" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="550" y="285" width="140" height="60" as="geometry" />
+        <mxCell id="uc_book_create" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Create&#xa;booking" vertex="1">
+          <mxGeometry height="55" width="120" x="345" y="585" as="geometry" />
         </mxCell>
-        <mxCell id="uc_equip_status" value="Изменить статус&#xa;(ТО / неисправность)" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=9;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="400" y="360" width="150" height="60" as="geometry" />
+        <mxCell id="uc_book_view" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="View&#xa;bookings" vertex="1">
+          <mxGeometry height="55" width="120" x="330" y="470" as="geometry" />
         </mxCell>
-        <mxCell id="uc_book_create" value="Создать&#xa;бронирование" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="260" y="510" width="120" height="55" as="geometry" />
+        <mxCell id="uc_book_edit" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Update&#xa;booking" vertex="1">
+          <mxGeometry height="55" width="120" x="610" y="492.5" as="geometry" />
         </mxCell>
-        <mxCell id="uc_book_view" value="Просмотреть&#xa;бронирования" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="410" y="510" width="120" height="55" as="geometry" />
+        <mxCell id="uc_book_cancel" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Cancel&#xa;booking" vertex="1">
+          <mxGeometry height="55" width="120" x="580" y="570" as="geometry" />
         </mxCell>
-        <mxCell id="uc_book_edit" value="Изменить&#xa;бронирование" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="260" y="580" width="120" height="55" as="geometry" />
+        <mxCell id="uc_api" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="REST API&#xa;data access" vertex="1">
+          <mxGeometry height="55" width="130" x="830" y="500" as="geometry" />
         </mxCell>
-        <mxCell id="uc_book_cancel" value="Отменить&#xa;бронирование" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="410" y="580" width="120" height="55" as="geometry" />
-        </mxCell>
-        <mxCell id="uc_api" value="Доступ к данным&#xa;через REST API" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="780" y="510" width="130" height="55" as="geometry" />
-        </mxCell>
-        <mxCell id="inc1" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;dashed=1;endFill=0;startArrow=none;html=1;rounded=0;fontSize=9;" edge="1" parent="1" source="uc_book_create" target="uc_equip_view">
+        <mxCell id="inc1" edge="1" parent="1" source="uc_book_create" style="endArrow=open;dashed=1;endFill=0;startArrow=none;html=1;rounded=0;fontSize=9" target="uc_equip_view" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="actor_sysadmin" value="Системный&#xa;администратор" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="100" width="40" height="60" as="geometry" />
+        <mxCell id="actor_sysadmin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="System&#xa;admin" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="actor_labadmin" value="Администратор&#xa;лаборатории" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="210" width="40" height="60" as="geometry" />
+        <mxCell id="actor_labadmin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="Lab&#xa;administrator" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="210" as="geometry" />
         </mxCell>
-        <mxCell id="actor_eqmgr" value="Менеджер&#xa;оборудования" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="320" width="40" height="60" as="geometry" />
+        <mxCell id="actor_eqmgr" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="Equipment&#xa;manager" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="actor_researcher" value="Исследователь" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="440" width="40" height="60" as="geometry" />
+        <mxCell id="actor_researcher" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="Researcher" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="440" as="geometry" />
         </mxCell>
-        <mxCell id="actor_student" value="Студент" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="540" width="40" height="60" as="geometry" />
+        <mxCell id="actor_student" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="Student" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="540" as="geometry" />
         </mxCell>
-        <mxCell id="actor_tech" value="Техник" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="60" y="640" width="40" height="60" as="geometry" />
+        <mxCell id="actor_tech" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="Technician" vertex="1">
+          <mxGeometry height="60" width="40" x="60" y="640" as="geometry" />
         </mxCell>
-        <mxCell id="actor_lims" value="Внешняя система&#xa;(LIMS)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="500" width="40" height="60" as="geometry" />
+        <mxCell id="actor_lims" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#333333;fontSize=10" value="External system&#xa;(LIMS)" vertex="1">
+          <mxGeometry height="60" width="40" x="1290" y="350" as="geometry" />
         </mxCell>
-        <mxCell id="e_sys_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_sysadmin" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_sys_org" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_sysadmin" target="uc_org_manage"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_sys_users" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_sysadmin" target="uc_users_all"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_sys_equip" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_sysadmin" target="uc_equip_manage"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_sys_book_c" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_sysadmin" target="uc_book_create"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lab_users" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_labadmin" target="uc_users_lab"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lab_equip" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_labadmin" target="uc_equip_manage"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lab_book_v" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_labadmin" target="uc_book_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lab_cancel" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_labadmin" target="uc_book_cancel"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lab_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_labadmin" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_mgr_cat" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_eqmgr" target="uc_cat"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_mgr_equip" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_eqmgr" target="uc_equip_manage"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_mgr_view" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_eqmgr" target="uc_equip_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_mgr_bookv" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_eqmgr" target="uc_book_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_mgr_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_eqmgr" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_view" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_equip_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_bc" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_book_create"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_bv" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_book_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_be" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_book_edit"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_cancel" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_book_cancel"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_res_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_researcher" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_reg" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_register"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_view" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_equip_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_bc" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_book_create"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_bv" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_book_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_stu_be" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_student" target="uc_book_edit"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_tech_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_tech" target="uc_login"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_tech_view" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_tech" target="uc_equip_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_tech_status" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_tech" target="uc_equip_status"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_tech_bv" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_tech" target="uc_book_view"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_lims_api" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="actor_lims" target="uc_api"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="e_all_profile" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=4 4;" edge="1" parent="1" source="actor_student" target="uc_profile"><mxGeometry relative="1" as="geometry" /></mxCell>
-        <mxCell id="legend" value="&lt;b&gt;Акторы (6 ролей + LIMS):&lt;/b&gt; соответствуют users.role в БД.&lt;br&gt;&lt;b&gt;&amp;lt;&amp;lt;include&amp;gt;&amp;gt;:&lt;/b&gt; создание брони требует просмотра каталога.&lt;br&gt;Связь с CRUD-матрицей: docs/04-crud-matrix.md | docs/02-users-and-roles.md" style="text;html=1;strokeColor=#999999;fillColor=#fafafa;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=10;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="760" y="620" width="470" height="70" as="geometry" />
+        <mxCell id="e_sys_login" edge="1" parent="1" source="actor_sysadmin" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sys_org" edge="1" parent="1" source="uc_register" style="endArrow=none;html=1;rounded=0" target="uc_org_manage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sys_users" edge="1" parent="1" source="uc_org_manage" style="endArrow=none;html=1;rounded=0" target="uc_users_all">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sys_equip" edge="1" parent="1" source="actor_sysadmin" style="endArrow=none;html=1;rounded=0" target="uc_equip_manage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sys_book_c" edge="1" parent="1" source="actor_sysadmin" style="endArrow=none;html=1;rounded=0" target="uc_book_create">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lab_users" edge="1" parent="1" source="actor_labadmin" style="endArrow=none;html=1;rounded=0" target="uc_users_lab">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lab_equip" edge="1" parent="1" source="actor_labadmin" style="endArrow=none;html=1;rounded=0" target="uc_equip_manage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lab_book_v" edge="1" parent="1" source="actor_labadmin" style="endArrow=none;html=1;rounded=0" target="uc_book_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lab_cancel" edge="1" parent="1" source="actor_labadmin" style="endArrow=none;html=1;rounded=0" target="uc_book_cancel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lab_login" edge="1" parent="1" source="actor_labadmin" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mgr_cat" edge="1" parent="1" source="actor_eqmgr" style="endArrow=none;html=1;rounded=0" target="uc_cat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mgr_equip" edge="1" parent="1" source="actor_eqmgr" style="endArrow=none;html=1;rounded=0" target="uc_equip_manage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mgr_view" edge="1" parent="1" source="actor_eqmgr" style="endArrow=none;html=1;rounded=0" target="uc_equip_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mgr_bookv" edge="1" parent="1" source="actor_eqmgr" style="endArrow=none;html=1;rounded=0" target="uc_book_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mgr_login" edge="1" parent="1" source="actor_eqmgr" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_view" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_equip_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_bc" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_book_create">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_bv" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_book_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_be" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_book_edit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_cancel" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_book_cancel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_res_login" edge="1" parent="1" source="actor_researcher" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_reg" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_login" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_view" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_equip_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_bc" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_book_create">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_bv" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_book_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stu_be" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0" target="uc_book_edit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tech_login" edge="1" parent="1" source="actor_tech" style="endArrow=none;html=1;rounded=0" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tech_view" edge="1" parent="1" source="actor_tech" style="endArrow=none;html=1;rounded=0" target="uc_equip_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tech_status" edge="1" parent="1" source="actor_tech" style="endArrow=none;html=1;rounded=0" target="uc_equip_status">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tech_bv" edge="1" parent="1" source="actor_tech" style="endArrow=none;html=1;rounded=0" target="uc_book_view">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lims_api" edge="1" parent="1" source="actor_lims" style="endArrow=none;html=1;rounded=0" target="uc_api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_all_profile" edge="1" parent="1" source="actor_student" style="endArrow=none;html=1;rounded=0;dashed=1;dashPattern=4 4" target="uc_profile">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="text;html=1;strokeColor=#36393d;fillColor=#eeeeee;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=10;rounded=1" value="&lt;b&gt;Actors (6 roles + LIMS)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="470" x="760" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="8bltSIMX5yXYTymGy3g7-1" edge="1" parent="1" source="actor_sysadmin" style="endArrow=none;html=1;rounded=0" target="uc_register" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="131" as="sourcePoint" />
+            <mxPoint x="600" y="146" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uc_register" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Register" vertex="1">
+          <mxGeometry height="50" width="130" x="410" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="8bltSIMX5yXYTymGy3g7-2" edge="1" parent="1" source="actor_sysadmin" style="endArrow=none;html=1;rounded=0" target="uc_org_manage" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="130" as="sourcePoint" />
+            <mxPoint x="740" y="141" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uc_org_manage" parent="1" style="ellipse;whiteSpace=wrap;html=1;align=center;fontSize=10;fillColor=#ffffff;strokeColor=#333333" value="Manage&#xa;organizations" vertex="1">
+          <mxGeometry height="55" width="120" x="640" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="RsGUw-9DN0PfLstiLHRQ-1" edge="1" parent="1" source="uc_login" style="shape=link;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="uc_logout" value="">
+          <mxGeometry relative="1" width="100" as="geometry">
+            <mxPoint x="520" y="330" as="sourcePoint" />
+            <mxPoint x="620" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RsGUw-9DN0PfLstiLHRQ-2" connectable="0" parent="RsGUw-9DN0PfLstiLHRQ-1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Link" vertex="1">
+          <mxGeometry relative="1" x="-0.0621" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

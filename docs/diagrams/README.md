@@ -1,61 +1,93 @@
-# Диаграммы проекта (draw.io)
+# Project diagrams (draw.io)
 
-Основной инструмент: [diagrams.net](https://app.diagrams.net) (draw.io).
+Tool: [diagrams.net](https://app.diagrams.net) (draw.io).  
+Diagrams use a **clean, minimal** style: white shapes, gray borders, Helvetica — easy to read in reports.
 
 ## ERD
 
-| Файл | Назначение |
-|------|------------|
-| `lab-equipment-booking-erd.drawio` | ERD базы `lab_equipment_booking` — открыть, править, экспорт PNG/PDF для отчёта |
+| File | Purpose |
+|------|---------|
+| `lab-equipment-booking-erd.drawio` | Entity–relationship diagram for `lab_equipment_booking` — 5 tables, FK links, ENUM notes |
 
-## CRUD-матрица
+**Shows:** static **data model** — what is stored and how tables relate (`organizations` → `users`, `equipment`, `bookings`).
 
-| Файл | Назначение |
-|------|------------|
-| `crud-matrix.drawio` | Таблица доступа **6 ролей × 5 таблиц** — основной артефакт для отчёта |
+## CRUD matrix
 
-Текстовая копия (справочно): [`../04-crud-matrix.md`](../04-crud-matrix.md).
+| File | Purpose |
+|------|---------|
+| `crud-matrix.drawio` | Access table **6 roles × 5 tables** — main security artifact for the report |
 
-**Как работать:**
+Text reference: [`../04-crud-matrix.md`](../04-crud-matrix.md).
 
-1. **File → Open from → Device** → выберите `.drawio`.
-2. Редактируйте схему.
-3. **File → Export as → PNG** или **PDF** для пояснительной записки.
+**Shows:** who can Create / Read / Update / Delete each entity (permissions only, not workflow).
 
-Согласовано с [`database/schema.sql`](../../database/schema.sql) и [`../03-tables.md`](../03-tables.md).
+## Use case
 
-## Use Case
+| File | Purpose |
+|------|---------|
+| `use-case.drawio` | Use cases — 6 human roles + LIMS external actor |
 
-| Файл | Назначение |
-|------|------------|
-| `use-case.drawio` | Диаграмма вариантов использования (6 ролей + LIMS) |
+Scenario list: [`../05-use-case.md`](../05-use-case.md).
 
-Описание сценариев: [`../05-use-case.md`](../05-use-case.md).
+**Shows:** **what users can do** with the system (goals), grouped by Auth, Admin, Equipment, Bookings, API.
 
-## Диаграммы состояний
+## State diagrams
 
-| Файл | Назначение |
-|------|------------|
-| `booking-states.drawio` | Состояния **bookings** и **equipment** (2 автомата на одном листе) |
+| File | Purpose |
+|------|---------|
+| `booking-states.drawio` | State machines for **bookings.status** and **equipment.status** (two automata on one page) |
 
-Описание переходов: [`../06-state-diagram.md`](../06-state-diagram.md).
+Transitions: [`../06-state-diagram.md`](../06-state-diagram.md).
 
-## Диаграмма последовательности
+**Shows:** **allowed status values** and **transitions** (active → completed/cancelled; available ↔ maintenance ↔ broken).
 
-| Файл | Назначение |
-|------|------------|
-| `booking-sequence.drawio` | Создание бронирования: браузер → API → JWT → MySQL |
+## Sequence diagram
 
-Описание: [`../07-sequence-diagram.md`](../07-sequence-diagram.md).
+| File | Purpose |
+|------|---------|
+| `booking-sequence.drawio` | Create booking — message order: User → Browser → Express → JWT → MySQL |
 
-## Диаграмма действий (Activity)
+Description: [`../07-sequence-diagram.md`](../07-sequence-diagram.md).
 
-| Файл | Назначение |
-|------|------------|
-| `booking-activity.drawio` | Алгоритм UC-30 с дорожками и условиями |
+**Shows:** **who calls whom over time** for one scenario (login + POST booking) — technical view.
 
-Описание: [`../08-activity-diagram.md`](../08-activity-diagram.md).
+## Activity diagram
+
+| File | Purpose |
+|------|---------|
+| `booking-activity.drawio` | UC-30 algorithm with swimlanes (User | API | MySQL) and decision diamonds |
+
+Description: [`../08-activity-diagram.md`](../08-activity-diagram.md).
+
+**Shows:** **business process flow** with branches (logged in? role OK? equipment available? slot free?).
+
+---
+
+## How to edit & export
+
+1. **File → Open from → Device** → pick a `.drawio` file.
+2. Edit labels or layout.
+3. **File → Export as → PNG** or **PDF** for your report.
+
+Aligned with [`database/schema.sql`](../../database/schema.sql) and [`../03-tables.md`](../03-tables.md).
+
+## Style
+
+- White boxes, `#333` borders, light gray swimlanes (`#eee` / `#f7f7f7`)
+- No sketch/hand-drawn mode — standard UML shapes
+- Export: **File → Export as → PNG** or **PDF**
 
 ## Visual Paradigm
 
-Не обязателен. При необходимости можно импортировать `.drawio` через VP Online (**Import draw.io**), но для проекта достаточно экспорта из draw.io.
+Optional. Import `.drawio` into VP Online (**Import draw.io**); draw.io export is enough for this project.
+
+## Quick comparison
+
+| Diagram | Question it answers | Time axis? | Best for |
+|---------|---------------------|------------|----------|
+| **ERD** | What data exists? | No | DB design chapter |
+| **CRUD matrix** | Who may change what? | No | Security / roles |
+| **Use case** | What can each actor do? | No | Requirements |
+| **State** | What statuses exist? | No | Business rules |
+| **Sequence** | Which component sends what message? | Yes (messages) | API / implementation |
+| **Activity** | What steps and decisions in the process? | Yes (flow) | One use case walkthrough |

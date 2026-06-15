@@ -1,0 +1,183 @@
+<mxfile host="app.diagrams.net" agent="lab-equipment-booking-saas" version="22.1.0" type="device">
+  <diagram id="booking-sequence" name="Sequence - Create Booking">
+    <mxGraphModel dx="1500" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0" defaultVertexStyle="rounded=1;arcSize=10;fillColor=#ffffff;strokeColor=#333333;fontFamily=Helvetica;fontSize=11;whiteSpace=wrap;html=1" defaultEdgeStyle="strokeColor=#333333;endArrow=block;html=1;rounded=0;fontFamily=Helvetica;fontSize=10">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Sequence Diagram: Create Booking&#xa;Lab Equipment Booking SaaS" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontStyle=1;fontSize=14;fontFamily=Helvetica" vertex="1" parent="1">
+          <mxGeometry x="400" y="15" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_auth" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;width=80;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;fontSize=10;fillColor=#f7f7f7" vertex="1" parent="1">
+          <mxGeometry x="30" y="55" width="1340" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_auth_label" value="[user not logged in]" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="50" y="60" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_main" value="sd" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;fontSize=10;fillColor=#ffffff" vertex="1" parent="1">
+          <mxGeometry x="30" y="220" width="1340" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="frame_main_label" value="Create booking (UC-30)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="225" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p_user" value=":User&#xa;(student / researcher)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="50" y="90" width="110" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_browser" value=":Browser&#xa;(Jade + fetch)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="200" y="90" width="110" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_router" value=":Express&#xa;Router" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="350" y="90" width="100" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_auth" value=":authMiddleware&#xa;(JWT)" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="490" y="90" width="110" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_ctrl" value=":BookingsController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="640" y="90" width="120" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_svc" value=":BookingsService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="800" y="90" width="110" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="p_db" value=":MySQL&#xa;lab_equipment_booking" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="960" y="90" width="120" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="1: open /auth/login" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="115" as="sourcePoint" />
+            <mxPoint x="255" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="2: POST /api/auth/login {email, password}" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="255" y="135" as="sourcePoint" />
+            <mxPoint x="400" y="135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="3: SELECT users WHERE email=?" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="155" as="sourcePoint" />
+            <mxPoint x="1020" y="155" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="4: user + bcrypt OK" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="175" as="sourcePoint" />
+            <mxPoint x="400" y="175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="5: Set-Cookie: token (JWT)" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="195" as="sourcePoint" />
+            <mxPoint x="255" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="6: open /dashboard" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="250" as="sourcePoint" />
+            <mxPoint x="255" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="7: GET /api/equipment (cookie)" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="255" y="280" as="sourcePoint" />
+            <mxPoint x="400" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="8: jwt.verify(token)" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="300" as="sourcePoint" />
+            <mxPoint x="545" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="9: req.user (role, id)" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="320" as="sourcePoint" />
+            <mxPoint x="400" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="10: SELECT * FROM equipment" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="340" as="sourcePoint" />
+            <mxPoint x="1020" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="11: JSON [equipment]" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="360" as="sourcePoint" />
+            <mxPoint x="255" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="12: pick slot, confirm" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="105" y="400" as="sourcePoint" />
+            <mxPoint x="255" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="13: POST /api/bookings {equipment_id, start_time, end_time, user_id}" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="255" y="430" as="sourcePoint" />
+            <mxPoint x="400" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="14: authenticate + authorize(roles)" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="460" as="sourcePoint" />
+            <mxPoint x="545" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m15" value="15: create(req.body)" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="490" as="sourcePoint" />
+            <mxPoint x="700" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m16" value="16: BookingsService.create()" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="510" as="sourcePoint" />
+            <mxPoint x="855" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m17" value="17: INSERT INTO bookings … status='active'" style="endArrow=block;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="855" y="540" as="sourcePoint" />
+            <mxPoint x="1020" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m18" value="18: insertId, booking" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="570" as="sourcePoint" />
+            <mxPoint x="255" y="570" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1100" y="570" />
+              <mxPoint x="1100" y="600" />
+              <mxPoint x="255" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m19" value="19: 201 Created {booking}" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="630" as="sourcePoint" />
+            <mxPoint x="255" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m20" value="20: show confirmation" style="endArrow=open;dashed=1;endFill=0;html=1;rounded=0;fontSize=9;labelBackgroundColor=#ffffff" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="255" y="660" as="sourcePoint" />
+            <mxPoint x="105" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="act_router" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;opacity=60" vertex="1" parent="1">
+          <mxGeometry x="375" y="425" width="50" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="act_svc" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;opacity=60" vertex="1" parent="1">
+          <mxGeometry x="825" y="505" width="70" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="note_future" value="DB layer: sp_create_booking() — checks available, slot conflict, org (see docs/06-state-diagram.md)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=14;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="1120" y="480" width="260" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;b&gt;Solid&lt;/b&gt; = call; &lt;b&gt;dashed&lt;/b&gt; = response.&lt;br&gt;Code: bookings routes, authMiddleware, bookingsController, bookingsService" style="text;html=1;strokeColor=#999999;fillColor=#fafafa;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;rounded=1" vertex="1" parent="1">
+          <mxGeometry x="30" y="720" width="1340" height="45" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
