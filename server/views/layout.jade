@@ -15,9 +15,14 @@ html(lang="ru")
 
         if user
           nav.site-nav(aria-label="Основное меню")
-            a.nav-link(href="/dashboard", class=currentPath.startsWith('/dashboard') ? 'is-active' : undefined) Каталог
-            a.nav-link(href="/bookings", class=currentPath === '/bookings' ? 'is-active' : undefined) Мои брони
-            a.nav-link(href="/bookings/new", class=currentPath === '/bookings/new' ? 'is-active' : undefined) Новая бронь
+            if navPerms.showCatalog
+              a.nav-link(href="/dashboard", class=currentPath.startsWith('/dashboard') ? 'is-active' : undefined) Каталог
+            if navPerms.showBookings
+              a.nav-link(href="/bookings", class=currentPath.startsWith('/bookings') && currentPath !== '/bookings/new' ? 'is-active' : undefined) Мои брони
+            if navPerms.showNewBooking
+              a.nav-link(href="/bookings/new", class=currentPath === '/bookings/new' ? 'is-active' : undefined) Новая бронь
+            if navPerms.showAdmin
+              a.nav-link(href="/admin", class=currentPath.startsWith('/admin') ? 'is-active' : undefined) Admin
 
           .header-user
             span.user-email= user.email

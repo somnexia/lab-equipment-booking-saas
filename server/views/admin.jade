@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1.page-title Admin
+  p.page-lead Управление пользователями и категориями оборудования — в следующих итерациях.
+
+  .card(style="max-width:520px")
+    p
+      | Пока доступны API:
+      code GET /api/users
+      | ,
+      code GET /api/equipment-categories
+      | .
+    p
+      a(href="/dashboard") ← К каталогу

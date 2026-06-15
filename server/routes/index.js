@@ -15,6 +15,7 @@ const classesApi = require('./api/classes');
 const authPagesRoutes = require('./pages/authPages');
 const dashboardRoutes = require('./pages/dashboard');
 const bookingsPagesRoutes = require('./pages/bookings');
+const adminPagesRoutes = require('./pages/admin');
 const classesRoutes = require('./pages/classes');
 
 router.get('/', (req, res) => {
@@ -34,6 +35,7 @@ router.use('/api/classes', classesApi);
 router.use('/auth', authPagesRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/bookings', bookingsPagesRoutes);
+router.use('/admin', adminPagesRoutes);
 router.use('/classes', classesRoutes);
 
 module.exports = router;
