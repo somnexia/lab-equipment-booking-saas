@@ -1,4 +1,4 @@
-// SIMPLE_PASSWORD_MODE=off в .env — отключить; иначе обычный режим (один раз после login).
+// SIMPLE_PASSWORD_MODE=off in .env disables this; otherwise one-time check after login.
 
 function isSimplePasswordEnabled() {
   return (process.env.SIMPLE_PASSWORD_MODE || 'on').toLowerCase() !== 'off';
@@ -17,5 +17,5 @@ module.exports = (req, res, next) => {
     return next();
   }
 
-  return res.render('simplePassword', { title: 'Дополнительный пароль' });
+  return res.render('simplePassword', { title: 'Additional password' });
 };

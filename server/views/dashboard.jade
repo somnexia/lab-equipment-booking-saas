@@ -1,45 +1,45 @@
 extends layout
 
 block content
-  h1.page-title Каталог оборудования
+  h1.page-title Equipment catalog
   p.page-lead
-    | Список приборов вашей организации.
+    | List of equipment in your organization.
     if uiPerms.canBook
-      |  Доступные позиции можно забронировать.
+      |  Available items can be booked.
     if uiPerms.canUpdateStatus && !uiPerms.canManageEquipment
-      |  Смена статуса — в колонке «Действия».
+      |  Status changes are in the "Actions" column.
 
   if uiPerms.canCreateEquipment
     .dashboard-toolbar
-      button#btnToggleAdd.btn.btn-primary(type="button") + Добавить оборудование
+      button#btnToggleAdd.btn.btn-primary(type="button") + Add equipment
 
     .card#addEquipmentPanel.add-equipment-panel(hidden)
-      h2.panel-title Новое оборудование
+      h2.panel-title New equipment
       form#addEquipmentForm
         if uiPerms.isSystemAdmin
           .form-row
-            label(for="eq_organization_id") Организация
+            label(for="eq_organization_id") Organization
             select#eq_organization_id(name="organization_id", required)
-              option(value="") Загрузка…
+              option(value="") Loading…
         .form-row
-          label(for="eq_name") Название
-          input#eq_name(type="text", name="name", required, maxlength="255", placeholder="Например: Спектрофотометр UV-2600")
+          label(for="eq_name") Name
+          input#eq_name(type="text", name="name", required, maxlength="255", placeholder="E.g.: UV-2600 Spectrophotometer")
         .form-row
-          label(for="eq_category_id") Категория
+          label(for="eq_category_id") Category
           select#eq_category_id(name="category_id")
-            option(value="") — без категории —
+            option(value="") — no category —
         .form-row
-          label(for="eq_description") Описание
-          textarea#eq_description(name="description", rows="2", placeholder="Необязательно")
+          label(for="eq_description") Description
+          textarea#eq_description(name="description", rows="2", placeholder="Optional")
         .form-row
-          label(for="eq_status") Статус
+          label(for="eq_status") Status
           select#eq_status(name="status")
-            option(value="available", selected) Доступно
-            option(value="maintenance") Техобслуживание
-            option(value="broken") Неисправно
+            option(value="available", selected) Available
+            option(value="maintenance") Maintenance
+            option(value="broken") Broken
         .form-actions
-          button.btn.btn-primary(type="submit") Сохранить
-          button#btnCancelAdd.btn(type="button") Отмена
+          button.btn.btn-primary(type="submit") Save
+          button#btnCancelAdd.btn(type="button") Cancel
       p#addEquipmentMessage.form-message(role="alert", aria-live="polite", hidden)
 
   p#dashboardMessage.form-message(role="alert", aria-live="polite", hidden)
@@ -48,29 +48,29 @@ block content
     thead
       tr
         th ID
-        th Название
-        th Категория
-        th Статус
-        th Действия
+        th Name
+        th Category
+        th Status
+        th Actions
     tbody#equipmentTable
       tr
-        td(colspan="5") Загрузка…
+        td(colspan="5") Loading…
 
 block scripts
   script.
     window.UI_PERMS = !{JSON.stringify(uiPerms)};
 
     const STATUS_LABELS = {
-      available: 'Доступно',
-      maintenance: 'Техобслуживание',
-      broken: 'Неисправно',
+      available: 'Available',
+      maintenance: 'Maintenance',
+      broken: 'Broken',
     };
 
     const API_ERRORS = {
-      'name is required': 'Укажите название оборудования.',
-      'organization_id is required': 'Выберите организацию.',
-      'Cannot delete equipment: active bookings exist': 'Нельзя удалить: есть активные брони.',
-      'Cannot delete equipment: booking history exists': 'Нельзя удалить: есть история бронирований.',
+      'name is required': 'Please specify equipment name.',
+      'organization_id is required': 'Select an organization.',
+      'Cannot delete equipment: active bookings exist': 'Cannot delete: active bookings exist.',
+      'Cannot delete equipment: booking history exists': 'Cannot delete: booking history exists.',
     };
 
     function escapeHtml(text) {
@@ -87,7 +87,7 @@ block scripts
     }
 
     function formatApiError(raw) {
-      if (!raw) return 'Ошибка запроса';
+      if (!raw) return 'Request error';
       const msg = String(raw).trim();
       return API_ERRORS[msg] || msg;
     }
@@ -104,16 +104,16 @@ block scripts
       const perms = window.UI_PERMS || {};
 
       if (perms.canBook && status === 'available') {
-        parts.push('<a class="btn btn-sm btn-primary" href="/bookings/new?equipment_id=' + id + '">Забронировать</a>');
+        parts.push('<a class="btn btn-sm btn-primary" href="/bookings/new?equipment_id=' + id + '">Book</a>');
       }
 
       if (perms.canUpdateStatus) {
         parts.push(
           '<div class="status-edit">' +
             '<select class="status-select" data-id="' + id + '">' +
-              '<option value="available"' + (status === 'available' ? ' selected' : '') + '>Доступно</option>' +
-              '<option value="maintenance"' + (status === 'maintenance' ? ' selected' : '') + '>Техобслуживание</option>' +
-              '<option value="broken"' + (status === 'broken' ? ' selected' : '') + '>Неисправно</option>' +
+              '<option value="available"' + (status === 'available' ? ' selected' : '') + '>Available</option>' +
+              '<option value="maintenance"' + (status === 'maintenance' ? ' selected' : '') + '>Maintenance</option>' +
+              '<option value="broken"' + (status === 'broken' ? ' selected' : '') + '>Broken</option>' +
             '</select>' +
             '<button type="button" class="btn btn-sm btn-save-status" data-id="' + id + '">OK</button>' +
           '</div>'
@@ -121,7 +121,7 @@ block scripts
       }
 
       if (perms.canDeleteEquipment) {
-        parts.push('<button type="button" class="btn btn-sm btn-danger btn-delete-equipment" data-id="' + id + '">Удалить</button>');
+        parts.push('<button type="button" class="btn btn-sm btn-danger btn-delete-equipment" data-id="' + id + '">Delete</button>');
       }
 
       if (!parts.length) {
@@ -149,7 +149,7 @@ block scripts
 
     async function deleteEquipment(id, name) {
       const label = name ? '«' + name + '» (#' + id + ')' : '#' + id;
-      if (!confirm('Удалить оборудование ' + label + '?')) return;
+      if (!confirm('Delete equipment ' + label + '?')) return;
 
       const res = await fetch('/api/equipment/' + id, {
         method: 'DELETE',
@@ -179,7 +179,7 @@ block scripts
         table.innerHTML = '';
 
         if (!data.length) {
-          table.innerHTML = '<tr><td colspan="5">Нет оборудования</td></tr>';
+          table.innerHTML = '<tr><td colspan="5">No equipment</td></tr>';
           return;
         }
 
@@ -217,7 +217,7 @@ block scripts
         });
       } catch (err) {
         console.error(err);
-        table.innerHTML = '<tr><td colspan="5">Ошибка загрузки</td></tr>';
+        table.innerHTML = '<tr><td colspan="5">Loading error</td></tr>';
       }
     }
 
@@ -229,7 +229,7 @@ block scripts
         const id = cat.category_id ?? cat.id;
         const opt = document.createElement('option');
         opt.value = id;
-        opt.textContent = cat.category_name ?? cat.name ?? ('Категория #' + id);
+        opt.textContent = cat.category_name ?? cat.name ?? ('Category #' + id);
         select.appendChild(opt);
       });
     }
@@ -237,16 +237,16 @@ block scripts
     async function loadOrganizations(select) {
       const res = await fetch('/api/organizations', { credentials: 'include' });
       if (!res.ok) {
-        select.innerHTML = '<option value="">Ошибка загрузки</option>';
+        select.innerHTML = '<option value="">Loading error</option>';
         return;
       }
       const items = await res.json();
-      select.innerHTML = '<option value="">— выберите организацию —</option>';
+      select.innerHTML = '<option value="">— select organization —</option>';
       items.forEach(function (org) {
         const id = org.organization_id ?? org.id;
         const opt = document.createElement('option');
         opt.value = id;
-        opt.textContent = org.organization_name ?? org.name ?? ('Орг. #' + id);
+        opt.textContent = org.organization_name ?? org.name ?? ('Org. #' + id);
         select.appendChild(opt);
       });
     }
@@ -319,7 +319,7 @@ block scripts
           panel.hidden = true;
           loadEquipment();
         } catch (err) {
-          showInlineMessage('addEquipmentMessage', 'Ошибка сети. Попробуйте ещё раз.');
+          showInlineMessage('addEquipmentMessage', 'Network error. Please try again.');
         } finally {
           submitBtn.disabled = false;
         }

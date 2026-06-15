@@ -1,4 +1,4 @@
--- Lab Equipment Booking SaaS — каноническая схема БД
+-- Lab Equipment Booking SaaS — canonical database schema
 -- MySQL / MariaDB 10.4+
 
 SET NAMES utf8mb4;

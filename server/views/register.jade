@@ -2,11 +2,11 @@ extends layout
 
 block content
   .card.auth-card
-    h1 Регистрация
+    h1 Register
 
     form#registerForm
       .form-row
-        label(for="name") Имя
+        label(for="name") Name
         input#name(type="text", name="name", required)
 
       .form-row
@@ -14,27 +14,27 @@ block content
         input#email(type="email", name="email", required)
 
       .form-row
-        label(for="password") Пароль
+        label(for="password") Password
         input#password(type="password", name="password", required, minlength="8")
 
       .form-row
-        label(for="organization_id") Организация
+        label(for="organization_id") Organization
         if organizations && organizations.length
           select#organization_id(name="organization_id", required)
             each org in organizations
               option(value=org.id)= org.name
         else
           select#organization_id(name="organization_id", disabled)
-            option(value="") Нет доступных организаций
-          p.page-hint Регистрация временно недоступна — обратитесь к администратору.
+            option(value="") No organizations available
+          p.page-hint Registration is temporarily unavailable — contact an administrator.
 
-      button.btn.btn-primary(type="submit", disabled=!organizations || !organizations.length) Зарегистрироваться
+      button.btn.btn-primary(type="submit", disabled=!organizations || !organizations.length) Register
 
     p#message.form-message(role="alert", aria-live="polite", hidden)
 
     p.auth-footer
-      | Уже есть аккаунт?
-      a(href="/auth/login") Войти
+      | Already have an account?
+      a(href="/auth/login") Log in
 
 block scripts
   script.
@@ -53,7 +53,7 @@ block scripts
       showMessage('');
 
       if (!orgSelect.value) {
-        showMessage('Выберите организацию');
+        showMessage('Please select an organization');
         return;
       }
 
@@ -79,15 +79,15 @@ block scripts
         const result = await res.json().catch(function () { return {}; });
 
         if (res.ok) {
-          showMessage('Регистрация успешна! Перенаправление…', true);
+          showMessage('Registration successful! Redirecting…', true);
           setTimeout(function () {
             window.location.href = '/auth/login';
           }, 1000);
         } else {
-          showMessage(result.error || 'Ошибка регистрации');
+          showMessage(result.error || 'Registration failed');
         }
       } catch (err) {
-        showMessage('Ошибка соединения');
+        showMessage('Connection error');
       } finally {
         if (orgSelect.value) submitBtn.disabled = false;
       }

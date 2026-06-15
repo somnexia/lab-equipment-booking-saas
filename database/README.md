@@ -1,18 +1,18 @@
-# База данных Lab Equipment Booking
+# Lab Equipment Booking database
 
-Канонические скрипты (используйте их вместо дампов `lab_equipment_booking*.sql` в корне):
+Canonical scripts (use these instead of `lab_equipment_booking*.sql` dumps in the project root):
 
-| Файл | Назначение |
-|------|------------|
-| `schema.sql` | Создание БД и таблиц |
-| `seed.sql` | Тестовые организации, пользователи, оборудование, брони |
-| `migrate_from_legacy_roles.sql` | Обновление существующей БД со старых ролей |
-| `procedures.sql` | Функции и хранимые процедуры (брони, статус оборудования) |
-| `views.sql` | Представления для каталога, броней, пользователей |
-| `grants.sql` | Пользователи MySQL и назначение прав (GRANT) |
-| `export/` | Экспорт БД в SQL, JSON, XML — см. [export/README.md](export/README.md) |
+| File | Purpose |
+|------|---------|
+| `schema.sql` | Create database and tables |
+| `seed.sql` | Test organizations, users, equipment, bookings |
+| `migrate_from_legacy_roles.sql` | Upgrade an existing DB from legacy roles |
+| `procedures.sql` | Functions and stored procedures (bookings, equipment status) |
+| `views.sql` | Views for catalog, bookings, users |
+| `grants.sql` | MySQL users and GRANT permissions |
+| `export/` | DB export to SQL, JSON, XML — see [export/README.md](export/README.md) |
 
-## Установка с нуля
+## Fresh install
 
 ```bash
 mysql -u root -p < database/schema.sql
@@ -22,15 +22,15 @@ mysql -u root -p lab_equipment_booking < database/views.sql
 mysql -u root -p < database/grants.sql
 ```
 
-- Процедуры: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md)  
-- Представления: [docs/10-views.md](../docs/10-views.md)  
-- Права: [docs/11-grants.md](../docs/11-grants.md)
+- Procedures: [docs/09-stored-procedures.md](../docs/09-stored-procedures.md)  
+- Views: [docs/10-views.md](../docs/10-views.md)  
+- Grants: [docs/11-grants.md](../docs/11-grants.md)
 
-## Демо-пользователи (5 аккаунтов)
+## Demo users (5 accounts)
 
-Пароль для всех: `Password123!`
+Password for all: `Password123!`
 
-| Email | Роль |
+| Email | Role |
 |-------|------|
 | admin@lab.local | system_admin |
 | lab.admin@chem.lab.local | lab_admin |
@@ -38,24 +38,27 @@ mysql -u root -p < database/grants.sql
 | researcher@chem.lab.local | researcher |
 | student@chem.lab.local | student |
 
-Роль **technician** в схеме есть, отдельный демо-логин не обязателен. Для проверки ТО:
+The **technician** role exists in the schema; a separate demo login is optional. To test maintenance workflows:
 
 ```sql
 UPDATE users SET role = 'technician' WHERE email = 'manager@chem.lab.local';
--- после теста верните: equipment_manager
+-- after testing, restore: equipment_manager
 ```
 
-## Пользователь приложения (`labuser`)
+## Application user (`labuser`)
 
-Создаётся в `grants.sql`. Пароль в `.env` (`DB_PASSWORD`) должен совпадать с паролем в SQL  
-(по умолчанию в скрипте: `ChangeMe_LabUser` — **замените** на свой).
+Created in `grants.sql`. The password in `.env` (`DB_PASSWORD`) must match the password in SQL  
+(default in the script: `ChangeMe_LabUser` — **replace** with your own).
 
-Проверка прав:
+Verify grants:
 
 ```sql
 SHOW GRANTS FOR 'labuser'@'localhost';
 SHOW GRANTS FOR 'app_student'@'localhost';
 ```
 
-## Проверка через PowerShell (не через браузер)
-Invoke-RestMethod -Uri "http://localhost:3000/api/auth/login" -Method POST -ContentType "application/json" -Body
+## Test via PowerShell (not the browser)
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:3000/api/auth/login" -Method POST -ContentType "application/json" -Body '{"email":"student@chem.lab.local","password":"Password123!"}'
+```

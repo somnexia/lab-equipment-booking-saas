@@ -2,7 +2,7 @@ extends layout
 
 block content
   .card.auth-card
-    h1 Вход
+    h1 Log in
 
     form#loginForm
       .form-row
@@ -10,10 +10,10 @@ block content
         input#email(type="email", name="email", required, autocomplete="username")
 
       .form-row
-        label(for="password") Пароль
+        label(for="password") Password
         input#password(type="password", name="password", required, autocomplete="current-password")
 
-      button.btn.btn-primary(type="submit") Войти
+      button.btn.btn-primary(type="submit") Log in
 
     p#message.form-message
 
@@ -44,9 +44,9 @@ block content
           if (res.ok) {
             window.location.href = '/dashboard';
           } else {
-            message.innerText = result.error || 'Ошибка входа';
+            message.innerText = result.error || 'Login failed';
           }
         } catch (err) {
-          message.innerText = 'Ошибка соединения';
+          message.innerText = 'Connection error';
         }
       });

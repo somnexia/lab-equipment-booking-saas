@@ -1,11 +1,11 @@
--- Представления (VIEW) Lab Equipment Booking SaaS
+-- Views — Lab Equipment Booking SaaS
 -- MySQL / MariaDB 10.4+
--- Запуск: mysql -u root -p lab_equipment_booking < database/views.sql
+-- Run: mysql -u root -p lab_equipment_booking < database/views.sql
 
 USE `lab_equipment_booking`;
 
 -- ---------------------------------------------------------------------------
--- v_equipment_catalog — каталог для dashboard и GET /api/equipment
+-- v_equipment_catalog — catalog for dashboard and GET /api/equipment
 -- JOIN: equipment + category + organization
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW `v_equipment_catalog` AS
@@ -20,16 +20,16 @@ SELECT
   e.`status`,
   e.`created_at`,
   CASE e.`status`
-    WHEN 'available' THEN 'Доступно для бронирования'
-    WHEN 'maintenance' THEN 'Техобслуживание'
-    WHEN 'broken' THEN 'Неисправно'
+    WHEN 'available' THEN 'Available for booking'
+    WHEN 'maintenance' THEN 'Maintenance'
+    WHEN 'broken' THEN 'Broken'
   END AS `status_label`
 FROM `equipment` e
 INNER JOIN `organizations` o ON o.`id` = e.`organization_id`
 LEFT JOIN `equipment_categories` c ON c.`id` = e.`category_id`;
 
 -- ---------------------------------------------------------------------------
--- v_bookings_detail — список броней для GET /api/bookings
+-- v_bookings_detail — booking list for GET /api/bookings
 -- JOIN: bookings + user + equipment + organization
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW `v_bookings_detail` AS
@@ -49,9 +49,9 @@ SELECT
   b.`status` AS `booking_status`,
   b.`created_at`,
   CASE b.`status`
-    WHEN 'active' THEN 'Активная'
-    WHEN 'completed' THEN 'Завершена'
-    WHEN 'cancelled' THEN 'Отменена'
+    WHEN 'active' THEN 'Active'
+    WHEN 'completed' THEN 'Completed'
+    WHEN 'cancelled' THEN 'Cancelled'
   END AS `booking_status_label`
 FROM `bookings` b
 INNER JOIN `users` u ON u.`id` = b.`user_id`
@@ -59,7 +59,7 @@ INNER JOIN `equipment` e ON e.`id` = b.`equipment_id`
 INNER JOIN `organizations` o ON o.`id` = u.`organization_id`;
 
 -- ---------------------------------------------------------------------------
--- v_active_bookings — только активные брони (календарь, проверка занятости)
+-- v_active_bookings — active bookings only (calendar, availability checks)
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW `v_active_bookings` AS
 SELECT
@@ -77,7 +77,7 @@ FROM `v_bookings_detail`
 WHERE `booking_status` = 'active';
 
 -- ---------------------------------------------------------------------------
--- v_users_by_organization — справочник пользователей (админка лаборатории)
+-- v_users_by_organization — user directory (lab admin UI)
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW `v_users_by_organization` AS
 SELECT

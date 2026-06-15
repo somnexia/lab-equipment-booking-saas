@@ -32,11 +32,11 @@ Thumbs.db
 *.sublime-workspace
 *.sublime-project
 
-# Optional: build outputs (если будут)
+# Optional: build outputs (if added later)
 dist/
 build/
 
-# Database export dumps (генерируются локально)
+# Database export dumps (generated locally)
 database/export/output/*
 !database/export/output/.gitkeep
 

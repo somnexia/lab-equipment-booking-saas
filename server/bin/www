@@ -3,14 +3,11 @@
 /**
  * Module dependencies.
  */
-// проверяем переменные окружения перед загрузкой приложения
+// Validate environment variables before loading the app
 require('../config/validateEnv'); 
 
-// загружаем приложение после проверки переменных окружения
 var app = require('../app');
-// 
-var debug = require('debug')('server:server');// для отладки, можно удалить если не нужно
-// http модуль для создания сервера
+var debug = require('debug')('server:server');
 var http = require('http');
 
 /**
@@ -22,7 +19,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-// слушаем на 0.0.0.0
+// listen on 0.0.0.0
 server.listen(port, '0.0.0.0', () => {
   console.log(`Server running on 0.0.0.0:${port}`);
 });

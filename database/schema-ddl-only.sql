@@ -1,5 +1,5 @@
--- Только CREATE TABLE (без DROP DATABASE и без USE)
--- Опционально: импорт DDL в CASE-инструменты; основной ERD — docs/diagrams/*.drawio
+-- DDL only (no DROP DATABASE, no USE)
+-- Optional: import DDL into CASE tools; main ERD — docs/diagrams/*.drawio
 
 CREATE TABLE `organizations` (
   `id` INT NOT NULL AUTO_INCREMENT,

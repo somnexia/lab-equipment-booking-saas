@@ -4,47 +4,47 @@ block content
   h1.page-title= title
   p.page-lead
     if uiPerms.canCreate
-      a(href="/bookings/new") + Новая бронь
+      a(href="/bookings/new") + New booking
       |  ·
-    a(href="/dashboard") Каталог оборудования
+    a(href="/dashboard") Equipment catalog
 
   .bookings-toolbar
-    label(for="statusFilter") Статус:
+    label(for="statusFilter") Status:
     select#statusFilter
-      option(value="", selected=!uiPerms.defaultStatusFilter) Все
-      option(value="active", selected=uiPerms.defaultStatusFilter === 'active') Активные
-      option(value="completed") Завершённые
-      option(value="cancelled") Отменённые
-    button#btnReload.btn.btn-sm(type="button") Обновить
+      option(value="", selected=!uiPerms.defaultStatusFilter) All
+      option(value="active", selected=uiPerms.defaultStatusFilter === 'active') Active
+      option(value="completed") Completed
+      option(value="cancelled") Cancelled
+    button#btnReload.btn.btn-sm(type="button") Refresh
 
   if uiPerms.useOrgList
-    p.page-hint Показаны брони вашей организации. По умолчанию — активные.
+    p.page-hint Showing bookings for your organization. Active by default.
 
   table.data-table
     thead
       tr
         th ID
-        th Оборудование
+        th Equipment
         if uiPerms.useOrgList
-          th ID&nbsp;польз.
-          th Пользователь
-          th Организация
-        th Начало
-        th Конец
-        th Статус
-        th Действия
+          th ID&nbsp;user
+          th User
+          th Organization
+        th Start
+        th End
+        th Status
+        th Actions
     tbody#bookingsTable
       tr
-        td(colspan=uiPerms.useOrgList ? 9 : 6) Загрузка…
+        td(colspan=uiPerms.useOrgList ? 9 : 6) Loading…
 
 block scripts
   script.
     window.UI_PERMS = !{JSON.stringify(uiPerms)};
 
     const BOOKING_STATUS = {
-      active: 'Активная',
-      completed: 'Завершена',
-      cancelled: 'Отменена',
+      active: 'Active',
+      completed: 'Completed',
+      cancelled: 'Cancelled',
     };
 
     function escapeHtml(text) {
@@ -62,28 +62,28 @@ block scripts
     }
 
     async function cancelBooking(id) {
-      if (!confirm('Отменить бронь #' + id + '?')) return;
+      if (!confirm('Cancel booking #' + id + '?')) return;
       const res = await fetch('/api/bookings/' + id + '/cancel', {
         method: 'PATCH',
         credentials: 'include',
       });
       const data = await res.json().catch(function () { return {}; });
       if (!res.ok) {
-        alert(data.error || 'Ошибка отмены');
+        alert(data.error || 'Cancel error');
         return;
       }
       loadBookings();
     }
 
     async function completeBooking(id) {
-      if (!confirm('Завершить бронь #' + id + '?')) return;
+      if (!confirm('Complete booking #' + id + '?')) return;
       const res = await fetch('/api/bookings/' + id + '/complete', {
         method: 'PATCH',
         credentials: 'include',
       });
       const data = await res.json().catch(function () { return {}; });
       if (!res.ok) {
-        alert(data.error || 'Ошибка завершения');
+        alert(data.error || 'Complete error');
         return;
       }
       loadBookings();
@@ -97,10 +97,10 @@ block scripts
 
       const parts = [];
       if (perms.canCancel) {
-        parts.push('<button type="button" class="btn btn-sm btn-danger btn-cancel" data-id="' + id + '">Отменить</button>');
+        parts.push('<button type="button" class="btn btn-sm btn-danger btn-cancel" data-id="' + id + '">Cancel</button>');
       }
       if (perms.canComplete) {
-        parts.push('<button type="button" class="btn btn-sm btn-primary btn-complete" data-id="' + id + '">Завершить</button>');
+        parts.push('<button type="button" class="btn btn-sm btn-primary btn-complete" data-id="' + id + '">Complete</button>');
       }
 
       if (!parts.length) {
@@ -122,7 +122,7 @@ block scripts
         }
         if (!res.ok) {
           const err = await res.json().catch(function () { return {}; });
-          table.innerHTML = '<tr><td colspan="' + colSpan + '">' + escapeHtml(err.error || 'Ошибка загрузки') + '</td></tr>';
+          table.innerHTML = '<tr><td colspan="' + colSpan + '">' + escapeHtml(err.error || 'Loading error') + '</td></tr>';
           return;
         }
 
@@ -130,7 +130,7 @@ block scripts
         table.innerHTML = '';
 
         if (!data.length) {
-          table.innerHTML = '<tr><td colspan="' + colSpan + '">Нет бронирований</td></tr>';
+          table.innerHTML = '<tr><td colspan="' + colSpan + '">No bookings</td></tr>';
           return;
         }
 
@@ -173,7 +173,7 @@ block scripts
         });
       } catch (err) {
         console.error(err);
-        table.innerHTML = '<tr><td colspan="' + colSpan + '">Ошибка загрузки</td></tr>';
+        table.innerHTML = '<tr><td colspan="' + colSpan + '">Loading error</td></tr>';
       }
     }
 

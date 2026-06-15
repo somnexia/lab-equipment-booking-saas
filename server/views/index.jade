@@ -3,11 +3,11 @@ extends layout
 block content
   .hero
     h1 Lab Equipment Booking
-    p SaaS для бронирования лабораторного оборудования: каталог приборов, слоты, роли пользователей.
+    p SaaS for booking laboratory equipment: equipment catalog, time slots, user roles.
 
     .hero-actions
       if user
-        a.btn.btn-primary(href="/dashboard") Каталог оборудования
+        a.btn.btn-primary(href="/dashboard") Equipment catalog
       else
-        a.btn.btn-primary(href="/auth/login") Войти
-        a.btn(href="/auth/register") Регистрация
+        a.btn.btn-primary(href="/auth/login") Log in
+        a.btn(href="/auth/register") Register

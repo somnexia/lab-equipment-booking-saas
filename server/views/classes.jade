@@ -1,15 +1,15 @@
-// Страница не связана с основным UI (MySQL). Доступ: /classes — только прямой URL.
+// Page not linked from main UI (MySQL). Access: /classes — direct URL only.
 extends layout
 
 block content
-  h1 Classes (PB) — эксперимент / PocketBase
+  h1 Classes (PB) — experiment / PocketBase
 
-  p Пользователь: #{user && user.email} (#{user && user.role})
+  p User: #{user && user.email} (#{user && user.role})
 
-  button#logoutBtn Выйти
+  button#logoutBtn Log out
 
   br
-  a(href="/dashboard") ← Назад к оборудованию
+  a(href="/dashboard") ← Back to equipment
 
   if error
     p(style="color:red")= error
@@ -28,16 +28,16 @@ block content
           td= cls.grade
           td= cls.status
   else
-    p Нет данных
+    p No data
 
-  h2 Добавить запись
+  h2 Add record
 
   form#addForm
     input(type="text" name="student" placeholder="Student")
     input(type="text" name="subject" placeholder="Subject")
     input(type="number" name="grade" placeholder="Grade")
     input(type="text" name="status" placeholder="Status")
-    button(type="submit") Добавить
+    button(type="submit") Add
 
     
   script(src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js")
@@ -59,7 +59,7 @@ block content
 
     // REALTIME
     pb.collection('classes').subscribe('*', function (e) {
-      console.log('🔥 REALTIME UPDATE:', e);
+      console.log('REALTIME UPDATE:', e);
       location.reload();
     });
 
@@ -82,9 +82,9 @@ block content
       });
 
       if (res.ok) {
-        console.log('✅ Created');
+        console.log('Created');
         form.reset();
       } else {
-        console.error('❌ Failed');
+        console.error('Failed');
       }
     });

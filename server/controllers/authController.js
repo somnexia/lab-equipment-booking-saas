@@ -84,7 +84,7 @@ exports.simplePassword = (req, res) => {
   const { password } = req.body;
 
   if (password !== process.env.SIMPLE_PASSWORD) {
-    return res.status(401).json({ error: 'Неверный пароль' });
+    return res.status(401).json({ error: 'Incorrect password' });
   }
 
   const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRET);

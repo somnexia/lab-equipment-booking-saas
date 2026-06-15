@@ -5,13 +5,13 @@ const authenticate = (req, res, next) => {
 
   let token = null;
 
-  // 1. Пытаемся взять из cookie
+  // 1. Cookie
   if (req.cookies && req.cookies.token) {
     token = req.cookies.token;
     console.log('Token from COOKIE');
   }
 
-  // 2. Если нет — пробуем из header
+  // 2. Authorization header
   else if (req.headers.authorization) {
     const parts = req.headers.authorization.split(' ');
     if (parts.length === 2 && parts[0] === 'Bearer') {

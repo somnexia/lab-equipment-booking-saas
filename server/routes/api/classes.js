@@ -16,8 +16,8 @@ router.post('/', async (req, res) => {
     res.json(record);
 
   } catch (err) {
-    console.error('❌ Create class error:', err);
-    res.status(500).json({ error: 'Ошибка создания' });
+    console.error('Create class error:', err);
+    res.status(500).json({ error: 'Create failed' });
   }
 });
 

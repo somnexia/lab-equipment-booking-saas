@@ -7,11 +7,11 @@ const simplePassword = require('../../middlewares/simplePassword');
 
 
 router.get('/', authenticate, simplePassword, async (req, res) => {
-  console.log('📚 Accessing classes page:', req.user.email);
+  console.log('Accessing classes page:', req.user.email);
 
   try {
     const classes = await pbService.getClasses();
-    console.log('📦 Classes loaded:', classes);
+    console.log('Classes loaded:', classes);
 
     res.render('classes', {
       title: 'Classes',
@@ -20,12 +20,12 @@ router.get('/', authenticate, simplePassword, async (req, res) => {
     });
 
   } catch (err) {
-    console.error('❌ Classes load error:', err);
+    console.error('Classes load error:', err);
 
     res.render('classes', {
       title: 'Classes',
       classes: [],
-      error: 'Ошибка загрузки данных',
+      error: 'Failed to load data',
       user: req.user
     });
   }

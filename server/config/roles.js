@@ -1,6 +1,6 @@
 /**
- * Роли информационной системы Lab Equipment Booking SaaS.
- * Значения совпадают с ENUM в MySQL (users.role).
+ * Roles for Lab Equipment Booking SaaS.
+ * Values match the MySQL ENUM in users.role.
  */
 const ROLES = {
   SYSTEM_ADMIN: 'system_admin',
@@ -12,25 +12,25 @@ const ROLES = {
 };
 
 const ROLE_LABELS = {
-  [ROLES.SYSTEM_ADMIN]: 'Системный администратор',
-  [ROLES.LAB_ADMIN]: 'Администратор лаборатории',
-  [ROLES.EQUIPMENT_MANAGER]: 'Менеджер оборудования',
-  [ROLES.RESEARCHER]: 'Исследователь',
-  [ROLES.STUDENT]: 'Студент',
-  [ROLES.TECHNICIAN]: 'Техник',
+  [ROLES.SYSTEM_ADMIN]: 'System administrator',
+  [ROLES.LAB_ADMIN]: 'Lab administrator',
+  [ROLES.EQUIPMENT_MANAGER]: 'Equipment manager',
+  [ROLES.RESEARCHER]: 'Researcher',
+  [ROLES.STUDENT]: 'Student',
+  [ROLES.TECHNICIAN]: 'Technician',
 };
 
-/** Просмотр каталога оборудования */
+/** View equipment catalog */
 const CAN_VIEW_EQUIPMENT = Object.values(ROLES);
 
-/** Создание / изменение / удаление оборудования и категорий */
+/** Create / update / delete equipment and categories */
 const CAN_MANAGE_EQUIPMENT = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
   ROLES.EQUIPMENT_MANAGER,
 ];
 
-/** Смена статуса оборудования (maintenance, broken) */
+/** Change equipment status (maintenance, broken) */
 const CAN_UPDATE_EQUIPMENT_STATUS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
@@ -38,7 +38,7 @@ const CAN_UPDATE_EQUIPMENT_STATUS = [
   ROLES.TECHNICIAN,
 ];
 
-/** Просмотр бронирований */
+/** View bookings */
 const CAN_VIEW_BOOKINGS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
@@ -48,7 +48,7 @@ const CAN_VIEW_BOOKINGS = [
   ROLES.TECHNICIAN,
 ];
 
-/** Создание и изменение бронирований */
+/** Create and update bookings */
 const CAN_MANAGE_BOOKINGS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
@@ -56,64 +56,64 @@ const CAN_MANAGE_BOOKINGS = [
   ROLES.STUDENT,
 ];
 
-/** Отмена / удаление бронирований */
+/** Cancel / delete bookings */
 const CAN_DELETE_BOOKINGS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
   ROLES.RESEARCHER,
 ];
 
-/** Просмотр организаций (system_admin — все, lab_admin — своя) */
+/** View organizations (system_admin — all, lab_admin — own) */
 const CAN_VIEW_ORGANIZATIONS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
 ];
 
-/** Раздел Admin в UI (пользователи, категории — позже) */
+/** Admin UI section (users, categories — later) */
 const CAN_ACCESS_ADMIN_UI = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
 ];
 
-/** Создание организаций */
+/** Create organizations */
 const CAN_CREATE_ORGANIZATIONS = [ROLES.SYSTEM_ADMIN];
 
-/** Изменение организаций (ограничения в сервисе для lab_admin) */
+/** Update organizations (lab_admin restrictions in service) */
 const CAN_UPDATE_ORGANIZATIONS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
 ];
 
-/** Удаление организаций */
+/** Delete organizations */
 const CAN_DELETE_ORGANIZATIONS = [ROLES.SYSTEM_ADMIN];
 
-/** Список пользователей (system_admin — все, lab_admin/equipment_manager — своя орг.) */
+/** List users (system_admin — all, lab_admin/equipment_manager — own org) */
 const CAN_LIST_USERS = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
   ROLES.EQUIPMENT_MANAGER,
 ];
 
-/** Создание пользователей (ограничения в сервисе) */
+/** Create users (restrictions in service) */
 const CAN_CREATE_USERS = [ROLES.SYSTEM_ADMIN, ROLES.LAB_ADMIN];
 
-/** Изменение пользователей (детальные правила в usersService) */
+/** Update users (detailed rules in usersService) */
 const CAN_UPDATE_USERS = Object.values(ROLES);
 
-/** Удаление пользователей */
+/** Delete users */
 const CAN_DELETE_USERS = [ROLES.SYSTEM_ADMIN, ROLES.LAB_ADMIN];
 
-/** Просмотр категорий оборудования (все роли — своя org; system_admin — все) */
+/** View equipment categories (all roles — own org; system_admin — all) */
 const CAN_VIEW_EQUIPMENT_CATEGORIES = Object.values(ROLES);
 
-/** Создание / изменение / удаление категорий (ограничения по org в сервисе) */
+/** Create / update / delete categories (org restrictions in service) */
 const CAN_MANAGE_EQUIPMENT_CATEGORIES = [
   ROLES.SYSTEM_ADMIN,
   ROLES.LAB_ADMIN,
   ROLES.EQUIPMENT_MANAGER,
 ];
 
-/** Роль по умолчанию при регистрации через UI */
+/** Default role for UI registration */
 const DEFAULT_REGISTER_ROLE = ROLES.STUDENT;
 
 module.exports = {

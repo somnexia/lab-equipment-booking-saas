@@ -1,12 +1,12 @@
--- Миграция со старых ролей (admin, manager, user) на новую модель.
--- Выполните на существующей БД, если не пересоздаёте её через schema.sql + seed.sql.
+-- Migration from legacy roles (admin, manager, user) to the new model.
+-- Run on an existing DB if you are not recreating it via schema.sql + seed.sql.
 
 USE `lab_equipment_booking`;
 
 ALTER TABLE `organizations`
   MODIFY `description` TEXT DEFAULT NULL;
 
--- Шаг 1: расширяем ENUM, сохраняя старые значения
+-- Step 1: extend ENUM while keeping old values
 ALTER TABLE `users`
   MODIFY `role` ENUM(
     'admin',
@@ -26,7 +26,7 @@ UPDATE `users` SET `role` = 'student' WHERE `role` = 'guest';
 UPDATE `users` SET `role` = 'equipment_manager' WHERE `role` = 'manager';
 UPDATE `users` SET `role` = 'student' WHERE `role` = 'user';
 
--- Шаг 2: только новые значения (без guest)
+-- Step 2: new values only (no guest)
 ALTER TABLE `users`
   MODIFY `role` ENUM(
     'system_admin',

@@ -17,7 +17,6 @@ async function authAdmin() {
 async function getClasses() {
   await authAdmin();
   const records = await pb.collection('classes').getFullList();
-  // Преобразуем в формат для dashboard
   return records.map(r => ({
     student: r.student || r.student_name || '—',
     subject: r.subject || '—',
@@ -37,18 +36,17 @@ async function createClass(data) {
 const pbAuthService = {
 
   async register({ name, email, password, role = 'student' }) {
-    // Сначала авторизуемся
     await authAdmin();
 
     console.log("PB register attempt:");
-    console.log({ name, email, password: '***', role }); // не выводи пароль в логи полностью
+    console.log({ name, email, password: '***', role });
 
     try {
       const record = await pb.collection('users').create({
         name,
         email,
         password,
-        passwordConfirm: password, // обязательно для PB
+        passwordConfirm: password,
         role
       });
 
@@ -58,10 +56,9 @@ const pbAuthService = {
     } catch (err) {
       console.error("❌ PB CREATE ERROR:", err.message);
 
-      // Полный объект ошибки для анализа
       console.error("PB FULL ERROR:", err.response || err);
 
-      throw err; // чтобы контроллер мог обработать
+      throw err;
     }
   },
 

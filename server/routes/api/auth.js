@@ -6,7 +6,7 @@ const router = express.Router();
 const authController = require('../../controllers/authController');
 const { authenticate } = require('../../middlewares/authMiddleware');
 
-// В браузере открывают GET — API принимает только POST; перенаправляем на форму
+// Browser may open GET — API accepts POST only; redirect to the form
 router.get('/login', (req, res) => {
   res.redirect('/auth/login');
 });
@@ -15,7 +15,6 @@ router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.post('/logout', authController.logout);
 
-// 🔹 ВОТ ЭТО ТЫ ИСКАЛ
 router.post('/simple-password', authenticate, authController.simplePassword);
 
 module.exports = router;

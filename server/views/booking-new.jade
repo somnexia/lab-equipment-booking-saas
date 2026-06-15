@@ -1,28 +1,28 @@
 extends layout
 
 block content
-  h1.page-title Новая бронь
+  h1.page-title New booking
   p.page-lead
-    a(href="/dashboard") ← Каталог
+    a(href="/dashboard") ← Catalog
     |  ·
-    a(href="/bookings") Мои бронирования
+    a(href="/bookings") My bookings
 
   .card(style="max-width:480px")
     form#bookingForm
       .form-row
-        label(for="equipment_id") Оборудование
+        label(for="equipment_id") Equipment
         select#equipment_id(name="equipment_id", required)
-          option(value="") Загрузка…
+          option(value="") Loading…
 
       .form-row
-        label(for="start_time") Начало
+        label(for="start_time") Start
         input#start_time(type="datetime-local", name="start_time", required)
 
       .form-row
-        label(for="end_time") Конец
+        label(for="end_time") End
         input#end_time(type="datetime-local", name="end_time", required)
 
-      button.btn.btn-primary(type="submit") Создать бронь
+      button.btn.btn-primary(type="submit") Create booking
 
     p#message.form-message(role="alert", aria-live="polite", hidden)
 
@@ -31,17 +31,17 @@ block scripts
     const preselectedId = '#{equipmentId}';
 
     const EQUIPMENT_STATUS = {
-      available: 'доступно',
-      maintenance: 'техобслуживание',
-      broken: 'неисправно',
+      available: 'available',
+      maintenance: 'maintenance',
+      broken: 'broken',
     };
 
     const API_ERRORS = {
-      'end_time must be after start_time': 'Конец должен быть позже начала.',
-      'Equipment is not available for booking': 'Прибор недоступен для бронирования (статус не «Доступно»).',
-      'Time slot conflicts with an active booking': 'Интервал пересекается с другой активной бронью.',
-      'Equipment not found': 'Прибор не найден.',
-      'Role cannot create bookings': 'Ваша роль не может создавать брони.',
+      'end_time must be after start_time': 'End must be after start.',
+      'Equipment is not available for booking': 'Equipment is not available for booking (status is not "Available").',
+      'Time slot conflicts with an active booking': 'Time slot conflicts with another active booking.',
+      'Equipment not found': 'Equipment not found.',
+      'Role cannot create bookings': 'Your role cannot create bookings.',
     };
 
     function showMessage(text) {
@@ -51,7 +51,7 @@ block scripts
     }
 
     function formatApiError(raw) {
-      if (!raw) return 'Не удалось создать бронь';
+      if (!raw) return 'Failed to create booking';
       const msg = String(raw).trim();
       return API_ERRORS[msg] || msg;
     }
@@ -75,14 +75,14 @@ block scripts
       const start = parseLocalInput(startVal);
       const end = parseLocalInput(endVal);
       if (end <= start) {
-        showMessage('Конец должен быть позже начала.');
+        showMessage('End must be after start.');
         return false;
       }
       return true;
     }
 
     function optionLabel(id, name, status) {
-      const title = name ? name : 'Прибор #' + id;
+      const title = name ? name : 'Equipment #' + id;
       if (status && status !== 'available') {
         const hint = EQUIPMENT_STATUS[status] || status;
         return '#' + id + ' — ' + title + ' (' + hint + ')';
@@ -115,14 +115,14 @@ block scripts
       const select = document.getElementById('equipment_id');
       const res = await fetch('/api/equipment/available', { credentials: 'include' });
       if (!res.ok) {
-        select.innerHTML = '<option value="">Ошибка загрузки</option>';
-        showMessage('Не удалось загрузить список доступного оборудования.');
+        select.innerHTML = '<option value="">Loading error</option>';
+        showMessage('Failed to load available equipment list.');
         return;
       }
 
       const items = await res.json();
       const seen = new Set();
-      select.innerHTML = '<option value="">— выберите прибор —</option>';
+      select.innerHTML = '<option value="">— select equipment —</option>';
 
       items.forEach(function (item) {
         const id = addEquipmentOption(select, item, String(preselectedId) === String(item.equipment_id ?? item.id));
@@ -134,15 +134,15 @@ block scripts
         if (extra) {
           addEquipmentOption(select, extra, true);
           if (extra.status && extra.status !== 'available') {
-            showMessage('Выбранный прибор сейчас недоступен для бронирования.');
+            showMessage('Selected equipment is currently unavailable for booking.');
           }
         } else {
           const opt = document.createElement('option');
           opt.value = preselectedId;
-          opt.textContent = 'Прибор #' + preselectedId + ' (не найден или нет доступа)';
+          opt.textContent = 'Equipment #' + preselectedId + ' (not found or no access)';
           opt.selected = true;
           select.appendChild(opt);
-          showMessage('Не удалось загрузить данные выбранного прибора.');
+          showMessage('Failed to load selected equipment data.');
         }
       }
     }
@@ -171,7 +171,7 @@ block scripts
       const equipmentSelect = document.getElementById('equipment_id');
       const selectedOpt = equipmentSelect.options[equipmentSelect.selectedIndex];
       if (selectedOpt && selectedOpt.dataset.unavailable === '1') {
-        showMessage('Прибор недоступен для бронирования (статус не «Доступно»).');
+        showMessage('Equipment is not available for booking (status is not "Available").');
         return;
       }
 
@@ -200,7 +200,7 @@ block scripts
         }
         showMessage(formatApiError(data.error));
       } catch (err) {
-        showMessage('Ошибка сети. Попробуйте ещё раз.');
+        showMessage('Network error. Please try again.');
       } finally {
         submitBtn.disabled = false;
       }

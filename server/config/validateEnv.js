@@ -18,7 +18,6 @@ if (simplePasswordRequired) {
   requiredVars.push('SIMPLE_PASSWORD');
 }
 
-// Проверяем отсутствие переменных
 const missingVars = requiredVars.filter(v => !process.env[v]);
 
 if (missingVars.length > 0) {
@@ -26,21 +25,16 @@ if (missingVars.length > 0) {
   process.exit(1);
 }
 
-// Дополнительные проверки (очень полезно 👇)
-
-// PORT должен быть числом
 if (isNaN(process.env.PORT)) {
   console.error('❌ PORT must be a number');
   process.exit(1);
 }
 
-// JWT_SECRET должен быть не слишком коротким
 if (process.env.JWT_SECRET.length < 10) {
   console.error('❌ JWT_SECRET is too short (min 10 chars)');
   process.exit(1);
 }
 
-// SIMPLE_PASSWORD (если режим не off)
 if (simplePasswordRequired) {
   if (process.env.SIMPLE_PASSWORD.length < 6) {
     console.error('❌ SIMPLE_PASSWORD is too short (min 6 chars)');
@@ -48,7 +42,6 @@ if (simplePasswordRequired) {
   }
 }
 
-// PB_URL должен начинаться с http
 if (!process.env.PB_URL.startsWith('http')) {
   console.error('❌ PB_URL must start with http/https');
   process.exit(1);

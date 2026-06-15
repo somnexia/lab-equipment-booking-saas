@@ -11,7 +11,7 @@ const {
 
 router.get('/', authenticate, simplePassword, (req, res) => {
   res.render('dashboard', {
-    title: 'Каталог оборудования',
+    title: 'Equipment catalog',
     uiPerms: {
       canBook: CAN_MANAGE_BOOKINGS.includes(req.user.role),
       canManageEquipment: CAN_MANAGE_EQUIPMENT.includes(req.user.role),

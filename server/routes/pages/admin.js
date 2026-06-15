@@ -6,7 +6,7 @@ const { CAN_ACCESS_ADMIN_UI } = require('../../config/roles');
 
 router.get('/', authenticate, simplePassword, (req, res) => {
   if (!CAN_ACCESS_ADMIN_UI.includes(req.user.role)) {
-    return res.status(403).send('Доступ запрещён');
+    return res.status(403).send('Access denied');
   }
   res.render('admin', { title: 'Admin' });
 });

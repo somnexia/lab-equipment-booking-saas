@@ -25,7 +25,7 @@ function buildNavPerms(role) {
   };
 }
 
-/** Подставляет user в res.locals для Jade (без обязательной авторизации). */
+/** Sets res.locals.user for Jade (auth optional). */
 module.exports = (req, res, next) => {
   res.locals.user = null;
   res.locals.roleLabel = null;

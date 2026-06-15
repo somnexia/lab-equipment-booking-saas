@@ -1,11 +1,11 @@
--- Хранимые функции и процедуры Lab Equipment Booking SaaS
+-- Stored functions and procedures — Lab Equipment Booking SaaS
 -- MySQL / MariaDB 10.4+
--- Запуск: mysql -u root -p lab_equipment_booking < database/procedures.sql
+-- Run: mysql -u root -p lab_equipment_booking < database/procedures.sql
 
 USE `lab_equipment_booking`;
 
 -- ---------------------------------------------------------------------------
--- Функция: пересечение с активными бронями (1 = конфликт)
+-- Function: overlap with active bookings (1 = conflict)
 -- ---------------------------------------------------------------------------
 DROP FUNCTION IF EXISTS `fn_booking_has_conflict`;
 
@@ -34,8 +34,8 @@ BEGIN
 END$$
 
 -- ---------------------------------------------------------------------------
--- sp_create_booking — создание брони (UC-30)
--- Акторы: system_admin, lab_admin, researcher, student
+-- sp_create_booking — create booking (UC-30)
+-- Actors: system_admin, lab_admin, researcher, student
 -- ---------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `sp_create_booking`$$
 
@@ -106,7 +106,7 @@ BEGIN
 END$$
 
 -- ---------------------------------------------------------------------------
--- sp_update_booking — изменение слота (только active)
+-- sp_update_booking — update time slot (active only)
 -- ---------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `sp_update_booking`$$
 
@@ -168,7 +168,7 @@ BEGIN
 END$$
 
 -- ---------------------------------------------------------------------------
--- sp_cancel_booking — отмена (cancelled), вместо DELETE в API
+-- sp_cancel_booking — cancel (cancelled), instead of DELETE in API
 -- ---------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `sp_cancel_booking`$$
 
@@ -220,7 +220,7 @@ BEGIN
 END$$
 
 -- ---------------------------------------------------------------------------
--- sp_complete_booking — завершение (completed)
+-- sp_complete_booking — complete (completed)
 -- ---------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `sp_complete_booking`$$
 
@@ -268,7 +268,7 @@ BEGIN
 END$$
 
 -- ---------------------------------------------------------------------------
--- sp_update_equipment_status — статус оборудования (техник, менеджер, админы)
+-- sp_update_equipment_status — equipment status (technician, manager, admins)
 -- ---------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `sp_update_equipment_status`$$
 

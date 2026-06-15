@@ -17,13 +17,13 @@ const CAN_COMPLETE_BOOKINGS = [
 
 router.get('/', authenticate, simplePassword, (req, res) => {
   if (!CAN_VIEW_BOOKINGS.includes(req.user.role)) {
-    return res.status(403).send('Доступ запрещён');
+    return res.status(403).send('Access denied');
   }
 
   const useOrgList = req.user.role !== ROLES.STUDENT;
 
   res.render('bookings', {
-    title: useOrgList ? 'Бронирования' : 'Мои бронирования',
+    title: useOrgList ? 'Bookings' : 'My Bookings',
     uiPerms: {
       useOrgList,
       canCreate: CAN_MANAGE_BOOKINGS.includes(req.user.role),
@@ -36,10 +36,10 @@ router.get('/', authenticate, simplePassword, (req, res) => {
 
 router.get('/new', authenticate, simplePassword, (req, res) => {
   if (!CAN_MANAGE_BOOKINGS.includes(req.user.role)) {
-    return res.status(403).send('Доступ запрещён');
+    return res.status(403).send('Access denied');
   }
   res.render('booking-new', {
-    title: 'Новая бронь',
+    title: 'New Booking',
     equipmentId: req.query.equipment_id || '',
   });
 });

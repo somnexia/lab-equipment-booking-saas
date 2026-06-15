@@ -14,7 +14,7 @@ function notFound(message = 'Organization not found') {
 }
 
 const OrganizationsService = {
-  /** Список организаций для формы регистрации (без авторизации). */
+  /** Organization list for the registration form (no auth). */
   listForRegistration: async () => {
     const [rows] = await db.query(
       'SELECT id, name FROM organizations ORDER BY id'
