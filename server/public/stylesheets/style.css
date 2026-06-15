@@ -167,6 +167,12 @@ a:hover {
   font-size: 1.4rem;
 }
 
+.auth-footer {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .form-row {
   margin-bottom: 1rem;
 }

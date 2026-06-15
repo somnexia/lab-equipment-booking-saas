@@ -6,63 +6,89 @@ block content
 
     form#registerForm
       .form-row
-        label Имя
-        input(type="text", name="name", required)
+        label(for="name") Имя
+        input#name(type="text", name="name", required)
 
       .form-row
-        label Email
-        input(type="email", name="email", required)
+        label(for="email") Email
+        input#email(type="email", name="email", required)
 
       .form-row
-        label Пароль
-        input(type="password", name="password", required)
+        label(for="password") Пароль
+        input#password(type="password", name="password", required, minlength="8")
 
       .form-row
-        label Organization ID
-        input(type="number", name="organization_id", value="1", required)
-        small(style="color:#5c6b7a") Демо: 1 — химия, 2 — физика
+        label(for="organization_id") Организация
+        if organizations && organizations.length
+          select#organization_id(name="organization_id", required)
+            each org in organizations
+              option(value=org.id)= org.name
+        else
+          select#organization_id(name="organization_id", disabled)
+            option(value="") Нет доступных организаций
+          p.page-hint Регистрация временно недоступна — обратитесь к администратору.
 
-      button.btn.btn-primary(type="submit") Зарегистрироваться
+      button.btn.btn-primary(type="submit", disabled=!organizations || !organizations.length) Зарегистрироваться
 
-    p#message.form-message
+    p#message.form-message(role="alert", aria-live="polite", hidden)
+
+    p.auth-footer
+      | Уже есть аккаунт?
+      a(href="/auth/login") Войти
 
 block scripts
   script.
     const form = document.getElementById('registerForm');
     const message = document.getElementById('message');
+    const orgSelect = document.getElementById('organization_id');
+
+    function showMessage(text, ok) {
+      message.textContent = text || '';
+      message.hidden = !text;
+      message.style.color = ok ? '#15803d' : '#b91c1c';
+    }
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      message.innerText = '';
+      showMessage('');
+
+      if (!orgSelect.value) {
+        showMessage('Выберите организацию');
+        return;
+      }
 
       const data = {
-        name: form.name.value,
-        email: form.email.value,
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
         password: form.password.value,
-        organization_id: parseInt(form.organization_id.value, 10),
-        role: 'student'
+        organization_id: parseInt(orgSelect.value, 10),
+        role: 'student',
       };
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
 
       try {
         const res = await fetch('/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
-          credentials: 'include'
+          credentials: 'include',
         });
 
-        const result = await res.json();
+        const result = await res.json().catch(function () { return {}; });
 
         if (res.ok) {
-          message.style.color = '#15803d';
-          message.innerText = 'Регистрация успешна! Перенаправление…';
+          showMessage('Регистрация успешна! Перенаправление…', true);
           setTimeout(function () {
             window.location.href = '/auth/login';
           }, 1000);
         } else {
-          message.innerText = result.error || 'Ошибка регистрации';
+          showMessage(result.error || 'Ошибка регистрации');
         }
       } catch (err) {
-        message.innerText = 'Ошибка соединения';
+        showMessage('Ошибка соединения');
+      } finally {
+        if (orgSelect.value) submitBtn.disabled = false;
       }
     });

@@ -14,6 +14,14 @@ function notFound(message = 'Organization not found') {
 }
 
 const OrganizationsService = {
+  /** Список организаций для формы регистрации (без авторизации). */
+  listForRegistration: async () => {
+    const [rows] = await db.query(
+      'SELECT id, name FROM organizations ORDER BY id'
+    );
+    return rows;
+  },
+
   getAll: async (actor) => {
     if (actor.role === ROLES.SYSTEM_ADMIN) {
       const [rows] = await db.query(

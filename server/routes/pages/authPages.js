@@ -1,23 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const { authenticate } = require('../../middlewares/authMiddleware');
+const OrganizationsService = require('../../services/organizationsService');
 
-// регистрация и логин остаются доступными
-// страница регистрации
-router.get('/register', (req, res) => {
-  console.log('Render register page');
-  res.render('register', { title: 'Регистрация' });
+router.get('/register', async (req, res, next) => {
+  try {
+    const organizations = await OrganizationsService.listForRegistration();
+    res.render('register', { title: 'Регистрация', organizations });
+  } catch (err) {
+    next(err);
+  }
 });
 
-// страница логина
 router.get('/login', (req, res) => {
-  console.log('Render login page');
   res.render('login', { title: 'Login' });
 });
 
-// защищённая страница dashboard
 router.get('/dashboard', authenticate, (req, res) => {
-  console.log('Render dashboard page, user:', req.user);
   res.render('dashboard', { title: 'Каталог оборудования' });
 });
 
