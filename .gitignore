@@ -43,6 +43,12 @@ database/export/output/*
 
 
 docs/team-jira.md
+docs/
+docs/README.md
+node_modules/*
+node_modules/
+server/node_modules/
+
 
 database/export/*
 !database/export/README.md
@@ -51,4 +57,36 @@ database/export/*
 
 server/rest-client/*
 test.http
+
+# Зависимости и кэш
+node_modules/
+.npm/
+.eslintcache
+coverage/
+.nyc_output/
+
+# Секреты. Шаблон server/.env.example в репозитории остаётся.
+.env
+.env.*
+!.env.example
+
+# Журналы
+logs/
+*.log
+npm-debug.log*
+
+# Загруженные документы. Папку uploads сохраняем через .gitkeep.
+server/uploads/**
+!server/uploads/.gitkeep
+
+# Система и редактор
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+*.swp
+
+server/scripts/export-db.js
+export-db.js
+
 
