@@ -15,8 +15,10 @@
     "export:db": "powershell -ExecutionPolicy Bypass -File ../database/export/export-all.ps1",
     "test": "jest --runInBand",
     "test:unit": "jest --runInBand --testPathPatterns=unit",
-    "test:security":"jest --runInBand --testPathPatterns=security"
+    "test:security":"jest --runInBand --testPathPatterns=security",
+    "test:integration":" jest --runInBand --testPathPatterns=bookings"
   },
+  
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "~1.4.4",
