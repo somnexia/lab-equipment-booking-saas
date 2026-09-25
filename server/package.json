@@ -14,7 +14,8 @@
     "export:db-ExecutionPolicy": "powershell -ExecutionPolicy Bypass -File ../database/export/export-all.ps1",
     "export:db": "powershell -ExecutionPolicy Bypass -File ../database/export/export-all.ps1",
     "test": "jest --runInBand",
-    "test:unit": "jest --runInBand --testPathPatterns=unit"
+    "test:unit": "jest --runInBand --testPathPatterns=unit",
+    "test:security":"jest --runInBand --testPathPatterns=security"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
