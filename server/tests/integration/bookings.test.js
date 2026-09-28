@@ -12,7 +12,7 @@ function pad(n) {
 
 }
 //formatSqlDate(date) преобразует объект Date в строку формата MySQL: YYYY-MM-DD HH:mm:ss
-function formatSqlDate(date) { 
+function formatSqlDate(date) {
     //setDate / setHours / getTime — методы объекта Date 2 * 60 * 60 * 1000 — два часа в миллисекундах
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:00`;
 }
@@ -66,6 +66,17 @@ describe('TC-I booking API and procedures', () => {
         expect(student.user.role).toBe('student');
         expect(student.cookie).toBeDefined();
         expect(student.cookie.join(';')).toMatch(/token=/);
+    });
+
+    //login() здесь не нужна: как раз проверяется, что вход не удался и cookie не выдаётся.
+    test('TC-I-02: login with a wrong password returns 401', async () => {
+        const res = await request(app)
+            .post('/api/auth/login')
+            .send({
+                email: 'student@chem.lab.local',
+                password: 'WrongPassword',
+            });
+        expect(res.status).toBe(401);
     });
 
     test('TC-I-03: GET /api/equipment with cookie returns an array', async () => {
@@ -160,6 +171,78 @@ describe('TC-I booking API and procedures', () => {
         expect(res.body.error).toMatch(/only book for self/i);
     });
 });
+
+
+//   BEGIN
+//   DECLARE v_equip_org INT;
+//   DECLARE v_user_org INT;
+//   DECLARE v_actor_org INT;
+//   DECLARE v_equip_status VARCHAR(20);
+//   DECLARE v_new_id INT;
+
+//   IF p_end_time <= p_start_time THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'end_time must be after start_time';
+//   END IF;
+
+//   IF p_actor_role NOT IN ('system_admin', 'lab_admin', 'researcher', 'student') THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Role cannot create bookings';
+//   END IF;
+
+//   IF p_actor_role = 'student' AND p_actor_id <> p_user_id THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Student can only book for self';
+//   END IF;
+
+//   SELECT `organization_id`, `status` INTO v_equip_org, v_equip_status
+//   FROM `equipment` WHERE `id` = p_equipment_id;
+
+//   IF v_equip_org IS NULL THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Equipment not found';
+//   END IF;
+
+//   IF v_equip_status <> 'available' THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Equipment is not available for booking';
+//   END IF;
+
+//   SELECT `organization_id` INTO v_user_org FROM `users` WHERE `id` = p_user_id;
+//   IF v_user_org IS NULL THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'User not found';
+//   END IF;
+
+//   IF v_equip_org <> v_user_org THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'User and equipment belong to different organizations';
+//   END IF;
+
+//   IF p_actor_role <> 'system_admin' THEN
+//     SELECT `organization_id` INTO v_actor_org FROM `users` WHERE `id` = p_actor_id;
+//     IF v_actor_org IS NULL OR v_actor_org <> v_user_org THEN
+//       SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Actor cannot book for this organization';
+//     END IF;
+//   END IF;
+
+//   IF fn_booking_has_conflict(p_equipment_id, p_start_time, p_end_time, NULL) = 1 THEN
+//     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Time slot conflicts with an active booking';
+//   END IF;
+
+//   INSERT INTO `bookings` (`equipment_id`, `user_id`, `start_time`, `end_time`, `status`)
+//   VALUES (p_equipment_id, p_user_id, p_start_time, p_end_time, 'active');
+
+//   SET v_new_id = LAST_INSERT_ID();
+
+//   SELECT v_new_id AS `booking_id`, 'active' AS `status`, 'OK' AS `result`;
+// END
+
+// est с supertest вызывает только HTTP. 
+// Вызов процедуры напрямую — это уже клиент MySQL (mysql2)
+// Первый вызов — успех (booking_id, active). Повтор тех же аргументов — 
+// Time slot conflicts with an active booking, тот же текст, 
+// что в res.body.error у TC-I-05.
+
+// CALL sp_create_booking(
+//   1, 5,
+//   '2026-12-20 10:00:00',
+//   '2026-12-20 12:00:00',
+//   5, 'student'
+// );
 
 
 
