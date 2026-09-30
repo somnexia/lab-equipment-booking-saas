@@ -43,11 +43,13 @@ database/export/output/*
 
 
 docs/team-jira.md
-docs/
+docs/*
 docs/README.md
 node_modules/*
 node_modules/
 server/node_modules/
+!docs/load-test/
+!docs/test-evidence/
 
 
 database/export/*

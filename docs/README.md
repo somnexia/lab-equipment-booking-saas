@@ -15,5 +15,6 @@
 11. [Права MySQL GRANT](11-grants.md) — `database/grants.sql`  
 12. [Экспорт БД](12-database-export.md) — SQL / JSON / XML, скрипты в `database/export/`  
 13. [Тест-план](13-test-plan.md) — виды тестов, Jest / supertest / JMeter / Selenium, каталог кейсов  
+13a. [Отчёт: функциональные тесты](14-test-report.md) — ручной прогон TC-F-01 … TC-F-16, 28.09.2026  
 14. [Команда и Jira](team-jira.md) — шаблон распределения работы в группе  
 15. [Каталог draw.io](diagrams/README.md) — все схемы

@@ -1,0 +1,41 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1790768970291,5,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,5,0,2
+1790768970296,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970297,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970299,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970299,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970301,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970302,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970303,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970304,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,0
+1790768970306,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970307,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970308,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970309,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970310,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970310,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970312,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970313,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970314,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970315,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970316,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970317,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970319,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970319,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970321,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970321,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,1
+1790768970323,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970324,3,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,3,0,0
+1790768970327,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970328,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,0
+1790768970330,0,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,0,0,0
+1790768970331,2,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,2,0,0
+1790768970333,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970334,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970335,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970336,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970337,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970338,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970339,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0
+1790768970340,1,POST /api/auth/login,401,Unauthorized,TC-L-06 baseline 1-1,text,false,,271,214,1,1,http://localhost:3000/api/auth/login,1,0,0
+1790768970341,1,GET /api/equipment,401,Unauthorized,TC-L-06 baseline 1-1,text,false,Equipment catalog did not return 200.,271,129,1,1,http://localhost:3000/api/equipment,1,0,0

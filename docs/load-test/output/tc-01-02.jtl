@@ -1,0 +1,151 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1790683037486,57,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-1,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,57,0,2
+1790683037544,4,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-1,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,4,0,0
+1790683037548,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-1,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683037604,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-1,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683037607,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-1,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683037662,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-1,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683037985,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-2,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683038040,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-2,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683038043,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-2,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683038099,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-2,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683038102,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-2,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683038156,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-2,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683038484,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-3,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683038540,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-3,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683038542,59,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-3,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,59,0,1
+1790683038602,4,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-3,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,4,0,0
+1790683038606,57,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-3,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,57,0,1
+1790683038664,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-3,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683038984,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-4,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683039040,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-4,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683039043,57,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-4,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,57,0,1
+1790683039100,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-4,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683039103,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-4,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683039158,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-4,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683039484,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-5,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683039539,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-5,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683039542,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-5,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,1
+1790683039597,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-5,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683039600,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-5,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683039655,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-5,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683039983,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-6,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683040039,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-6,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683040042,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-6,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683040097,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-6,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683040099,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-6,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,1
+1790683040154,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-6,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683040484,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-7,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683040540,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-7,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683040543,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-7,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683040598,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-7,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683040601,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-7,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,1
+1790683040655,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-7,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683040983,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-8,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683041038,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-8,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683041041,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-8,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683041096,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-8,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683041099,60,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-8,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,60,0,0
+1790683041159,5,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-8,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,5,0,0
+1790683041484,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-9,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683041538,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-9,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683041541,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-9,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,1
+1790683041596,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-9,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683041599,53,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-9,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,53,0,0
+1790683041652,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-9,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683041985,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-10,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683042041,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-10,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683042044,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-10,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683042099,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-10,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683042102,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-10,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683042157,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-10,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683042486,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-11,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683042542,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-11,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683042545,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-11,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683042600,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-11,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683042603,53,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-11,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,53,0,0
+1790683042657,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-11,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683042987,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-12,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683043042,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-12,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683043045,53,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-12,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,53,0,0
+1790683043099,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-12,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683043101,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-12,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683043157,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-12,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683043484,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-13,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683043539,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-13,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683043542,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-13,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683043598,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-13,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683043601,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-13,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683043655,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-13,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683043984,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-14,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683044039,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-14,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683044042,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-14,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683044097,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-14,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683044100,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-14,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683044154,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-14,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683044486,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-15,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,1
+1790683044541,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-15,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683044545,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-15,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683044600,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-15,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683044604,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-15,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683044658,4,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-15,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,4,0,0
+1790683044986,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-16,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683045041,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-16,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683045044,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-16,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683045099,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-16,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683045102,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-16,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683045156,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-16,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683045485,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-17,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683045539,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-17,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683045542,57,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-17,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,57,0,1
+1790683045599,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-17,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683045603,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-17,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683045658,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-17,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683045984,56,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-18,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,56,0,1
+1790683046041,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-18,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683046044,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-18,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683046099,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-18,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683046102,56,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-18,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,56,0,1
+1790683046158,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-18,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683046484,57,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-19,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,57,0,1
+1790683046542,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-19,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683046545,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-19,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683046600,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-19,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683046603,55,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-19,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683046658,3,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-19,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,3,0,0
+1790683046986,56,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-20,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,56,0,1
+1790683047042,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-20,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683047045,54,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-20,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683047099,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-20,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683047102,53,TC-L-01 POST /api/auth/login,200,OK,TC-L-01 login and catalog 1-20,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,53,0,0
+1790683047156,2,TC-L-01 GET /api/equipment,200,OK,TC-L-01 login and catalog 1-20,text,true,,2478,401,1,1,http://localhost:3000/api/equipment,2,0,0
+1790683047159,55,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-1,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683047215,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-1,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683047294,59,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-2,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,59,0,0
+1790683047353,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-2,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683047426,55,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-3,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683047482,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-3,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683047560,55,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-4,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,0
+1790683047615,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-4,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683047692,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-5,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683047746,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-5,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683047824,55,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-6,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683047879,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-6,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683047958,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-7,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048012,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-7,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683048092,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-8,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048146,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-8,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683048224,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-9,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048278,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-9,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683048356,55,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-10,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,55,0,1
+1790683048411,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-10,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683048491,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-11,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048546,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-11,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683048624,56,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-12,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,56,0,0
+1790683048680,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-12,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683048755,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-13,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048810,2,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-13,text,true,,315,539,1,1,http://localhost:3000/api/bookings,2,0,0
+1790683048888,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-14,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683048942,3,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-14,text,true,,315,539,1,1,http://localhost:3000/api/bookings,3,0,0
+1790683049021,54,TC-L-02 POST /api/auth/login,200,OK,TC-L-02 parallel booking 2-15,text,true,,731,243,1,1,http://localhost:3000/api/auth/login,54,0,0
+1790683049075,4,TC-L-02 POST /api/bookings,400,Bad Request,TC-L-02 parallel booking 2-15,text,true,,315,539,1,1,http://localhost:3000/api/bookings,4,0,0
