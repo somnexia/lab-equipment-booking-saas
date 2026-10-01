@@ -1,7 +1,7 @@
-const { Builder } = require('selenium-webdriver');
+const { Builder, Browser, By, until, } = require('selenium-webdriver');
 
 async function test() {
-    const driver = await new Builder()
+     let driver = await new Builder().forBrowser(Browser.CHROME).build()
         .forBrowser('chrome')
         .build();
 
