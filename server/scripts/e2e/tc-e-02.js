@@ -3,7 +3,7 @@ const { By, until } = require('selenium-webdriver');
 // By - это объект Selenium, в котором лежат готовые локаторы для поиска элементов на странице.
 // until - это набор helper-функций ожидания: until.elementLocated(...) ждёт, пока элемент появится в DOM.
 
-a
+
 // Проверяет создание записи бронирования и наличие её в списке с активным статусом.
 async function run(driver, ctx) {
   // driver.get(url) открывает нужную страницу в браузере.
