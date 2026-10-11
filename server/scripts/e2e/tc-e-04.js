@@ -35,13 +35,14 @@ async function run(driver, ctx) {
   // Ждём, пока в таблице не появится та же дата, но уже со статусом Cancelled.
   // Это сигнализирует, что отмена успешно завершилась и данные перерисовались.
   await driver.wait(async () => {
-    const nextRows = await driver.findElements(By.css('#bookingsTable tr'));
-    for (const row of nextRows) {
-      const text = await row.getText();
-      if (text.includes(ctx.day) && text.includes('Cancelled')) return true;
-    }
-    return false;
-  }, 10000);
+  try {
+    const text = await driver.findElement(By.id('bookingsTable')).getText();
+    return text.includes(ctx.day) && text.includes('Cancelled');
+  } catch (err) {
+    if (err.name === 'StaleElementReferenceError') return false;
+    throw err;
+  }
+}, 10000);
 }
 
 module.exports = {
